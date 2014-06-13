@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/shuttlemap" distributable="true" reloadable="true">
+	
+    <ResourceLink name="jdbc/shuttlemap" global="jdbc/shuttlemap" type="javax.sql.DataSource" />
+		
+	<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader" />
+</Context>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+				http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd "
+	default-destroy-method="destroy" default-init-method="init">
+
+	<security:http pattern="/resources/**" security="none"/>			
+				
+				
+	<security:http access-denied-page="/error/accessDenied.jsp" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll"/>
+		<security:intercept-url pattern="/loginByToken" access="permitAll"/>
+		<security:intercept-url pattern="/loginBySocial" access="permitAll"/>
+		<security:intercept-url pattern="/front/**" access="permitAll"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/mobile/**" access="permitAll"/>
+		<security:intercept-url pattern="/login/**" access="permitAll"/>
+		<security:intercept-url pattern="/an/**"   access="permitAll"/>
+		<security:custom-filter ref="requestHeaderFilter" before="FORM_LOGIN_FILTER" />
+		<security:custom-filter ref="socialHeaderFilter" before="BASIC_AUTH_FILTER"/>
+		
+		<security:form-login login-page="/login/loginForm" 
+			authentication-success-handler-ref="loginSuccessHandler" 
+			authentication-failure-handler-ref="loginFaiulureHandler" 
+			default-target-url="/" always-use-default-target="false" 
+			login-processing-url="/loginAction" />
+		<security:logout logout-url="/logout" 
+			invalidate-session="true"
+			success-handler-ref="logoutSuccessHandler"/>
+		
+		<security:anonymous/>
+	</security:http>			
+				 
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="daoAuthenticationProvider"/>
+		<security:authentication-provider ref="tokenAuthenticationProvider"/>
+		<security:authentication-provider ref="socialAuthenticationProvider"/>
+	</security:authentication-manager>
+				
+	<bean id="loginSuccessHandler" class="com.shuttlemap.web.identity.impl.LoginSuccessHandler"></bean>		
+	
+	<bean id="loginFaiulureHandler" class="com.shuttlemap.web.identity.impl.LoginFailureHandler"></bean>			
+	
+	<bean id="logoutSuccessHandler" class="com.shuttlemap.web.identity.impl.LogoutSuccessHandler"></bean>			
+	
+	<bean id="requestHeaderFilter" class="com.shuttlemap.web.identity.impl.RequestHeaderProcessingFilter">
+		<property name="authenticationManager" ref="authenticationManager"></property>
+		<property name="authenticationSuccessHandler" ref="loginSuccessHandler"></property>
+		<property name="authenticationFailureHandler" ref="loginFaiulureHandler"></property>
+	</bean>	
+	<bean id="socialHeaderFilter" class="com.shuttlemap.web.identity.impl.SocialProcessingFilter">
+		<property name="authenticationManager" ref="authenticationManager"></property>
+		<property name="authenticationSuccessHandler" ref="loginSuccessHandler"></property>
+		<property name="authenticationFailureHandler" ref="loginFaiulureHandler"></property>
+	</bean>		
+		
+	<bean id="daoAuthenticationProvider"  class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+  		<property name="userDetailsService" ref="userDetailsService"/>
+  		<property name="hideUserNotFoundExceptions" value="false"/>
+  		<property name="passwordEncoder" ref="md5PasswordEncoder"/>
+  		
+	</bean>
+	
+	<bean id="md5PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+    </bean>
+    
+	<bean id="tokenAuthenticationProvider" class="com.shuttlemap.web.identity.impl.SignedTokenAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsService"/>
+		<property name="userService" ref="UserService"/>
+		<property name="hideUserNotFoundExceptions" value="false"/>
+	</bean>
+	
+	<bean id="socialAuthenticationProvider" class="com.shuttlemap.web.identity.impl.SocialAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsService"/>
+		<property name="userService" ref="UserService"/>
+		<property name="hideUserNotFoundExceptions" value="false"/>
+	</bean>
+	
+
+	<bean id="userDetailsService" class="com.shuttlemap.web.identity.impl.UserDetailsServiceImpl"/>
+
+	<bean id="userPassAuthFilterBeanPostProcessor"
+		class="com.shuttlemap.web.identity.impl.UserPassAuthFilterBeanPostProcessor">
+		<property name="usernameParameter" value="loginId"/>
+		<property name="passwordParameter" value="pwd"/>
+	</bean>
+
+</beans>
