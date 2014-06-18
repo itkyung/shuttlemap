@@ -40,7 +40,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.clockworks.bigture.delegate.UserDelegate;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
