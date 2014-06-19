@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">셔틀맵</string>
+    <string name="title_section1">내셔틀</string>
+    <string name="title_section2">셔틀찾기</string>
+    <string name="title_section3">주변셔틀</string>
+    <string name="title_section4">설정</string>
+    <string name="action_settings">설정</string>
+
+</resources>
