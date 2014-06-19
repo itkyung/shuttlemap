@@ -75,6 +75,20 @@ public class User {
 	
 	private String twitter;
 	
+	private String osVersion;
+	
+	private String appVersion;
+	
+	private String gcmId;
+	
+	@Expose
+	@Column(length=128)
+	private String loginToken;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date tokenExpireDate;	//loginToken만료일 - 한달뒤로 설정. 
+	
+	
 	@OneToMany(mappedBy="user",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
 	private Set<UserRoles> roles;
 
@@ -204,6 +218,46 @@ public class User {
 
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
+	}
+
+	public String getOsVersion() {
+		return osVersion;
+	}
+
+	public void setOsVersion(String osVersion) {
+		this.osVersion = osVersion;
+	}
+
+	public String getAppVersion() {
+		return appVersion;
+	}
+
+	public void setAppVersion(String appVersion) {
+		this.appVersion = appVersion;
+	}
+
+	public String getLoginToken() {
+		return loginToken;
+	}
+
+	public void setLoginToken(String loginToken) {
+		this.loginToken = loginToken;
+	}
+
+	public Date getTokenExpireDate() {
+		return tokenExpireDate;
+	}
+
+	public void setTokenExpireDate(Date tokenExpireDate) {
+		this.tokenExpireDate = tokenExpireDate;
+	}
+
+	public String getGcmId() {
+		return gcmId;
+	}
+
+	public void setGcmId(String gcmId) {
+		this.gcmId = gcmId;
 	}
 	
 	

@@ -26,7 +26,7 @@ import com.google.gson.annotations.Expose;
 @Entity
 @Table(name=UserRoles.TABLE_NAME)
 public class UserRoles {
-	public static final String TABLE_NAME = "BT_USER_ROLES";
+	public static final String TABLE_NAME = "SM_USER_ROLES";
 	
 	@Id @Column(length=36) @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")		

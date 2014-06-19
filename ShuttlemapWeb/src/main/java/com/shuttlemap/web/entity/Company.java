@@ -32,6 +32,10 @@ public class Company {
 	
 	private String companyLogo;
 	
+	private String homepage;
+	
+	private String contactPerson;
+	
 	@Enumerated(EnumType.STRING)
 	private CompanyType companyType;
 	
@@ -102,6 +106,22 @@ public class Company {
 
 	public void setCompanyLogo(String companyLogo) {
 		this.companyLogo = companyLogo;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
 	}
 	
 	
