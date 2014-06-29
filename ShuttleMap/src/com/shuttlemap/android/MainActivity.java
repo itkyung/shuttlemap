@@ -2,6 +2,11 @@ package com.shuttlemap.android;
 
 import java.util.Locale;
 
+import com.shuttlemap.android.fragment.ArroundMapFragment;
+import com.shuttlemap.android.fragment.MyShuttleFragment;
+import com.shuttlemap.android.fragment.SettingFragment;
+import com.shuttlemap.android.fragment.ShuttleListFragment;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -9,6 +14,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,21 +24,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.TabListener {
-
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
-	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
-	 */
+	
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
+	private boolean mFlag = false;
+	private Handler mHandler=null;
+	
 	ViewPager mViewPager;
 
 	@Override
@@ -39,6 +39,17 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mHandler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				if(msg.what == 0){
+					mFlag = false;
+				    //2초가 지나면 다시 Falg 를 false로 바꾼다.
+				    //Log.d("", "handleMessage mFlag : " + mFlag);
+				}
+			}
+		};
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -54,8 +65,7 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
 						actionBar.setSelectedNavigationItem(position);
@@ -95,21 +105,20 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 	}
 
 	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabSelected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabUnselected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+		
 	}
 
 	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabReselected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+		
 	}
 
 	/**
@@ -124,10 +133,24 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class
-			// below).
-			return PlaceholderFragment.newInstance(position + 1);
+			Fragment fragment = null;
+			switch(position){
+			case 0:
+				fragment = MyShuttleFragment.newInstance();
+				break;
+			case 1:
+				fragment = ShuttleListFragment.newInstance();
+				break;
+			case 2:
+				fragment = ArroundMapFragment.newInstance();
+				break;
+			case 3:
+				fragment = SettingFragment.newInstance();
+				break;
+			}
+			
+			
+			return fragment;
 		}
 
 		@Override
@@ -153,41 +176,16 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 		}
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
 
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			TextView textView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			textView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-
+	@Override
+	public void onBackPressed() {
+	   if(!mFlag){
+		   Toast.makeText(this, getResources().getString(R.string.message_backkey_to_exit), Toast.LENGTH_SHORT).show();
+		   mFlag = true;
+		   mHandler.sendEmptyMessageDelayed(0, 1000*2);
+		   //2초 후에 handleMessage에 메시지를 전달한다.
+	   }else{
+		   super.onBackPressed();
+	   }
+    }
 }

@@ -10,6 +10,112 @@ package com.shuttlemap.android;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int Black0Percent=0x7f040005;
+        public static final int all_bg=0x7f040000;
+        public static final int basic_0=0x7f04003b;
+        public static final int basic_1=0x7f04003c;
+        public static final int basic_10=0x7f040045;
+        public static final int basic_11=0x7f040046;
+        public static final int basic_12=0x7f040047;
+        public static final int basic_13=0x7f040048;
+        public static final int basic_14=0x7f040049;
+        public static final int basic_2=0x7f04003d;
+        public static final int basic_3=0x7f04003e;
+        public static final int basic_4=0x7f04003f;
+        public static final int basic_5=0x7f040040;
+        public static final int basic_6=0x7f040041;
+        public static final int basic_7=0x7f040042;
+        public static final int basic_8=0x7f040043;
+        public static final int basic_9=0x7f040044;
+        public static final int black=0x7f040004;
+        public static final int bot_normal=0x7f040019;
+        public static final int bot_now=0x7f04001a;
+        public static final int context_menu_color=0x7f040014;
+        public static final int day_0=0x7f040059;
+        public static final int day_1=0x7f04005a;
+        public static final int day_10=0x7f040063;
+        public static final int day_11=0x7f040064;
+        public static final int day_12=0x7f040065;
+        public static final int day_13=0x7f040066;
+        public static final int day_14=0x7f040067;
+        public static final int day_2=0x7f04005b;
+        public static final int day_3=0x7f04005c;
+        public static final int day_4=0x7f04005d;
+        public static final int day_5=0x7f04005e;
+        public static final int day_6=0x7f04005f;
+        public static final int day_7=0x7f040060;
+        public static final int day_8=0x7f040061;
+        public static final int day_9=0x7f040062;
+        public static final int draft_text=0x7f040018;
+        public static final int friends_0=0x7f04004a;
+        public static final int friends_1=0x7f04004b;
+        public static final int friends_10=0x7f040054;
+        public static final int friends_11=0x7f040055;
+        public static final int friends_12=0x7f040056;
+        public static final int friends_13=0x7f040057;
+        public static final int friends_14=0x7f040058;
+        public static final int friends_2=0x7f04004c;
+        public static final int friends_3=0x7f04004d;
+        public static final int friends_4=0x7f04004e;
+        public static final int friends_5=0x7f04004f;
+        public static final int friends_6=0x7f040050;
+        public static final int friends_7=0x7f040051;
+        public static final int friends_8=0x7f040052;
+        public static final int friends_9=0x7f040053;
+        public static final int gray=0x7f040003;
+        public static final int list_btn_text_n=0x7f04000a;
+        public static final int list_friend_name=0x7f040012;
+        public static final int list_remove_cell=0x7f040009;
+        public static final int main_btn_text=0x7f040006;
+        public static final int map_top_divider=0x7f040010;
+        public static final int map_top_layer=0x7f04000f;
+        public static final int morden_pop_0=0x7f04001d;
+        public static final int morden_pop_1=0x7f04001e;
+        public static final int morden_pop_10=0x7f040027;
+        public static final int morden_pop_11=0x7f040028;
+        public static final int morden_pop_12=0x7f040029;
+        public static final int morden_pop_13=0x7f04002a;
+        public static final int morden_pop_14=0x7f04002b;
+        public static final int morden_pop_2=0x7f04001f;
+        public static final int morden_pop_3=0x7f040020;
+        public static final int morden_pop_4=0x7f040021;
+        public static final int morden_pop_5=0x7f040022;
+        public static final int morden_pop_6=0x7f040023;
+        public static final int morden_pop_7=0x7f040024;
+        public static final int morden_pop_8=0x7f040025;
+        public static final int morden_pop_9=0x7f040026;
+        public static final int popup_list_selected=0x7f040013;
+        public static final int posicle_0=0x7f04002c;
+        public static final int posicle_1=0x7f04002d;
+        public static final int posicle_10=0x7f040036;
+        public static final int posicle_11=0x7f040037;
+        public static final int posicle_12=0x7f040038;
+        public static final int posicle_13=0x7f040039;
+        public static final int posicle_14=0x7f04003a;
+        public static final int posicle_2=0x7f04002e;
+        public static final int posicle_3=0x7f04002f;
+        public static final int posicle_4=0x7f040030;
+        public static final int posicle_5=0x7f040031;
+        public static final int posicle_6=0x7f040032;
+        public static final int posicle_7=0x7f040033;
+        public static final int posicle_8=0x7f040034;
+        public static final int posicle_9=0x7f040035;
+        public static final int pre_next_bg_n=0x7f04000b;
+        public static final int pre_next_bg_p=0x7f04000c;
+        public static final int pre_next_txt_n=0x7f04000d;
+        public static final int pre_next_txt_p=0x7f04000e;
+        public static final int red=0x7f040001;
+        public static final int share_story_text=0x7f040015;
+        public static final int share_story_text2=0x7f040016;
+        public static final int share_story_text_dimmed=0x7f040017;
+        public static final int tab_text_n=0x7f040008;
+        public static final int tab_text_p=0x7f040007;
+        public static final int text_read_color=0x7f04001b;
+        public static final int text_unread_color=0x7f04001c;
+        public static final int transparent=0x7f040011;
+        public static final int white=0x7f040002;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -18,31 +124,73 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
+        public static final int add_text_n=0x7f020011;
+        public static final int add_text_p=0x7f020012;
+        public static final int btn_big_n=0x7f02001b;
+        public static final int btn_big_p=0x7f02001a;
+        public static final int btn_big_white=0x7f02001c;
+        public static final int career_tab_action_bg_n=0x7f020005;
+        public static final int career_tab_action_bg_p=0x7f020004;
+        public static final int d_list_btn_area_n=0x7f020020;
+        public static final int d_list_btn_area_p=0x7f02001f;
         public static final int ic_launcher=0x7f020000;
+        public static final int intro=0x7f020001;
+        public static final int joined_artist_n=0x7f02001e;
+        public static final int joined_artist_p=0x7f02001d;
+        public static final int like_bg_n=0x7f020007;
+        public static final int like_bg_p=0x7f020006;
+        public static final int list_btn_area_n=0x7f020008;
+        public static final int list_btn_area_p=0x7f020009;
+        public static final int pre_next_bg_n=0x7f02000d;
+        public static final int pre_next_bg_p=0x7f02000e;
+        public static final int pre_next_txt_n=0x7f02000f;
+        public static final int pre_next_txt_p=0x7f020010;
+        public static final int sketchbook_btn_n=0x7f02000c;
+        public static final int sketchbook_btn_p=0x7f02000b;
+        public static final int sketchbook_left_menu_btn_n=0x7f02000a;
+        public static final int tab_action_bg_n=0x7f020003;
+        public static final int tab_action_bg_p=0x7f020002;
+        public static final int tab_left_bg_n=0x7f020014;
+        public static final int tab_left_bg_p=0x7f020013;
+        public static final int tab_right_bg_n=0x7f020016;
+        public static final int tab_right_bg_p=0x7f020015;
+        public static final int tabaction_bg_n=0x7f020018;
+        public static final int tabaction_bg_p=0x7f020019;
+        public static final int tabmenu_select_bg=0x7f020017;
     }
     public static final class id {
-        public static final int action_settings=0x7f080002;
-        public static final int pager=0x7f080000;
-        public static final int section_label=0x7f080001;
+        public static final int action_settings=0x7f090007;
+        public static final int btnGoLogin=0x7f090004;
+        public static final int listView=0x7f090002;
+        public static final int needLoginFrame=0x7f090003;
+        public static final int pager=0x7f090000;
+        public static final int progressBar1=0x7f090006;
+        public static final int searchText=0x7f090005;
+        public static final int section_label=0x7f090001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int fragment_main=0x7f030001;
+        public static final int activity_intro=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int fragment_main=0x7f030002;
+        public static final int fragment_my_shuttle=0x7f030003;
+        public static final int fragment_shuttle_list=0x7f030004;
+        public static final int popup_wait_dialog=0x7f030005;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050005;
-        public static final int app_name=0x7f050000;
-        public static final int title_section1=0x7f050001;
-        public static final int title_section2=0x7f050002;
-        public static final int title_section3=0x7f050003;
-        public static final int title_section4=0x7f050004;
+        public static final int action_settings=0x7f060005;
+        public static final int app_name=0x7f060000;
+        public static final int message_backkey_to_exit=0x7f060006;
+        public static final int title_section1=0x7f060001;
+        public static final int title_section2=0x7f060002;
+        public static final int title_section3=0x7f060003;
+        public static final int title_section4=0x7f060004;
     }
     public static final class style {
         /** 
@@ -66,10 +214,12 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
+        public static final int PopupDialog=0x7f070003;
+        public static final int WaitDialog=0x7f070002;
     }
 }

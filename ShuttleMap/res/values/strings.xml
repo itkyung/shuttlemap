@@ -7,5 +7,6 @@
     <string name="title_section3">주변셔틀</string>
     <string name="title_section4">설정</string>
     <string name="action_settings">설정</string>
+	<string name="message_backkey_to_exit"><![CDATA[한 번 더 "뒤로 가기"를 누르면 앱을 종료합니다.]]></string>
 
 </resources>
