@@ -2,6 +2,8 @@ package com.shuttlemap.android.server.entity;
 
 import org.json.JSONObject;
 
+import com.shuttlemap.android.server.ServerStaticVariable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -342,8 +344,67 @@ public class ShuttleEntity implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-
+		dest.writeString(id);
+		dest.writeString(shuttleName);
+		dest.writeString(companyId);
+		dest.writeString(companyName);
+		dest.writeString(companyLogo);
+		dest.writeString(carNo);
+		dest.writeString(carType.name());
+		dest.writeDouble(startLatitude);
+		dest.writeDouble(startLongitude);
+		dest.writeString(startPointName);
+		dest.writeDouble(endLatitude);
+		dest.writeDouble(endLongitude);
+		dest.writeString(endPointName);
+		dest.writeInt(startHour);
+		dest.writeInt(startMinute);
+		dest.writeInt(endHour);
+		dest.writeInt(endMinute);
+		dest.writeString(scheduleType.name());
+		dest.writeString(bookmarkId);
+		dest.writeString(bookmarkName);
+		dest.writeString(driverId);
+		dest.writeString(driverName);
+		dest.writeString(driverPhone);
+		
+		
+	}
+	
+	protected void readFromParcel(Parcel in){
+		this.id = in.readString();
+		this.shuttleName = in.readString();
+		this.companyId = in.readString();
+		this.companyName = in.readString();
+		this.companyLogo = in.readString();
+		this.carNo = in.readString();
+		this.carType = CarType.valueOf(in.readString());
+		this.startLatitude = in.readDouble();
+		this.startLongitude = in.readDouble();
+		this.startPointName = in.readString();
+		this.endLatitude = in.readDouble();
+		this.endLongitude = in.readDouble();
+		this.endPointName = in.readString();
+		this.startHour = in.readInt();
+		this.startMinute = in.readInt();
+		this.endHour = in.readInt();
+		this.endMinute = in.readInt();
+		this.scheduleType = ScheduleType.valueOf(in.readString());
+		this.bookmarkId = in.readString();
+		this.bookmarkName = in.readString();
+		this.driverId = in.readString();
+		this.driverName = in.readString();
+		this.driverPhone = in.readString();
+		
+		
+	}
+	
+	public String getCompanyLogoURL(){
+		if(companyLogo != null){
+			return ServerStaticVariable.ImageURL + companyLogo;
+		}else{
+			return null;
+		}
 	}
 
 }

@@ -3,7 +3,9 @@ package com.shuttlemap.android.fragment;
 import java.util.ArrayList;
 
 import com.shuttlemap.android.R;
+import com.shuttlemap.android.ShuttleDetailActivity;
 import com.shuttlemap.android.adapter.ShuttleListAdapter;
+import com.shuttlemap.android.adapter.ShuttleListAdapter.ShuttleListListener;
 import com.shuttlemap.android.common.WaitDialog;
 import com.shuttlemap.android.server.entity.ShuttleEntity;
 import com.shuttlemap.android.server.handler.ShuttleHandler;
@@ -11,6 +13,7 @@ import com.shuttlemap.android.server.handler.ShuttleHandler;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class ShuttleListFragment extends Fragment {
+public class ShuttleListFragment extends Fragment implements ShuttleListListener{
 	private ListView listView;
 	private EditText searchText;
 	private ShuttleListAdapter adapter;
@@ -57,7 +60,7 @@ public class ShuttleListFragment extends Fragment {
 		this.listView = (ListView)rootView.findViewById(R.id.listView);
 		this.searchText = (EditText)rootView.findViewById(R.id.searchText);
 		
-		this.adapter = new ShuttleListAdapter();
+		this.adapter = new ShuttleListAdapter(context,this);
 		this.listView.setAdapter(adapter);
 		
 		initView();
@@ -111,6 +114,13 @@ public class ShuttleListFragment extends Fragment {
 		}
 		
 		
+	}
+
+	@Override
+	public void viewShuttleDetail(ShuttleEntity entity) {
+		Intent intent = new Intent(context,ShuttleDetailActivity.class);
+		intent.putExtra("shuttle", entity);
+		startActivity(intent);
 	}
 	
 	

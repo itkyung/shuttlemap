@@ -25,7 +25,7 @@ public interface ServerStaticVariable {
 	
 
 	public static final String SearchShuttleURL = BASE_URL + "/shuttle/searchShuttle";
-	
+	public static final String GetRoutesURL = BASE_URL + "/shuttle/listRoutes";
 	
 	/**
 	 * Account

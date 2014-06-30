@@ -6,6 +6,8 @@ import com.shuttlemap.android.fragment.ArroundMapFragment;
 import com.shuttlemap.android.fragment.MyShuttleFragment;
 import com.shuttlemap.android.fragment.SettingFragment;
 import com.shuttlemap.android.fragment.ShuttleListFragment;
+import com.shuttlemap.android.fragment.common.TitleBar;
+import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -26,19 +28,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.TabListener {
+public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.TabListener,TitleBarListener {
 	
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	private boolean mFlag = false;
 	private Handler mHandler=null;
 	
 	ViewPager mViewPager;
-
+	TitleBar titleBar;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
+		this.titleBar.hideBackButton();
+		this.titleBar.setTitle("셔틀맵");
+		
 		mHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -176,6 +183,12 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 		}
 	}
 
+
+	@Override
+	public void onBackButtonClicked(TitleBar titleBar) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void onBackPressed() {
