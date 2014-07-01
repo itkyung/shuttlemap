@@ -28,23 +28,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.TabListener,TitleBarListener {
+public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.TabListener {
 	
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	private boolean mFlag = false;
 	private Handler mHandler=null;
 	
 	ViewPager mViewPager;
-	TitleBar titleBar;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.hideBackButton();
-		this.titleBar.setTitle("셔틀맵");
+	
 		
 		mHandler = new Handler() {
 			@Override
@@ -61,6 +59,8 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+		
+		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
@@ -184,11 +184,7 @@ public class MainActivity extends ShuttlemapBaseActivity implements ActionBar.Ta
 	}
 
 
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void onBackPressed() {

@@ -6,6 +6,7 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
         <!-- API 11 theme customizations can go here. -->
+        
     </style>
 
 </resources>

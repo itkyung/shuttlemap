@@ -1,10 +1,12 @@
 package com.shuttlemap.android.fragment;
 
+import com.shuttlemap.android.LoginActivity;
 import com.shuttlemap.android.R;
 import com.shuttlemap.android.common.AccountManager;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.ListView;
 public class MyShuttleFragment extends Fragment {
 	private ListView listView;
 	private View needLoginFrame;
+	
 	
 	public static MyShuttleFragment newInstance(){
 		MyShuttleFragment fragment = new MyShuttleFragment();
@@ -57,8 +60,8 @@ public class MyShuttleFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				
-				
+				Intent intent = new Intent(getActivity(),LoginActivity.class);
+				startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -86,5 +89,17 @@ public class MyShuttleFragment extends Fragment {
 		}
 		
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == Activity.RESULT_OK){
+			initView();
+			
+		}else{
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+	
+	
 	
 }

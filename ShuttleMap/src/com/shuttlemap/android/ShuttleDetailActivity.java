@@ -9,6 +9,7 @@ import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.server.entity.RouteEntity;
 import com.shuttlemap.android.server.entity.ShuttleEntity;
 import com.shuttlemap.android.server.handler.ShuttleHandler;
+import com.shuttlemap.android.views.dialog.BookmarkDialog;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +42,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.context = this;
 		
 		Intent intent = getIntent();
@@ -50,7 +52,6 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 		
 		
 		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.hideBackButton();
 		this.titleBar.setTitle("셔틀정보");
 		
 		bitmapOption = new BitmapFactory.Options();
@@ -76,14 +77,14 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 			
 			@Override
 			public void onClick(View v) {
-				changeTab(1);
+				changeTab(BASIC_TAB);
 			}
 		});
 		findViewById(R.id.tvMenu2R).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				changeTab(2);
+				changeTab(ROUTE_TAB);
 			}
 		});
 		
@@ -97,7 +98,9 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
+				BookmarkDialog dialog = new BookmarkDialog(context,shuttle.getId());
+				dialog.show();
 				
 			}
 		});
@@ -143,7 +146,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 	private void changeTab(int tab){
 		currentTab = tab;
 		
-		if(tab == 0){
+		if(tab == BASIC_TAB){
 			ivMark1.setVisibility(View.VISIBLE);
 			ivMark2.setVisibility(View.GONE);
 			

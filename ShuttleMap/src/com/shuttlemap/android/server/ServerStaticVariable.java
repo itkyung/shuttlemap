@@ -1,11 +1,11 @@
 package com.shuttlemap.android.server;
 
 public interface ServerStaticVariable {
-	public static final String BASE_URL = "http://121.78.131.152/shuttlemap";
+	//public static final String BASE_URL = "http://121.78.131.152/shuttlemap";
 	public static final String IMG_BASE_URL = "http://121.78.131.152/";
 
-	//public static final String IMG_BASE_URL = "http://192.168.0.48/";
-	//public static final String BASE_URL = "http://192.168.0.48:8080/bigture";
+	//public static final String IMG_BASE_URL = "http://192.168.219.158/";
+	public static final String BASE_URL = "http://192.168.219.158:8080/shuttlemap";
 	public static final String BASE_MOBILE_URL = BASE_URL + "/mobile";
 	public static final String ProfileURL   = IMG_BASE_URL + "/upload/profile/";
 	public static final String ImageDownloadURL = BASE_URL + "/image_download";
@@ -21,16 +21,20 @@ public interface ServerStaticVariable {
 	public static final String LoginOutURL = BASE_URL + "/logout";
 	public static final String CheckSnsAccountURL = BASE_URL + "/login/checkSnsAccount";
 	
-	public static final String GcmRegistURL = BASE_URL + "/login/updateGCMRegistrationId";
+	public static final String GcmRegistURL = BASE_MOBILE_URL + "/updateGCMRegistrationId";
 	
 
-	public static final String SearchShuttleURL = BASE_URL + "/shuttle/searchShuttle";
-	public static final String GetRoutesURL = BASE_URL + "/shuttle/listRoutes";
+	public static final String SearchShuttleURL = BASE_MOBILE_URL + "/shuttle/searchShuttle";
+	public static final String GetRoutesURL = BASE_MOBILE_URL + "/shuttle/listRoutes";
+	public static final String AddBookmarkURL = BASE_MOBILE_URL + "/shuttle/addBookmark";
+	public static final String ListBookmarkURL = BASE_MOBILE_URL + "/shuttle/listBookmark";
+	public static final String RemoveBookmarkURL = BASE_MOBILE_URL + "/shuttle/removeBookmark";
+	
 	
 	/**
 	 * Account
 	 */
-	public static final String RegistAccountURL = BASE_MOBILE_URL + "/account/registAccount";
+	public static final String RegistAccountURL = BASE_MOBILE_URL + "/registAccount";
 	
 	public static final String ResendActivateURL = BASE_MOBILE_URL + "/account/resendActivateLink";
 	public static final String ResetPasswordURL = BASE_MOBILE_URL + "/account/resetPassword";

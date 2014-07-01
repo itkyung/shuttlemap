@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+	 <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" />
+    
+      <LinearLayout 
+          android:layout_below="@+id/titleBar"
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="15dp"
+	        >
+		    <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="아이디(이메일)"
+		        android:textSize="16dp"
+		        android:textStyle="bold"
+		        android:textColor="#505050"
+		         />
+		
+		    <EditText
+		        android:id="@+id/editBigtureId"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        
+		        android:textColorHint="#aaaaaa"
+		        android:textColor="#555555"
+		        android:inputType="textEmailAddress"
+		        android:paddingLeft="13dp" >
+		
+		        <requestFocus />
+		    </EditText>
+		
+		    <TextView
+		        android:id="@+id/passwordBoxTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:text="비밀번호"
+		        android:textStyle="bold"
+		        android:textColor="#505050"
+		        android:textSize="16dp" />
+		
+		    <LinearLayout
+		        android:id="@+id/passwordBox"
+		        android:layout_width="match_parent"
+		        android:layout_height="92dp"
+		        android:layout_marginTop="10dp"
+		        android:padding="0dp"
+		     
+		        android:orientation="vertical" >
+		
+		        <EditText
+		            android:id="@+id/editPassword1"
+		            android:layout_width="match_parent"
+		            android:layout_height="45dp"
+		            android:layout_marginTop="0dp"
+		            android:ems="10"
+		          
+		            android:background="@drawable/rounded_edittext_top"
+	           		android:textColor="#555555"
+	            	android:textColorHint="#aaaaaa" 
+		            android:inputType="textPassword"
+		            android:paddingLeft="13dp" >
+		
+		            <requestFocus />
+		        </EditText>
+		
+		        <EditText
+		            android:id="@+id/editPassword2"
+		            android:layout_width="match_parent"
+		            android:layout_height="46dp"
+		            android:background="@drawable/rounded_edittext_bottom"
+		            android:ems="10"
+		         
+		            android:textColor="#555555"
+	            	android:textColorHint="#aaaaaa" 
+		            android:inputType="textPassword"
+		            android:paddingLeft="13dp" />
+		    </LinearLayout>
+		
+		    <TextView
+		        android:id="@+id/textView2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:text="닉네임"
+		         android:textStyle="bold"
+		        android:textColor="#505050"
+		        android:textSize="16dp" />
+		
+		    <EditText
+		        android:id="@+id/editNickname"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        android:textColor="#555555"
+	            android:textColorHint="#aaaaaa" 
+		        android:paddingLeft="13dp" >
+		
+		    </EditText>
+		    
+		     <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:text="전화번호"
+		         android:textStyle="bold"
+		        android:textColor="#505050"
+		        android:textSize="16dp" />
+		
+		    <EditText
+		        android:id="@+id/editPhone"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        android:textColor="#555555"
+	            android:textColorHint="#aaaaaa" 
+		        android:paddingLeft="13dp" >
+		
+		    </EditText>
+		    
+		      <Button
+		        android:id="@+id/btnDone"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="18dp"
+		        android:background="@drawable/selector_contents_button_red"
+		        android:text="가입하기"
+		        android:textColor="#ffffffff"
+		        android:textSize="16dp"
+		        android:textStyle="bold" />
+			
+   </LinearLayout>
+    
+    
+</RelativeLayout>

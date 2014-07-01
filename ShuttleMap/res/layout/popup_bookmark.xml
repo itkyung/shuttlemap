@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="150dp"
+    android:padding="20dp" >   
+    
+    <EditText 
+        android:id="@+id/editBookmarkName"
+        android:layout_width="320dp"
+        android:layout_height="46dp"
+        android:hint="셔틀 북마크 이름을 적으세요."
+        android:paddingLeft="13dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="#505050"
+        />
+    <Button 
+        android:id="@+id/btnOk"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:layout_below="@+id/editBookmarkName"
+        android:layout_marginTop="30dp"
+        />
+    <Button 
+        android:id="@+id/btnCancel"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="닫기"
+        android:layout_alignTop="@+id/btnOk"
+        android:layout_toRightOf="@+id/btnOk"
+        />
+</RelativeLayout>

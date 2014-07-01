@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.RelativeLayout;
 
 public class IntroActivity extends ShuttlemapBaseActivity{
@@ -25,7 +26,7 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_intro);
 		this.context = this;
 		

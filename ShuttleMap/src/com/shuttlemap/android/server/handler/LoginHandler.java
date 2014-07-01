@@ -240,22 +240,22 @@ public class LoginHandler{
 		return success;
 	}
 	
-	public static AccountEntity registAccount(String socialType,String socialId,String loginId, String passwd, 
-			String nickName, String birthday, String gender, String countryCode){
-		AccountEntity entity = new AccountEntity();
+	public static boolean registAccount(String loginId, String passwd, 
+			String nickName, String phone){
 		
+
+		String osType = "Android";
+		String appVersion = "" + AccountManager.appVersion;
 		
 		HttpRequestParameters params = new HttpRequestParameters();
 
 		params.add("loginId", loginId);
-		params.add("socialType",socialType);
-		params.add("socialId",socialId);
 		params.add("password",passwd);
-		params.add("nickName",nickName);
-		params.add("gender",gender);
-		params.add("birthDay",birthday);
-		params.add("countryCode",countryCode);
-		
+		params.add("name",nickName);
+		params.add("phone",phone);
+		params.add("osType",osType);
+		params.add("appVersion", appVersion);
+	
 		HttpUtil util = new HttpUtil();
 		String resultString = util.execute(ServerStaticVariable.RegistAccountURL, params);
 
@@ -265,23 +265,16 @@ public class LoginHandler{
 			int result = object.getInt("errno");
 			
 			if (success){
-				JSONObject data = (JSONObject)object.get("data");
-				entity.importData(data);
-				entity.keepLogin = true;
-				entity.resultCode = result;
-				entity.success = true;
-			}else{
-				entity.resultCode = result;
-				entity.success = false;
+				return true;
 			}
+			return false;
 		}
 		catch(Exception e){
-			entity.resultCode = -1;
-			entity.success = false;
+		
 			e.printStackTrace();
 		}
 		
-		return entity;
+		return false;
 	}
 	
 	public static boolean changePassword(String currentPasswd,String newPasswd){
