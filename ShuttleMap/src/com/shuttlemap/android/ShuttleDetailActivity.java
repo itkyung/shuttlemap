@@ -51,7 +51,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 		setContentView(R.layout.activity_shuttle_detail);
 		
 		
-		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
+		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
 		this.titleBar.setTitle("셔틀정보");
 		
 		bitmapOption = new BitmapFactory.Options();

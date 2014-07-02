@@ -48,6 +48,38 @@ public class ShuttleHandler {
 		}
 	}
 	
+	public static ArrayList<ShuttleEntity> listBookmark(int page){
+		ArrayList<ShuttleEntity> results = new ArrayList<ShuttleEntity>();
+		HttpRequestParameters params = new HttpRequestParameters();
+		
+		params.add("page",page+"");
+		
+		HttpUtil util = new HttpUtil();
+		DefaultHttpClient httpClient = HttpClientWrapper.getClient();
+		String resultString = util.execute(httpClient, ServerStaticVariable.ListBookmarkURL, params);
+		try{
+			JSONObject object = new JSONObject(resultString);
+			int errorNo = object.getInt("errno");
+			boolean success = object.getBoolean("success");
+			
+			if (success){
+				JSONArray array = object.getJSONArray("datas");
+				
+				for(int i=0; i < array.length(); i++){
+					JSONObject json = array.getJSONObject(i);
+					ShuttleEntity entity = new ShuttleEntity();
+					entity.importData(json);
+					results.add(entity);
+				}
+			}
+			
+			return results;
+		}catch(Exception e){
+			e.printStackTrace();
+			return results;
+		}
+	}
+	
 	
 	public static ArrayList<RouteEntity> getRoutes(String shuttleId){
 		ArrayList<RouteEntity> results = new ArrayList<RouteEntity>();

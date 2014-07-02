@@ -42,7 +42,7 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
 		
-		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
+		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
 		this.titleBar.setTitle("로그인");
 		
 		editEmail  = (EditText)findViewById(R.id.editEmail);

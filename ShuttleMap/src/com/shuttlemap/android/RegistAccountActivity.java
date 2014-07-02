@@ -40,7 +40,7 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_regist);
 		
-		this.titleBar = (TitleBar)getSupportFragmentManager().findFragmentById(R.id.titleBar);
+		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
 		this.titleBar.setTitle("회원가입");
 		
 		TelephonyManager telManager = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE); 

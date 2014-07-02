@@ -17,6 +17,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,29 @@ public class ShuttleListFragment extends Fragment implements ShuttleListListener
 		this.listView = (ListView)rootView.findViewById(R.id.listView);
 		this.searchText = (EditText)rootView.findViewById(R.id.searchText);
 		
+		searchText.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s){
+				
+				if (s.toString().length() > 1){
+					searchShuttle(s.toString());
+				}else{
+					searchShuttle(s.toString());
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+			}
+		});
+		
 		this.adapter = new ShuttleListAdapter(context,this);
 		this.listView.setAdapter(adapter);
 		
@@ -99,14 +124,14 @@ public class ShuttleListFragment extends Fragment implements ShuttleListListener
 
 		@Override
 		protected void onPreExecute() {
-			WaitDialog.showWailtDialog(context, false);
+			//WaitDialog.showWailtDialog(context, false);
 			super.onPreExecute();
 		}
 
 		@Override
 		protected void onPostExecute(ArrayList<ShuttleEntity> result) {
 			super.onPostExecute(result);
-			WaitDialog.hideWaitDialog();
+		//	WaitDialog.hideWaitDialog();
 			
 			adapter.setShuttles(result);
 			adapter.notifyDataSetChanged();

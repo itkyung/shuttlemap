@@ -1,5 +1,7 @@
 package com.shuttlemap.android.fragment;
 
+import com.shuttlemap.android.R;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -34,8 +36,10 @@ public class SettingFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		return super.onCreateView(inflater, container, savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_setting, container,false);
+		
+		
+		return rootView;
 	}
 	
 	
