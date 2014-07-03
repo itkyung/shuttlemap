@@ -1,11 +1,11 @@
 package com.shuttlemap.android.server;
 
 public interface ServerStaticVariable {
-	//public static final String BASE_URL = "http://121.78.131.152/shuttlemap";
+	public static final String BASE_URL = "http://121.78.131.152:8080/shuttlemap";
 	public static final String IMG_BASE_URL = "http://121.78.131.152/";
 
 	//public static final String IMG_BASE_URL = "http://192.168.219.158/";
-	public static final String BASE_URL = "http://192.168.219.158:8080/shuttlemap";
+	//public static final String BASE_URL = "http://192.168.219.158:8080/shuttlemap";
 	public static final String BASE_MOBILE_URL = BASE_URL + "/mobile";
 	public static final String ProfileURL   = IMG_BASE_URL + "/upload/profile/";
 	public static final String ImageDownloadURL = BASE_URL + "/image_download";

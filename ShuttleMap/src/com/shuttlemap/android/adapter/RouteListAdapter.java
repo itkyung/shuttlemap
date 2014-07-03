@@ -49,7 +49,7 @@ public class RouteListAdapter extends BaseAdapter {
 		RouteEntity entity = (RouteEntity)getItem(position);
 		if (convertView == null){
 			LayoutInflater inflater = LayoutInflater.from(context);
-			convertView = inflater.inflate(R.layout.cell_route, null);
+			convertView = inflater.inflate(R.layout.cell_route, parent, false);
 		}
 		
 		TextView routeLabel = (TextView)convertView.findViewById(R.id.routeLabel);

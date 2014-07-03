@@ -41,8 +41,18 @@
               android:textSize="18dp"
               android:layout_below="@+id/companyLabel"
               android:layout_alignLeft="@+id/companyLabel"
-              
               />
+           <TextView 
+               android:id="@+id/ingLabel"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="14dp"
+               android:text="운행중"
+               android:layout_toRightOf="@+id/shuttleLabel"
+               android:layout_alignBottom="@+id/shuttleLabel"
+               android:layout_marginLeft="5dp"
+               />
+               
       </RelativeLayout>
       <LinearLayout 
             android:id="@+id/tabContainer"
@@ -122,7 +132,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="출발지"
                  />
              <TextView 
@@ -130,7 +140,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="엘스아파트"
                  android:layout_alignParentRight="true"
                  />
@@ -139,7 +149,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="도착지"
                  android:layout_below="@+id/startPointNameLabel"
                  />
@@ -148,7 +158,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="XX학원"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/startPointName"
@@ -158,7 +168,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="기사이름"
                  android:layout_below="@+id/endPointNameLabel"
                  />
@@ -167,7 +177,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="홍길동"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/endPointName"
@@ -177,7 +187,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="기사연락처"
                  android:layout_below="@+id/driverNameLabel"
                  />
@@ -186,7 +196,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="010-222-1111"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/driverNameLabel"
@@ -196,7 +206,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="운행시간"
                  android:layout_below="@+id/driverPhoneLabel"
                  />
@@ -205,7 +215,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="24:00 ~ 24:00"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/driverPhone"
@@ -215,7 +225,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="차량번호"
                  android:layout_below="@+id/timeLabel"
                  />
@@ -224,7 +234,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="서울가1020"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/time"
@@ -234,7 +244,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="차량종류"
                  android:layout_below="@+id/carNoLabel"
                  />
@@ -243,11 +253,14 @@
                  android:layout_width="wrap_content"
                  android:layout_height="20dp"
                  android:gravity="center_vertical"
-                 android:textSize="12dp"
+                 android:textSize="14dp"
                  android:text="미니버스"
                  android:layout_alignParentRight="true"
                  android:layout_below="@+id/carNo"
                  />
+             
+           
+             
          </RelativeLayout>  
          <ListView 
              android:id="@+id/routeList"
@@ -270,21 +283,28 @@
           >
           <Button 
               android:id="@+id/btnBookmark"
-              android:layout_width="80dp"
+              android:layout_width="120dp"
               android:layout_height="50dp"
               android:layout_marginTop="5dp"
               android:layout_marginLeft="5dp"
-              android:text="즐겨찾기"
+              android:text="내셔틀에 등록"
               />
           <Button 
               android:id="@+id/btnMap"
-              android:layout_width="80dp"
+              android:layout_width="120dp"
               android:layout_height="50dp"
               android:layout_marginTop="5dp"
               android:layout_marginLeft="5dp"
-              android:text="지도보기"
+              android:text="노선지도보기"
               />
-          
+           <Button 
+              android:id="@+id/btnCall"
+              android:layout_width="120dp"
+              android:layout_height="50dp"
+              android:layout_marginTop="5dp"
+              android:layout_marginLeft="5dp"
+              android:text="기사에게 전화"
+              />
       </LinearLayout>
 </RelativeLayout>
     

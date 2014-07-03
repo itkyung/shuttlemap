@@ -6,6 +6,7 @@ import com.shuttlemap.android.adapter.RouteListAdapter;
 import com.shuttlemap.android.common.bitmapDownloader.BitmapDownloader;
 import com.shuttlemap.android.fragment.common.TitleBar;
 import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
+import com.shuttlemap.android.server.ServerStaticVariable;
 import com.shuttlemap.android.server.entity.RouteEntity;
 import com.shuttlemap.android.server.entity.ShuttleEntity;
 import com.shuttlemap.android.server.handler.ShuttleHandler;
@@ -15,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -109,8 +111,22 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+//				Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+//				
+//				Uri uri1 = Uri.parse("geo:0,0?q=http://code.google.com/apis/kml/documentation/KML_Samples.kml");
+//				mapIntent.setData(uri1);
+//				startActivity(Intent.createChooser(mapIntent, "Shuttlemap"));
+				Intent intent = new Intent(ShuttleDetailActivity.this,MapWebViewActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		findViewById(R.id.btnCall).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + shuttle.getDriverPhone()));
+				startActivity(intent);
 			}
 		});
 		
@@ -128,6 +144,16 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 		driverName.setText(shuttle.getDriverName());
 		TextView driverPhone = (TextView)findViewById(R.id.driverPhone);
 		driverPhone.setText(shuttle.getDriverPhone());
+		
+		driverPhone.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + shuttle.getDriverPhone()));
+				startActivity(intent);
+			}
+		});
+		
 		TextView time = (TextView)findViewById(R.id.time);
 		time.setText(shuttle.getStartHour() + ":" + shuttle.getStartMinute() + "~" + shuttle.getEndHour() + ":" + shuttle.getEndMinute());
 		TextView carNo = (TextView)findViewById(R.id.carNo);

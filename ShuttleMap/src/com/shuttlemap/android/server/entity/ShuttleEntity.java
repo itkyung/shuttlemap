@@ -60,6 +60,10 @@ public class ShuttleEntity implements Parcelable {
 		
 	}
 	
+	public ShuttleEntity(Parcel in){
+		readFromParcel(in);
+	}
+	
 	public void importData(JSONObject jsonObj) throws Exception{
 		this.id = jsonObj.getString("id");
 		this.companyId = jsonObj.getString("companyId");
@@ -74,7 +78,8 @@ public class ShuttleEntity implements Parcelable {
 		}
 		
 		if(jsonObj.has("carType")){
-			this.carType = CarType.valueOf(jsonObj.getString("carType"));
+			String ct = jsonObj.getString("carType");
+			this.carType = CarType.valueOf(ct);
 		}else{
 			this.carType = CarType.UNKNOWN;
 		}
@@ -398,6 +403,20 @@ public class ShuttleEntity implements Parcelable {
 		
 		
 	}
+	
+	public static final Parcelable.Creator<ShuttleEntity> CREATOR = new Parcelable.Creator<ShuttleEntity>()
+	{
+		public ShuttleEntity createFromParcel(Parcel in)
+		{
+			return new ShuttleEntity(in);
+		}
+		
+		public ShuttleEntity[] newArray(int size)
+		{
+			return new ShuttleEntity[size];
+		}
+	};
+
 	
 	public String getCompanyLogoURL(){
 		if(companyLogo != null){
