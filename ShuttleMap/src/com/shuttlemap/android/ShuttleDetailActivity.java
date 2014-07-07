@@ -111,12 +111,9 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 			
 			@Override
 			public void onClick(View v) {
-//				Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-//				
-//				Uri uri1 = Uri.parse("geo:0,0?q=http://code.google.com/apis/kml/documentation/KML_Samples.kml");
-//				mapIntent.setData(uri1);
-//				startActivity(Intent.createChooser(mapIntent, "Shuttlemap"));
-				Intent intent = new Intent(ShuttleDetailActivity.this,MapWebViewActivity.class);
+
+				Intent intent = new Intent(ShuttleDetailActivity.this,MapRouteActivity.class);
+				intent.putExtra("kmlUrl", "http://121.78.131.152/kml/shuttle_1.kml");
 				startActivity(intent);
 			}
 		});
