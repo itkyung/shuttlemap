@@ -9,8 +9,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.shuttlemap.android.fragment.common.TitleBar;
 import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.map.MapDataSet;
@@ -19,6 +22,7 @@ import com.shuttlemap.android.map.Placemark;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -57,6 +61,10 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
         
         Intent intent = getIntent();
         String kmlUrl = intent.getStringExtra("kmlUrl");
+        String title = intent.getStringExtra("routeName");
+        TitleBar titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
+		titleBar.setTitle(title);
+		
         getRouteKmlData(kmlUrl);
 	}
 	
@@ -66,13 +74,40 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 	
 	private void drawPath(MapDataSet navigationData){
 		ArrayList<Placemark> routes = navigationData.getPlacemarks();
-		for(int i=0; i < routes.size(); i++){
-			addMarker(routes.get(i),i==0?true:false);
+		for(int i=0; i < routes.size()-1; i++){
+			boolean first = false;
+			boolean last = false;
+			if(i==0){
+				first = true;
+			}else if(i == routes.size()-2){
+				last = true;
+			}
+			addMarker(routes.get(i),first, first||last ? true : false);
+		}
+		String routeCoordinates = navigationData.getCurrentPlacemark().getCoordinates();
+		String[] points = routeCoordinates.split(" ");
+		for(int i=0;i <  points.length; i++){
+			if(i < points.length-1){
+				String pointStart = points[i];
+				String pointEnd = points[i+1];
+				googleMap.addPolyline(new PolylineOptions()
+				  .add(getLatLng(pointStart),getLatLng(pointEnd))
+				  .width(10)
+				  .color(Color.RED));
+			}
 		}
 		
 	}
 	
-	private void addMarker(Placemark marker,boolean needMove){
+	private LatLng getLatLng(String coordinates){
+		
+		String[] datas = coordinates.split(",");
+		double latitude = Double.parseDouble(datas[1]);
+		double longitude = Double.parseDouble(datas[0]);
+		return new LatLng(latitude, longitude);
+	}
+	
+	private void addMarker(Placemark marker,boolean needMove,boolean changeColor){
 		String coordinates = marker.getCoordinates();
 		String[] datas = coordinates.split(",");
 		if(datas.length == 0){
@@ -81,10 +116,22 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		double latitude = Double.parseDouble(datas[1]);
 		double longitude = Double.parseDouble(datas[0]);
 		LatLng ll = new LatLng(latitude, longitude);
-		googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle()));
+		if(changeColor){
+			if(needMove){
+				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+						.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("출발지"));
+			}else{
+				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+						.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("도착지"));
+			}
+		}else{
+			googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle()));
+		}
+		
 		if(needMove){
-			CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
-			googleMap.moveCamera(center);
+			CameraPosition cp = new CameraPosition.Builder().target(ll).zoom(17f).build();
+			googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+		
 		}
 	}
 	
@@ -118,7 +165,7 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
 		CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
 	//	googleMap.moveCamera(center);
-		googleMap.animateCamera(zoom);
+	//	googleMap.animateCamera(zoom);
 		
 	}
 

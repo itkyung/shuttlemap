@@ -114,6 +114,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Tit
 
 				Intent intent = new Intent(ShuttleDetailActivity.this,MapRouteActivity.class);
 				intent.putExtra("kmlUrl", "http://121.78.131.152/kml/shuttle_1.kml");
+				intent.putExtra("routeName", shuttle.getShuttleName());
 				startActivity(intent);
 			}
 		});
