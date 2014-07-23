@@ -20,7 +20,7 @@ public class BookmarkDialog extends Dialog {
 	private String shuttleId;
 	
 	public BookmarkDialog(Context context,String shuttleId) {
-		super(context , android.R.style.Theme_Translucent_NoTitleBar);
+		super(context , android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
 		this.context = context;
 		this.shuttleId = shuttleId;
 	}

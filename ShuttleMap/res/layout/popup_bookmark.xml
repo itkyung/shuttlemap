@@ -15,18 +15,23 @@
         />
     <Button 
         android:id="@+id/btnOk"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="확인"
         android:layout_below="@+id/editBookmarkName"
         android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_btn_popup_red"      
         />
     <Button 
         android:id="@+id/btnCancel"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="닫기"
         android:layout_alignTop="@+id/btnOk"
         android:layout_toRightOf="@+id/btnOk"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_btn_popup_red"      
         />
 </RelativeLayout>

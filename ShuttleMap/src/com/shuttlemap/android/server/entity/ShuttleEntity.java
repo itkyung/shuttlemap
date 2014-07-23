@@ -56,6 +56,8 @@ public class ShuttleEntity implements Parcelable {
 	
 	private String driverPhone;
 	
+	private String routeFilePath;
+	
 	public ShuttleEntity(){
 		
 	}
@@ -149,6 +151,10 @@ public class ShuttleEntity implements Parcelable {
 		this.driverName = jsonObj.getString("driverName");
 		if(jsonObj.has("driverPhone")){
 			this.driverPhone = jsonObj.getString("driverPhone");
+		}
+		
+		if(jsonObj.has("routeFilePath")){
+			this.routeFilePath = jsonObj.getString("routeFilePath");
 		}
 		
 	}
@@ -341,6 +347,16 @@ public class ShuttleEntity implements Parcelable {
 		this.driverPhone = driverPhone;
 	}
 
+	
+	
+	public String getRouteFilePath() {
+		return routeFilePath;
+	}
+
+	public void setRouteFilePath(String routeFilePath) {
+		this.routeFilePath = routeFilePath;
+	}
+
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -372,7 +388,7 @@ public class ShuttleEntity implements Parcelable {
 		dest.writeString(driverId);
 		dest.writeString(driverName);
 		dest.writeString(driverPhone);
-		
+		dest.writeString(routeFilePath);
 		
 	}
 	
@@ -400,7 +416,7 @@ public class ShuttleEntity implements Parcelable {
 		this.driverId = in.readString();
 		this.driverName = in.readString();
 		this.driverPhone = in.readString();
-		
+		this.routeFilePath = in.readString();
 		
 	}
 	

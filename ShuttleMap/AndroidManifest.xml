@@ -31,7 +31,7 @@
     
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -113,7 +113,7 @@
 	          application uses a custom BroadcastReceiver that redefines its name.
 	        -->
 	        <!--  service android:name="com.clockworks.android.bigture.GCMIntentService" / -->
-	        <meta-data android:value="AIzaSyDYniAZKsbRkCtNJgcfkrk2XSSm_qu68_I" android:name="com.google.android.maps.v2.API_KEY"/>
+	        <meta-data android:value="AIzaSyBXE_kJnAvyVaV1eeYwKEfAl4bdcCrKOys" android:name="com.google.android.maps.v2.API_KEY"/>
 	       
     </application>
 
