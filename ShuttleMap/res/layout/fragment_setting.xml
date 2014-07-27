@@ -7,9 +7,34 @@
     
     android:background="#f5f3ee" 
     android:padding="0dp">
-    
+     <LinearLayout 
+        android:id="@+id/needLoginFrame"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="로그인이 필요한 화면입니다."
+            android:textSize="20dp"
+            />
+        <Button 
+            android:id="@+id/btnGoLogin"
+            android:layout_width="100dp"
+            android:layout_marginTop="10dp"
+			android:layout_height="wrap_content"
+			android:text="로그인"
+			android:layout_gravity="center"
+        	android:textColor="@color/white"
+        	android:background="@drawable/selector_btn_popup_red"  			
+            />
+        
+    </LinearLayout>
    <LinearLayout 
-       android:layout_below="@+id/titleBar"
+       android:id="@+id/settingFrame"
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical"

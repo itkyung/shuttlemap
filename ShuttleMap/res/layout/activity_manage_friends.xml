@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+      <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" />
+    
+      <LinearLayout 
+            android:id="@+id/tabContainer"
+        	android:layout_width="fill_parent"
+        	android:layout_height="38dp"
+        	android:background="#fdfbf4"
+        	android:layout_below="@+id/titleBar"
+        	android:orientation="horizontal"
+        >
+ 	      <FrameLayout 
+            android:id="@+id/tvMenu1R"
+            android:layout_width="wrap_content"
+	        android:layout_height="38dp"
+	        android:orientation="vertical"
+	        android:layout_weight="0.33"
+            >
+	        <TextView
+		        android:id="@+id/tvMenu1"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:gravity="center"
+		        android:text="지인들"
+		        android:paddingLeft="15dp"
+		        android:paddingRight="15dp"
+		        android:textColor="@color/tab_text_p"
+		        android:textSize="16dp" />
+	        <ImageView
+		        android:id="@+id/ivMark1"
+		        android:layout_width="fill_parent"
+		        android:layout_height="4dp"
+		        android:layout_marginTop="34dp"
+		        android:src="@drawable/tabmenu_select_bg" />  
+	      </FrameLayout>
+	     <FrameLayout 
+            android:id="@+id/tvMenu2R"
+            android:layout_width="wrap_content"
+	        android:layout_height="38dp"
+	        android:layout_weight="0.33"
+            >
+		     <TextView
+		        android:id="@+id/tvMenu2"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:gravity="center"
+		        android:text="받은요청"
+		        android:paddingLeft="15dp"
+		        android:paddingRight="15dp"
+		        android:textColor="@color/tab_text_n"
+		        android:textSize="16dp" />
+			  <ImageView
+		        android:id="@+id/ivMark2"
+		        android:layout_width="fill_parent"
+		        android:layout_height="4dp"
+		        android:layout_marginTop="34dp"
+		        android:src="@drawable/tabmenu_select_bg"
+		        android:visibility="gone" />
+		</FrameLayout>   
+         <FrameLayout 
+            android:id="@+id/tvMenu3R"
+            android:layout_width="wrap_content"
+	        android:layout_height="38dp"
+	        android:layout_weight="0.33"
+            >
+		     <TextView
+		        android:id="@+id/tvMenu3"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:gravity="center"
+		        android:text="보낸요청"
+		        android:paddingLeft="15dp"
+		        android:paddingRight="15dp"
+		        android:textColor="@color/tab_text_n"
+		        android:textSize="16dp" />
+			  <ImageView
+		        android:id="@+id/ivMark3"
+		        android:layout_width="fill_parent"
+		        android:layout_height="4dp"
+		        android:layout_marginTop="34dp"
+		        android:src="@drawable/tabmenu_select_bg"
+		        android:visibility="gone" />
+		</FrameLayout>   
+      </LinearLayout>
+      <ListView 
+          android:id="@+id/friendsList"
+          android:layout_below="@+id/tabContainer"
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:divider="@color/map_top_divider"
+       	  android:dividerHeight="1dp"
+          ></ListView>
+</RelativeLayout>
+    
+    

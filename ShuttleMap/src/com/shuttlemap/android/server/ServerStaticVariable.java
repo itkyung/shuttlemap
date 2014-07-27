@@ -5,7 +5,7 @@ public interface ServerStaticVariable {
 	public static final String IMG_BASE_URL = "http://121.78.131.152/";
 
 	//public static final String IMG_BASE_URL = "http://192.168.219.158/";
-	//public static final String BASE_URL = "http://192.168.219.158:8080/shuttlemap";
+	//public static final String BASE_URL = "http://192.168.219.185:8080/shuttlemap";
 	public static final String BASE_MOBILE_URL = BASE_URL + "/mobile";
 	public static final String ProfileURL   = IMG_BASE_URL + "/upload/profile/";
 	public static final String ImageDownloadURL = BASE_URL + "/image_download";
@@ -40,6 +40,17 @@ public interface ServerStaticVariable {
 	public static final String ResetPasswordURL = BASE_MOBILE_URL + "/account/resetPassword";
 	public static final String UpdateAccountURL = BASE_MOBILE_URL + "/account/updateAccount";
 	public static final String ChangePassworkdURL = BASE_MOBILE_URL + "/account/changePasswd";
+	
+	
+	/**
+	 * Friends
+	 */
+	public static final String SearchFriendURL = BASE_MOBILE_URL + "/friends/findUser";
+	public static final String GetFriendsURL = BASE_MOBILE_URL + "/friends/getFriends";
+	public static final String RequestFriendURL = BASE_MOBILE_URL + "/friends/requestFriends";
+	public static final String ApproveFriendURL = BASE_MOBILE_URL + "/friends/approveFriends";
+	public static final String WaitingForMeURL = BASE_MOBILE_URL + "/friends/waitingForMeFriends";
+	public static final String WaitingURL = BASE_MOBILE_URL + "/friends/waitingFriends";
 	
 	
 	/**

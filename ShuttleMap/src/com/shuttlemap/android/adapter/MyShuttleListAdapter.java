@@ -124,7 +124,7 @@ public class MyShuttleListAdapter extends BaseAdapter {
 			if(imageUrl != null){
 				BitmapDownloader.getInstance().displayImage(imageUrl, bitmapOption, imageProfile, null);
 			}else{
-				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.common_profile_96x96));
+				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.shuttle_icon));
 			}
 			
 		}

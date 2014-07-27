@@ -13,7 +13,7 @@
         android:layout_marginBottom="12dp"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/shuttle_icon" />
+        android:src="@drawable/common_profile_96x96" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,52 +22,39 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/imageProfile"
         android:orientation="vertical" >
-        <TextView 
-            android:id="@+id/bookmarkLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:text="[bookmark]"
-            android:textColor="#d34b46"
-            />
         
 		<TextView
-		    android:id="@+id/companyLabel"
+		    android:id="@+id/phoneLabel"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@+id/bookmarkLabel"
 		    android:layout_marginBottom="1dp"
-		    android:layout_marginLeft="5dp"
-		    android:text="company"
+		    android:text="phone"
 		    android:textSize="14dp"
-		    
 		    />
-		<LinearLayout 
-		    android:layout_below="@+id/bookmarkLabel"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal"
-		    >
+
 		    <TextView
 	            android:id="@+id/nameLabel"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="ShuttleName"
+	            android:layout_below="@+id/phoneLabel"
+	            android:text="이름"
 	            android:textColor="#786e5a"
 	            android:textSize="16dp"
 	            android:maxLines="2"
 	            android:textStyle="bold" />
 	
-	        <TextView
-	            android:id="@+id/startLabel"
+	        <Button
+	            android:id="@+id/btnFriends"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_marginLeft="5dp"
-	             android:textColor="#786e5a"
-	            android:text="StartPoint"
+	            android:layout_alignParentRight="true"
+	            android:textColor="#ffffff"
+	            android:background="@drawable/selector_btn_popup_red"
+	            android:layout_marginRight="5dp"
+	            android:layout_centerVertical="true"
+	            android:text="친구요청"
 	            android:textSize="14dp" />
 		    
-		</LinearLayout>
 
     </RelativeLayout>
 	   

@@ -86,6 +86,21 @@
             android:screenOrientation="portrait"
             ></activity>
           
+           <activity 
+            android:name="com.shuttlemap.android.SearchFriendsActivity"
+            android:theme="@style/AppTheme"
+            android:label="Friends"
+            android:screenOrientation="portrait"
+            ></activity>
+          
+           <activity 
+            android:name="com.shuttlemap.android.ManageFriendsActivity"
+            android:theme="@style/AppTheme"
+            android:label="Friends"
+            android:screenOrientation="portrait"
+            ></activity>
+           
+          
            <!--
 	          BroadcastReceiver that will receive intents from GCM
 	          services and handle them to the custom IntentService.
