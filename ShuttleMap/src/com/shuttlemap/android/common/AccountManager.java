@@ -129,4 +129,9 @@ public class AccountManager{
 		void onLoginChanged(boolean login);
 	}
 	
+	public boolean isDriver(){
+		AccountEntity account = getAccountEntity();
+		if(account == null) return false;
+		return account.isDriver();
+	}
 }

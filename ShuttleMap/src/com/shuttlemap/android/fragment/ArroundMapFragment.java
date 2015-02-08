@@ -1,5 +1,9 @@
 package com.shuttlemap.android.fragment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -8,7 +12,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.shuttlemap.android.R;
+import com.shuttlemap.android.server.entity.FriendEntity;
+import com.shuttlemap.android.server.handler.FriendHandler;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +24,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Context;
@@ -27,6 +35,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class ArroundMapFragment extends Fragment implements LocationListener{
@@ -109,6 +118,15 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 			
 		}
 		
+		Button btn = (Button)view.findViewById(R.id.btnRefresh);
+		btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				new GetFriendsTask().execute();
+			}
+		});
+		
 		return view;
 	}
 
@@ -156,10 +174,22 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 		if(location != null){
 			
 		}
+		
+		new GetFriendsTask().execute();
 	}
 
-
+	DateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
+	public void viewFriendsLocation(ArrayList<FriendEntity> friends){
+		googleMap.clear();
+		for(FriendEntity friend : friends){
+			if(friend.getLatitude() > 0) {
+				googleMap.addMarker(new MarkerOptions().position(
+					new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getName())
+					.snippet("마지막시간 " + fm.format(friend.getLastLocationDate())));
+			}
+		}
+	}
 	
 	    
 	 
@@ -181,4 +211,18 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 		}
 	}
 	
+	class GetFriendsTask extends AsyncTask<Void, Void, ArrayList<FriendEntity>>{
+
+		@Override
+		protected ArrayList<FriendEntity> doInBackground(Void... params) {
+			return FriendHandler.getFriend(1);
+		}
+
+		@Override
+		protected void onPostExecute(ArrayList<FriendEntity> result) {
+			super.onPostExecute(result);
+			viewFriendsLocation(result);
+			
+		}
+	}
 }

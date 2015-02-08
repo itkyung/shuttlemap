@@ -29,7 +29,8 @@ public class AccountEntity implements Parcelable{
 	public boolean keepLogin;
 	public int resultCode;
 	public boolean success;
-
+	public String userType;
+	public boolean sendLocation;
 
 	public AccountEntity(){
 		
@@ -37,6 +38,10 @@ public class AccountEntity implements Parcelable{
 	
 	public AccountEntity(Parcel in){
 		readFromParcel(in);
+	}
+	
+	public boolean isDriver(){
+		return userType == null ? false : userType.equals("DRIVER");
 	}
 	
 	public void importData(JSONObject data) throws Exception{
@@ -69,6 +74,9 @@ public class AccountEntity implements Parcelable{
 			this.profileImg = data.getString("profileImg");
 		}
 		
+		if (data.has("userType")){
+			this.userType = data.getString("userType");
+		}
 		
 	}
 	
@@ -85,6 +93,8 @@ public class AccountEntity implements Parcelable{
 			this.profileImg = preferences.getString("profileImg", null);
 			this.phone = preferences.getString("phone", null);
 			this.keepLogin = preferences.getBoolean("keepLogin", false);
+			this.userType = preferences.getString("userType", null);
+			this.sendLocation = preferences.getBoolean("sendLocation", false);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -104,7 +114,8 @@ public class AccountEntity implements Parcelable{
 		editor.putString("phone", this.phone);
 		editor.putString("profileImg", this.profileImg);
 		editor.putBoolean("keepLogin", this.keepLogin);
-		
+		editor.putString("userType", this.userType);
+		editor.putBoolean("sendLocation", this.sendLocation);
 		editor.commit();
 		
 	}
@@ -136,7 +147,8 @@ public class AccountEntity implements Parcelable{
 		out.writeString(facebook);
 		out.writeString(phone);
 		out.writeString(profileImg);
-		
+		out.writeString(userType);
+		out.writeInt(sendLocation ? 1 : 0);
 	}
 	
 	protected void readFromParcel(Parcel in){
@@ -149,6 +161,8 @@ public class AccountEntity implements Parcelable{
 		facebook   = in.readString();
 		phone = in.readString();
 		profileImg = in.readString();
+		userType = in.readString();
+		sendLocation = in.readInt() == 1 ? true : false;
 	}
 
 	

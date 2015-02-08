@@ -1,5 +1,7 @@
 package com.shuttlemap.android.server.entity;
 
+import java.util.Date;
+
 import org.json.JSONObject;
 
 import android.os.Parcel;
@@ -14,6 +16,10 @@ public class RouteEntity implements Parcelable {
 	
 	private double longitude;
 	
+	private boolean arrived;
+	
+	private Date arriveDate;
+	
 	public RouteEntity(){
 		
 	}
@@ -23,6 +29,9 @@ public class RouteEntity implements Parcelable {
 		this.routeName = json.getString("routeName");
 		this.latitude = json.getDouble("latitude");
 		this.longitude = json.getDouble("longitude");
+		this.arrived = json.getBoolean("arrived");
+		long date = json.getLong("arriveDate");
+		arriveDate = new Date(date);
 	}
 	
 	
@@ -68,6 +77,22 @@ public class RouteEntity implements Parcelable {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+
+	public boolean isArrived() {
+		return arrived;
+	}
+
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
+	}
+
+	public Date getArriveDate() {
+		return arriveDate;
+	}
+
+	public void setArriveDate(Date arriveDate) {
+		this.arriveDate = arriveDate;
 	}
 
 }

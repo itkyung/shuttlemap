@@ -12,14 +12,14 @@
  
     
        <Button 
-           android:id="@+id/btnFriendMgt"
+           android:id="@+id/btnRefresh"
            android:layout_width="100dp"
            android:layout_alignParentRight="true"
            android:layout_alignParentTop="true"
            android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
 		   android:layout_height="wrap_content"
-		   android:text="지인찾기"
+		   android:text="지인위치갱신"
 		   android:layout_gravity="center"
        	   android:textColor="@color/white"
        	   android:background="@drawable/selector_btn_popup_red"  			

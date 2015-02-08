@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+	 <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" />
+    
+      <LinearLayout 
+          android:layout_below="@+id/titleBar"
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="15dp"
+	        >
+	      	
+          <TextView
+              android:id="@+id/driverText"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginBottom="10dp"
+		        android:text="본인은 운전수 입니다."
+		         android:textStyle="bold"
+		        android:textColor="@color/red"
+		        android:visibility="gone"
+		        android:textSize="16dp" />
+          
+		    <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="아이디(이메일)"
+		        android:textSize="16dp"
+		        android:textStyle="bold"
+		        android:textColor="#505050"
+		         />
+		
+		    <EditText
+		        android:id="@+id/editBigtureId"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        android:editable="false"
+		        android:textColorHint="#aaaaaa"
+		        android:textColor="#555555"
+		        android:inputType="textEmailAddress"
+		        android:paddingLeft="13dp" >
+		
+		        <requestFocus />
+		    </EditText>
+		
+		    <TextView
+		        android:id="@+id/textView2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:text="닉네임"
+		         android:textStyle="bold"
+		        android:textColor="#505050"
+		        android:textSize="16dp" />
+		
+		    <EditText
+		        android:id="@+id/editNickname"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        android:textColor="#555555"
+	            android:textColorHint="#aaaaaa" 
+		        android:paddingLeft="13dp" >
+		
+		    </EditText>
+		    
+		     <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:text="전화번호"
+		         android:textStyle="bold"
+		        android:textColor="#505050"
+		        android:textSize="16dp" />
+		
+		    <EditText
+		        android:id="@+id/editPhone"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/rounded_edittext"
+		        android:ems="10"
+		        android:textColor="#555555"
+	            android:textColorHint="#aaaaaa" 
+		        android:paddingLeft="13dp" >
+		
+		    </EditText>
+		    
+		    <LinearLayout 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="16dp"
+		        >
+		        
+		        <ImageButton
+			        android:id="@+id/btnSendLocation"
+			        android:layout_width="24dp"
+			        android:layout_height="24dp"
+			        
+			        android:background="@null"
+			        android:src="@drawable/selector_check_button" />
+		        
+		        <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"
+			        android:text="백그라운드 동작"
+			         android:textStyle="bold"
+			        android:textColor="#505050"
+			        android:textSize="16dp" />
+		        
+		    </LinearLayout>
+		    
+		    
+		      <Button
+		        android:id="@+id/btnDone"
+		        android:layout_width="match_parent"
+		        android:layout_height="46dp"
+		        android:layout_marginTop="18dp"
+		        android:background="@drawable/selector_contents_button_red"
+		        android:text="저장하기"
+		        android:textColor="#ffffffff"
+		        android:textSize="16dp"
+		        android:textStyle="bold" />
+			
+   </LinearLayout>
+    
+    
+</RelativeLayout>

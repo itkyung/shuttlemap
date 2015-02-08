@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">셔틀맵</string>
-    <string name="title_section1">내셔틀</string>
-    <string name="title_section2">셔틀찾기</string>
-    <string name="title_section3">지인찾기</string>
+    <string name="title_section1">등록셔틀</string>
+    <string name="title_section2">셔틀검색</string>
+    <string name="title_section3">지인위치</string>
     <string name="title_section4">설정</string>
     <string name="action_settings">설정</string>
 	<string name="message_backkey_to_exit"><![CDATA[한 번 더 "뒤로 가기"를 누르면 앱을 종료합니다.]]></string>

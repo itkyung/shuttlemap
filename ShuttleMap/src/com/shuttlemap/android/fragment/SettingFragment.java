@@ -3,6 +3,7 @@ package com.shuttlemap.android.fragment;
 
 import com.shuttlemap.android.LoginActivity;
 import com.shuttlemap.android.ManageFriendsActivity;
+import com.shuttlemap.android.MyInfoActivity;
 import com.shuttlemap.android.R;
 import com.shuttlemap.android.SearchFriendsActivity;
 import com.shuttlemap.android.common.AccountManager;
@@ -79,6 +80,16 @@ public class SettingFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(),ManageFriendsActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		View myProfile = rootView.findViewById(R.id.myProfile);
+		myProfile.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),MyInfoActivity.class);
 				startActivity(intent);
 			}
 		});

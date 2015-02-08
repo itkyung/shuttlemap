@@ -9,7 +9,10 @@ import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.server.entity.FriendEntity;
 import com.shuttlemap.android.server.handler.FriendHandler;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -137,8 +140,15 @@ public class ManageFriendsActivity extends ShuttlemapBaseActivity implements Tit
 
 
 	@Override
-	public void approveFriends(String friendId, String name) {
-		// TODO Auto-generated method stub
+	public void approveFriends(final String friendId, String name) {
+		new AlertDialog.Builder(context)
+        .setTitle(name + "님의 지인요청을 승인하시겠습니까?")
+        .setNeutralButton("네" ,new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				new ApproveFriendsTask().execute(friendId);
+			}
+        }).show();
 		
 	}
 
@@ -185,6 +195,21 @@ public class ManageFriendsActivity extends ShuttlemapBaseActivity implements Tit
 			adapter.setFriends(result, true, true);
 			adapter.notifyDataSetChanged();
 		}
+	}
+	
+	class ApproveFriendsTask extends AsyncTask<String, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			return FriendHandler.approveFriend(params[0]);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			getReceived();
+		}
+		
 	}
 	
 }

@@ -92,7 +92,7 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 				builder.create().show();
 				return;
 			}
-			WaitDialog.showWailtDialog(context, false);
+			
 			LoginTask task = new LoginTask();
 			if(Build.VERSION.SDK_INT >= 11){
 				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,loginId, passwd, keepLogin);
@@ -128,6 +128,12 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 	class LoginTask extends AsyncTask<Object, Void, Boolean>{
 
 		@Override
+		protected void onPreExecute() {
+			WaitDialog.showWailtDialog(context, false);
+			super.onPreExecute();
+		}
+
+		@Override
 		protected Boolean doInBackground(Object... params) {
 			boolean result = false;
 			String loginId = (String)params[0];
@@ -141,6 +147,10 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 				AccountManager.getInstance().setLogin(true);
 				entity.store(context);
 				result = true;
+				
+				if(entity.isDriver() || entity.sendLocation){
+					((ShuttlemapApplication)getApplication()).startLocationUpdate();
+				}
 			}
 			
 			return result;
@@ -148,6 +158,7 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 
 		@Override
 		protected void onPostExecute(Boolean result) {
+			WaitDialog.hideWaitDialog();
 			if (result){
 				AccountEntity account = AccountManager.getInstance().getAccountEntity();
 				UpdateRegistTask taskU = new UpdateRegistTask();
@@ -160,6 +171,12 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 				
 				AccountManager.getInstance().setLogin(result);
 				
+			}else{
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle("로그인 에러");
+				builder.setMessage("아이디 또는 비밀번호를 확인하세요.");
+				builder.setNegativeButton("확인", null);
+				builder.create().show();
 			}
 			super.onPostExecute(result);
 		}

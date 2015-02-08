@@ -1,5 +1,7 @@
 package com.shuttlemap.android.adapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.shuttlemap.android.R;
@@ -8,6 +10,7 @@ import com.shuttlemap.android.server.entity.RouteEntity;
 import com.shuttlemap.android.server.entity.ShuttleEntity;
 
 import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 public class RouteListAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<RouteEntity> routes;
+	
+	private DateFormat format = new SimpleDateFormat("h:mm a");
 	
 	public RouteListAdapter(Context context){
 		this.context = context;
@@ -53,7 +58,14 @@ public class RouteListAdapter extends BaseAdapter {
 		}
 		
 		TextView routeLabel = (TextView)convertView.findViewById(R.id.routeLabel);
+		TextView arriveLabel = (TextView)convertView.findViewById(R.id.arriveLabel);
 		routeLabel.setText(entity.getRouteName());
+		if(entity.isArrived()){
+			arriveLabel.setVisibility(View.VISIBLE);
+			arriveLabel.setText(format.format(entity.getArriveDate()) + "- 도착");
+		}else{
+			arriveLabel.setVisibility(View.GONE);
+		}
 		
 		return convertView;
 	}

@@ -80,6 +80,10 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 				AccountManager.getInstance().setLogin(true);
 				entity.store(context);
 				result = true;
+				
+				if(entity.isDriver() || entity.sendLocation){
+					((ShuttlemapApplication)getApplication()).startLocationUpdate();
+				}
 			}
 			
 			return result;
@@ -108,6 +112,8 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 //				}
 				
 				
+			}else{
+				goMain(10);
 			}
 			super.onPostExecute(result);
 		}

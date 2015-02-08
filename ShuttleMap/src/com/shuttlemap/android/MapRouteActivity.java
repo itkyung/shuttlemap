@@ -19,8 +19,11 @@ import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.map.MapDataSet;
 import com.shuttlemap.android.map.MapService;
 import com.shuttlemap.android.map.Placemark;
+import com.shuttlemap.android.server.ServerStaticVariable;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -69,7 +72,16 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 	}
 	
 	private void getRouteKmlData(String url){
-		new MapDataTask().execute(url);
+		if(url != null && url.length() > 0){
+			if(ServerStaticVariable.KML_PREFIX.equals(url)){
+				new AlertDialog.Builder(context)
+		        .setTitle("노선정보가 등록되지 않았습니다.").show();
+				
+				
+			}else{
+				new MapDataTask().execute(url);
+			}
+		}
 	}
 	
 	private void drawPath(MapDataSet navigationData){
