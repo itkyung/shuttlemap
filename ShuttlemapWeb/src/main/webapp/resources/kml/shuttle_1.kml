@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>정일학원 셔틀</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>정일학원</name>
+			<Placemark>
+				<styleUrl>#icon-503-3F5BA9</styleUrl>
+				<name>출발지</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04462170600891,37.51785307034368,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-DB4436</styleUrl>
+				<name>현대아파트101동</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.0453405380249,37.51692124992386,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-DB4436</styleUrl>
+				<name>롯데캐슬 102동</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04556584358215,37.51572135443698,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-DB4436</styleUrl>
+				<name>롯데캐슬108동</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04520106315613,37.514372512718076,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-DB4436</styleUrl>
+				<name>롯데캐슬 107동</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04355418682098,37.51544052504759,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-DB4436</styleUrl>
+				<name>서광아파트 102동</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04383850097656,37.5172616422937,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#icon-503-3F5BA9</styleUrl>
+				<name>도착지</name>
+				<ExtendedData>
+				</ExtendedData>
+				<Point>
+					<coordinates>127.04442322254181,37.517780737668296,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<styleUrl>#line-000000-1</styleUrl>
+				<name>노선도</name>
+				<ExtendedData>
+				</ExtendedData>
+				<LineString>
+					<tessellate>1</tessellate>
+					<coordinates>127.04464316368103,37.51782328630939,0.0 127.04508304595947,37.51788285436612,0.0 127.04533517360687,37.516989328522044,0.0 127.04546928405762,37.51651277703048,0.0 127.0455551147461,37.51581070902108,0.0 127.04562485218048,37.51521926478434,0.0 127.04588770866394,37.5145639901566,0.0 127.04405307769775,37.5140321071699,0.0 127.04355418682098,37.51544052504759,0.0 127.04428911209106,37.515657529668545,0.0 127.0441335439682,37.516351089225864,0.0 127.04383850097656,37.5172616422937,0.0 127.04374730587006,37.51766160134421,0.0 127.04442322254181,37.517780737668296,0.0</coordinates>
+				</LineString>
+			</Placemark>
+		</Folder>
+		<Style id='icon-503-3F5BA9'>
+			<IconStyle>
+				<color>ffA95B3F</color>
+				<scale>1.1</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+		</Style>
+		<Style id='icon-503-DB4436'>
+			<IconStyle>
+				<color>ff3644DB</color>
+				<scale>1.1</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+		</Style>
+		<Style id='line-000000-1'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+		</Style>
+	</Document>
+</kml>

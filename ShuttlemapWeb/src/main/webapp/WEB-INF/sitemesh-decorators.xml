@@ -5,16 +5,17 @@
 		<pattern>/error/*</pattern>
 		<pattern>/loading</pattern>
 	</excludes>
-	<!--  
+	
 	<decorator name="login" page="login/default.jsp">
     	<pattern>/login/*</pattern>
     </decorator>
-    -->
-
     
     <decorator name="default" page="default.jsp">
     	<pattern>/*</pattern>
     </decorator>
     
+     <decorator name="admin" page="admin/default.jsp">
+    	<pattern>/admin/*</pattern>
+    </decorator>
 
 </decorators>

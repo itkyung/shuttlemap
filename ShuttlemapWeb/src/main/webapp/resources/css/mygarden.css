@@ -1,0 +1,816 @@
+#main-header{
+	
+}
+
+#main-footer{
+	color : #a6a6a6;
+	background :transparent !important;
+}
+#main-footer a{
+	color : #a6a6a6;
+}
+
+
+.footer-line{
+	
+	background-image: url("../images/1.5/sub/footer/sub_foot_line.png");
+
+}
+
+.foot-logo-img{
+	background-image: url("../images/1.5/sub/footer/sub_foot_logo.png");
+	width : 56px;
+	height : 62px;
+}
+
+.footer-logo-title{
+	color : #a6a6a6 !important;
+}
+#header-logo{
+	font-weight : bold;
+	font-size : 20px;
+}
+
+#left-menu{
+	float : left;
+	width : 149px;
+	border-right : 1px solid #333;
+	padding-top : 20px;
+}
+
+
+
+#supplier-contents{
+	float : left;
+	padding-top : 10px;
+	padding-left : 10px;
+	padding-right : 10px;
+	width : 1110px;
+}
+
+.menuRow{
+	border-bottom : 1px solid #333;
+	width : 100%;
+	
+}
+
+.firstMenu{
+	height : 20px;
+	line-height : 20px;
+	font-size : 15px;
+	font-weight : bold;
+	margin-bottom : 5px;
+}
+
+
+.secondMenu{
+	font-size : 13px;
+	height : 18px;
+	line-height : 18px;
+	padding-left : 10px;
+	margin-bottom : 3px;
+}
+
+#productStatus{
+	height : 50px;
+	padding : 5px;
+	line-height : 50px;
+	border : 1px solid #bbb;
+}
+
+.statusTitle{
+	display : inline-block;
+	width : 90px;
+	font-size : 15px;
+	font-weight : bold;
+	text-align : right;
+	margin-left : 5px;
+}
+
+.statusTitleLong{
+	display : inline-block;
+	width : 130px;
+	font-size : 15px;
+	font-weight : bold;
+	text-align : right;
+	margin-left : 5px;	
+}
+
+.statusResult{
+	font-size : 15px;
+}
+
+#menuPath{
+	font-size : 18px;
+	height : 30px;
+	font-weight : bold;
+	border-bottom : 3px solid #454545;
+	margin-bottom : 10px;
+}
+
+#productSearchCondition{
+	margin-top : 5px;
+	padding : 5px;
+	border : 1px solid #bbb;
+}
+
+.subTitle{
+	margin-top : 10px;
+	font-size : 13px;
+	font-weight : bold;
+}
+
+.searchConditionRow{
+	height : 30px;
+	line-height : 30px;
+	text-align : center;
+}
+
+.searchConditionRow .label{
+	float : left;
+	width : 100px;
+	font-size : 13px;
+	font-weight : bold;
+	text-align : right;
+	padding-right : 10px;
+}
+
+.searchConditionRow .field{
+	float : left;
+	width : 450px;
+	font-size : 13px;
+	text-align : left;
+}
+
+#productSearchResult{
+	margin-top : 10px;
+	
+}
+
+.align-right{
+	text-align : right;
+}
+
+#orderSearchResult{
+	margin-top : 10px;
+}
+
+.product-tab{
+	padding : 10px;
+	min-height : 300px;
+}
+
+.product-tab table{
+	width : 100%;
+	border : 1px solid #ebebeb;
+	border-width : 0 0 1px 1px;
+	table-layout : fixed;
+}
+
+.product-tab th{
+	vertical-align : top;
+	line-height : 15px;
+	background-color : #fcfcfc;
+}
+.product-tab th,.product-tab td{
+	border : 1px solid #ebebeb;
+	padding : 11px 16px 9px;
+	border-width : 1px 1px 0 0;
+}
+
+.categoryUl{
+	overflow : auto;
+	width : 160px;
+	height : 160px;
+	padding : 7px;
+	border : 1px solid #c9c9c9;
+	color : #888;
+	font-size : 11px;
+	border-color : #c9c9c9 #ebebeb #ebebeb #c9c9c9;
+}
+
+#product-category div{
+	float : left;
+	margin-right : 15px;
+}
+
+#importArea{
+	display : none;
+}
+
+#importArea1{
+	display : none;
+}
+
+#importArea2{
+	display : none;
+}
+
+.importing-wrapper span{
+	display : inline-block;
+	margin-right : 20px;
+}
+
+#imageUploadWrapper{
+	border : 1px solid #ededed;
+	width : 875px;
+	min-height : 400px;
+
+	overflow : auto;
+}
+
+#imageUploadLeft{
+	float : left;
+	width : 280px;
+	min-height : 400px;
+	padding-left : 5px;
+}
+
+#imageUploadRight{
+	float : right;
+	width : 470px;
+	overflow : auto;
+	padding-left : 10px;
+	border-left : 1px solid #ededed;
+}
+
+#imageThumbnailWrapper{
+	float : left;
+	width : 200px;
+	border-right : 1px solid #ededed;
+}
+
+#imageOriginalWrapper{
+	float : left;
+	width : 450px;
+}
+
+.hide{
+	display : none;
+}
+
+.imageShowBtn{
+	float : left;
+	text-align : right;
+}
+.imageInputRow{
+	padding-top : 5px;
+	padding-bottom : 5px;
+	width : 100%;
+	overflow : auto;
+}
+
+.required{
+	color : red;
+}
+span#selectedCategory{
+	font-weight : bold;
+}
+
+
+.page-title{
+	height : 20px;
+	margin-bottom : 14px;
+	font-size : 16px;
+	font-weight : bold;
+}
+
+
+
+.tb-download{
+	width : 100%;
+	border : none;
+	border-top : 1px solid #383d4a;
+	border-bottom : 1px solid #dddde1;
+	table-layout : fixed;
+	font-size : 13px;
+}
+
+.tb-download th{
+	border : none;
+	padding : 13px 0 12px;
+	border-top : 1px solid #383d4a;
+	font-weight : normal;
+	text-align : center;
+}
+
+.tb-download td{
+	padding : 15px 0;
+	border-top : 1px solid #edeeef;
+	vertical-align : center;
+	word-wrap : break-word;
+	word-break : break-all;
+	text-align : center;
+	border : none;
+	
+}
+
+.tb-download td.none{
+	padding : 100px 0;
+}
+
+.downloadProductCell{
+	overflow : auto;
+	margin-left : 20px;
+	text-align : center;
+}
+
+.downloadImg{
+	float : left;
+	width : 120px;
+	margin-right : 10px;
+}
+
+.downloadProductName{
+	float : left;
+	vertical-align : center;
+}
+
+.order-subinfo-wrapper{
+	margin-top : 20px;
+	margin-bottom : 10px;
+}
+
+.sub-title{
+	height : 18px;
+	line-height : 18px;
+	font-size : 15px;
+	font-weight : bold;
+	margin-bottom : 5px;
+}
+
+table.price-table{
+	width : 100%;
+	border : none;
+	table-layout : fixed;
+	border-top : 2px solid #393c4b;
+	font-size : 13px;
+}
+
+thead.blind{
+	display : none;
+}
+
+.price-table td{
+	border : none;
+	border-bottom : 1px solid #dddce1;
+}
+
+.price-th{
+	padding : 5px 0 5px 14px;
+	background-color : #f7f7f7;
+}
+
+.price-td{
+	padding : 5px 0 5px 14px;
+}
+
+.ship-info-div{
+	padding-right : 299px;
+	border-top : 2px solid #383d4a;
+	border-bottom : 1px solid #dddde1;
+	overflow : hidden;
+}
+
+.ship-info-div .ship-left{
+	float : left;
+	width : 100%;
+	border-right : 1px solid #edeeef;
+	margin-right : -1px;
+}
+
+.ship-info-div .ship-right{
+	float : right;
+	width : 299px;
+	border-left : 1px solid #edeeef;
+	margin-right : -300px;
+	zoom : 1;
+}
+
+.ship-table{
+	width : 100%;
+	border : none;
+	border-right : none;
+	table-layout : fixed;
+	font-size : 13px;
+}
+
+.ship-table th{
+	padding : 5px 0 6px 15px;
+	background-color : #f7f7f7;
+	font-weight : normal;
+	border : none;
+	border-bottom : 1px solid #dddce1;
+
+}
+
+.ship-table td{
+	border : none;
+	padding : 5px 15px 6px;	
+	border-bottom : 1px solid #dddce1;
+}
+
+.ship-right dt{
+	overflow : hidden;
+	padding : 9px 10px 8px 14px;
+	border-bottom : 1px solid #eeeeef;
+	line-height : 20px;
+	font-size : 13px;
+}
+
+.ship-right dd{
+	padding : 10px 14px;
+	line-height : 18px;
+	font-size : 12px;
+}
+
+.align-center{
+	text-align : center;
+}
+
+.blind{
+	display : none;
+}
+
+.summaryContainer{
+	overflow : auto;
+}
+
+.summary-left{
+	float : left;
+	width : 300px;
+	margin-right : 20px;
+}
+
+.summaryWrapper{
+	height : 230px;
+	padding : 5px;
+	line-height : 50px;
+	border : 1px solid #bbb;
+}
+
+#supplierInfo{
+	height : 100px;
+	padding-left : 10px;
+	padding-top : 10px;
+	font-size : 13px;
+	border : 1px solid #bbb;
+}
+
+#supplierBoard{
+	height : 100px;
+	padding : 5px;
+	border : 1px solid #bbb;	
+}
+
+.product-option{
+	margin-top : 5px;
+	border : 0;
+	table-layout : fixed;
+	
+	border-collapse:separate;
+}
+
+.product-option td{
+	overflow : hidden;
+	padding : 0 10px;
+	border-top : 1px solid #bbb;
+	white-space : nowrap;
+}
+
+.product-option td.editable{
+	background-color : #ffffef;
+}
+
+.manage-option{
+	width : 100%;
+	margin-top : 5px;
+	border : 0;
+	table-layout : fixed;
+	border-collapse:separate;	
+	margin-bottom : 10px;
+}
+
+.align-right {
+	text-align : right;
+}
+
+#myPageWrapper{
+	padding-top : 10px;
+	padding-left : 20px;
+	padding-right : 20px;
+}
+
+ul.myPageSubMenu {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 32px; /*--Set height of tabs--*/
+	border-bottom: 1px solid #999;
+	border-left: 1px solid #999;
+	width: 100%;
+}
+ul.myPageSubMenu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 31px; /*--Subtract 1px from the height of the unordered list--*/
+	line-height: 31px; /*--Vertically aligns the text within the tab--*/
+	border: 1px solid #999;
+	border-left: none;
+	margin-bottom: -1px; /*--Pull the list item down 1px--*/
+	overflow: hidden;
+	position: relative;
+	background: #e0e0e0;
+}
+ul.myPageSubMenu li a {
+	text-decoration: none;
+	color: #000;
+	display: block;
+	font-size: 1.2em;
+	padding: 0 20px;
+	border: 1px solid #fff; /*--Gives the bevel look with a 1px white border inside the list item--*/
+	outline: none;
+}
+ul.myPageSubMenu li a:hover {
+	background: #ccc;
+}
+html ul.myPageSubMenu li.active, html ul.myPageSubMenu li.active a:hover  { /*--Makes sure that the active tab does not listen to the hover properties--*/
+	background: #fff;
+	border-bottom: 1px solid #fff; /*--Makes the active tab look like it's connected with its content--*/
+}
+
+#myPageData{
+	padding : 20px;
+	border: 1px solid #999;
+	border-top: none;
+	overflow: hidden;
+	clear: both;
+	background: #fff;
+}
+
+.opengarden-tab{
+	border : 1px solid #c0c0c0;
+	border-top : 3px solid #ff9a38;
+    background-image: url("../images/bg.png");
+    background-repeat: repeat;
+}
+
+
+
+.mid-line{
+	border-top : 1px solid transparent;
+	border-color : #ddd;
+	margin-top : 8px;	
+	margin-bottom : 8px;	
+	width : 100%;
+	max-width : 800px;
+}
+
+.notice-page-info-section{
+	padding-top : 20px;
+}
+
+.info-section-middle{
+	padding-top : 20px;
+}
+
+.no-padding-left{
+	padding-left : 0px !important;
+}
+
+.addressTable{
+	width : 550px;
+	margin : 0 auto !important;
+}
+
+.bookmark-box{
+	border : 1px solid transparent;
+	border-color : #ddd;
+	padding-left: 0px !important;
+	margin-right : 5px;
+}
+
+.bookmark-logo-box{
+	width : 180px;
+	border-right : 1px solid transparent;
+	border-color : #ddd;
+}
+
+.bookmark-row{
+	margin-bottom : 5px;
+}
+
+.bookmark-content{
+	margin-left : 15px;
+	padding-top : 20px;
+	
+}
+
+.bookmark-del{
+	margin-top : 50px;
+}
+
+.searchBox-small{
+	border : 1px solid transparent;
+	border-color : #ddd;
+	margin-top : 20px;
+	padding-left : 5px;
+	padding-right : 15px;
+	padding-top : 15px;
+}
+
+
+.searchBox{
+	border : 1px solid transparent;
+	border-color : #ddd;
+	margin-top : 20px;
+	padding-top : 15px;
+	padding-bottom : 15px;
+	padding-right : 15px;
+	padding-left : 15px;
+}
+
+#resultTable{
+	margin-top : 30px;
+}
+
+.progress-bar.animate {
+   width: 100%;
+}
+
+.height-sm{
+	height : 30px;
+	line-height : 30px;
+}
+
+.img-file{
+	float : left;
+	width : 200px;	
+}
+
+.margin-top-10{
+	margin-top : 10px;
+}
+
+.opengarden-small-title{
+	width : 244px;
+	height : 32px;
+	line-height : 32px;
+	text-align : center;
+	margin-bottom : 0px;
+	font-size : 13px;
+	font-weight : bold;
+	background-image: url("../images/1.5/subtitle_bg.png");
+}
+
+.form-horizontal .opengarden-tab .form-group{
+	margin : 0px;
+	padding : 0px;
+	position : relative;
+}
+
+.form-horizontal .opengarden-tab .control-label{
+	padding-top : 10px;
+	padding-bottom : 10px;
+}
+
+
+.top-summary{
+	margin-bottom : 10px;
+}
+
+table.dataTable{
+	border-collapse : collapse !important;
+}
+
+.notice-date{
+	border-top : 1px solid #c0c0c0;
+	padding-top : 5px;
+}
+
+.notice-content{
+	padding-top : 10px;
+	min-height : 250px;
+	border-bottom : 1px solid #c0c0c0;
+}
+
+.notice-content pre{
+	background-color: transparent;
+	border : none;
+	padding : 0;
+}
+
+.notice-page{
+	margin-top : 20px;
+}
+
+.og-table-padding th{
+	padding : 10px;
+}
+
+.og-table-padding td{
+	padding : 10px;
+	background-color: #ffffff;
+}
+
+.og-table-center td{
+	text-align : center;
+}
+
+.search-result-title{
+	height : 40px;
+}
+
+.search-result-title .opengarden-small-title{
+	margin-top : 8px;
+}
+
+.notice-ul{
+	margin-top : 10px;
+	font-size : 12px;	
+}
+
+.notice-ul li{
+	display: block;
+	overflow : auto;
+	margin-bottom : 3px;
+	padding-left : 10px;
+}
+
+.notice-ul li .pull-right{
+	color : #7d7d7d;
+}
+
+.info-area{
+	margin-top : 39px;
+	margin-bottom : 40px;
+}
+
+.mydesk-info-section{
+	float : left;
+	width : 240px;
+	height : 303px;
+	padding-top : 20px;
+	background-image: url("../images/1.5/mydesk/bg.png");
+}
+
+.info-section{
+	padding-top : 20px;
+}
+
+.info-section-bottom{
+	padding-top : 20px;
+	padding-bottom : 20px;
+}
+
+.margin-right-10{
+	margin-right : 20px;
+}
+
+.info-section-title{
+	text-align : left;
+	padding-left : 50px;
+	height : 50px;
+	line-height : 50px;
+	font-size : 16px;
+	font-weight: bold;
+	color : #ffffff;
+}
+
+.info-data{
+	margin-top : 20px;
+	padding-left : 25px;
+	padding-right : 25px;
+}
+
+.info-row{
+	height : 25px;
+	line-height: 25px;
+	width : 100%;
+	font-size : 12px;
+	overflow : hidden;
+}
+.border-bottom-info{
+	border-bottom: 1px solid #dbdbdb;	
+}
+
+.faqContents{
+	display : none;
+	padding : 5px;
+	margin-top : 5px;
+	border-top : 1px solid #dbdbdb;
+}
+
+.no-header .dataTables_scrollHead{
+	display : none;
+}
+
+.no-header .dataTables_wrapper.no-footer .dataTables_scrollBody{
+	border-top : 1px solid #ddd;
+}
+
+.text-bold{
+	font-weight: bold;
+}

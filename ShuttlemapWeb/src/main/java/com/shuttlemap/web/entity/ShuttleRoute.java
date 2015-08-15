@@ -1,5 +1,6 @@
 package com.shuttlemap.web.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,11 +13,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name=ShuttleRoute.TABLE_NAME)
 public class ShuttleRoute {
 	public static final String TABLE_NAME = "SM_ROUTE";
 	
+	@Expose
 	@Id @Column(length=36) @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")	
 	private String id;
@@ -25,16 +29,22 @@ public class ShuttleRoute {
 	@JoinColumn(name="shuttle_fk")
 	private Shuttle shuttle;
 	
+	@Expose
 	private int idx;
 	
+	@Expose
 	private String routeName;
 	
-	private float latitude;
+	@Expose
+	@Column(precision=10, scale=6)
+	private BigDecimal latitude;
 	
-	private float longitude;
+	@Expose
+	@Column(precision=10, scale=6)
+	private BigDecimal longitude;
 	
 	private Date created;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -67,19 +77,19 @@ public class ShuttleRoute {
 		this.routeName = routeName;
 	}
 
-	public float getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(float latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
-	public float getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(float longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
@@ -90,6 +100,7 @@ public class ShuttleRoute {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
+
+
 	
 }

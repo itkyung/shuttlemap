@@ -40,6 +40,7 @@ public class User {
 	@GenericGenerator(name="system-uuid", strategy = "uuid")	
 	private String id;
 	
+	@Expose
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
@@ -52,8 +53,10 @@ public class User {
 	@JoinColumn(name="company_fk")
 	private Company company;
 	
+	@Expose
 	private String phone;
 	
+	@Expose
 	private String loginId;
 	
 	private String password;
@@ -258,6 +261,11 @@ public class User {
 
 	public void setGcmId(String gcmId) {
 		this.gcmId = gcmId;
+	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		return this.id.equals(((User)arg0).getId());
 	}
 	
 	

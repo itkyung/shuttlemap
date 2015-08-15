@@ -1,0 +1,32 @@
+#main-header{
+	background-color : #3232FF;
+	color : white;
+}
+
+#main-header a{
+	color : white;
+}
+
+#admin-menu{
+	background-color : #6496FF;
+	height : 30px;
+	line-height : 30px;
+	font-size : 13px;
+}
+
+#admin-menu span{
+	display : inline-block;
+	margin-right : 20px;
+	
+}
+
+.subTitle {
+	margin-top : 10px;
+	font-weight : bold;
+	font-size : 20px;
+	height : 30px;
+}
+
+.hidden{
+	display : none;
+}

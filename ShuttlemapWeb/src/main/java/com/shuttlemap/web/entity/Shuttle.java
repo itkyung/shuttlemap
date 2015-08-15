@@ -1,5 +1,6 @@
 package com.shuttlemap.web.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,24 +34,24 @@ public class Shuttle {
 	@JoinColumn(name="company_fk")
 	private Company company;
 	
-	@ManyToOne
-	@JoinColumn(name="driver_fk")
-	private User driver;
-	
 	private String carNo;	//차량번호.
 	
 	@Enumerated(EnumType.STRING)
 	private CarType carType;	//차종.
 	
-	private float startLatitude;
+	@Column(precision=10, scale=6)
+	private BigDecimal startLatitude;
 	
-	private float startLongitude;
+	@Column(precision=10, scale=6)
+	private BigDecimal startLongitude;
 	
 	private String startPointName;
 	
-	private float endLatitude;
+	@Column(precision=10, scale=6)
+	private BigDecimal endLatitude;
 	
-	private float endLongitude;
+	@Column(precision=10, scale=6)
+	private BigDecimal endLongitude;
 	
 	private String endPointName;
 	
@@ -71,12 +72,22 @@ public class Shuttle {
 	
 	private boolean active;
 	
+	private String routeFilePath;
+	
+	//공유처리한 구글맵 지도 URL
+	private String googleMapUrl;
+	
+	@ManyToOne
+	@JoinColumn(name="driver_fk")
+	private User driver;
+	
 	@OneToMany(mappedBy = "shuttle", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("idx")
 	private List<ShuttleRoute> routes;
 	
 	@Enumerated(EnumType.STRING)
 	private ShuttleStatus status;
+
 	
 	public String getId() {
 		return id;
@@ -102,27 +113,20 @@ public class Shuttle {
 		this.company = company;
 	}
 
-	public User getDriver() {
-		return driver;
-	}
 
-	public void setDriver(User driver) {
-		this.driver = driver;
-	}
-
-	public float getStartLatitude() {
+	public BigDecimal getStartLatitude() {
 		return startLatitude;
 	}
 
-	public void setStartLatitude(float startLatitude) {
+	public void setStartLatitude(BigDecimal startLatitude) {
 		this.startLatitude = startLatitude;
 	}
 
-	public float getStartLongitude() {
+	public BigDecimal getStartLongitude() {
 		return startLongitude;
 	}
 
-	public void setStartLongitude(float startLongitude) {
+	public void setStartLongitude(BigDecimal startLongitude) {
 		this.startLongitude = startLongitude;
 	}
 
@@ -134,19 +138,19 @@ public class Shuttle {
 		this.startPointName = startPointName;
 	}
 
-	public float getEndLatitude() {
+	public BigDecimal getEndLatitude() {
 		return endLatitude;
 	}
 
-	public void setEndLatitude(float endLatitude) {
+	public void setEndLatitude(BigDecimal endLatitude) {
 		this.endLatitude = endLatitude;
 	}
 
-	public float getEndLongitude() {
+	public BigDecimal getEndLongitude() {
 		return endLongitude;
 	}
 
-	public void setEndLongitude(float endLongitude) {
+	public void setEndLongitude(BigDecimal endLongitude) {
 		this.endLongitude = endLongitude;
 	}
 
@@ -253,6 +257,30 @@ public class Shuttle {
 	public void setStatus(ShuttleStatus status) {
 		this.status = status;
 	}
-	
+
+	public User getDriver() {
+		return driver;
+	}
+
+	public void setDriver(User driver) {
+		this.driver = driver;
+	}
+
+	public String getRouteFilePath() {
+		return routeFilePath;
+	}
+
+	public void setRouteFilePath(String routeFilePath) {
+		this.routeFilePath = routeFilePath;
+	}
+
+	public String getGoogleMapUrl() {
+		return googleMapUrl;
+	}
+
+	public void setGoogleMapUrl(String googleMapUrl) {
+		this.googleMapUrl = googleMapUrl;
+	}
+
 	
 }

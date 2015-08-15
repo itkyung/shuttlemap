@@ -29,5 +29,42 @@
 		<servlet-name>shuttlemap</servlet-name> 
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	  <filter>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping> <filter>
+	    <filter-name>siteMesh</filter-name>
+	    <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>siteMesh</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+	  <filter>
+	    <filter-name>preProcessFilter</filter-name>
+	    <filter-class>com.shuttlemap.web.ui.filter.PreProcessFilter</filter-class>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>preProcessFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+	  <filter>
+	    <filter-name>encodingFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	    <init-param>
+	      <param-name>encoding</param-name>
+	      <param-value>utf-8</param-value>
+	    </init-param>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>encodingFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+	  <welcome-file-list>
+			<welcome-file>index.jsp</welcome-file>
+		</welcome-file-list>
 </web-app>

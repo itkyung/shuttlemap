@@ -21,9 +21,19 @@
 	
 	
 		
-			 <!--  Container에 정의된 JNDI기반의 데이타 소스를 연결한다. -->
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/shuttlemap" resource-ref="true"/>
+	<!--  Container에 정의된 JNDI기반의 데이타 소스를 연결한다. -->
+	<!-- jee:jndi-lookup id="dataSource" jndi-name="jdbc/shuttlemap" resource-ref="true"/ -->
 	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="2" />
+        <property name="minIdle" value="2" />
+        <property name="validationQuery" value="select 1" />
+    </bean>
+    
 	<context:component-scan base-package="com.shuttlemap" use-default-filters="true">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		

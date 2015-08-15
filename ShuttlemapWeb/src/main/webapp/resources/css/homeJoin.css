@@ -1,0 +1,94 @@
+.btn-og-confirm {
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+}
+
+.btn-og-confirm:hover {
+	color: #fff;
+	background-color: #3276b1;
+	border-color: #285e8e;
+}
+
+.btn-og-close {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.btn-og-close:hover {
+	color: #333;
+	background-color: #ebebeb;
+	border-color: #adadad;
+}
+
+.og-modal-header {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.og-modal-sub-title {
+	clear: both;
+	padding-top: 20px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
+
+#join-step1 {
+	width: 201px;
+	height: 62px;
+	background-image: url("../images/home/step_1_nor.png");
+}
+
+#join-step1.active{
+	background-image: url("../images/home/step_1_act.png");
+}
+
+#join-step2 {
+	width: 201px;
+	height: 62px;
+	background-image: url("../images/home/step_2_nor.png");
+}
+
+#join-step2.active{
+	background-image: url("../images/home/step_2_act.png");
+}
+
+#join-step3 {
+	width: 201px;
+	height: 62px;
+	background-image: url("../images/home/step_3_nor.png");
+}
+
+#join-step3.active{
+	background-image: url("../images/home/step_3_act.png");
+}
+
+#join-step4 {
+	width: 201px;
+	height: 62px;
+	background-image: url("../images/home/step_4_nor.png");
+}
+
+#join-step4.active{
+	background-image: url("../images/home/step_4_act.png");
+}
+
+.og-clause-title {
+	font-size: 14px;
+	margin-top: 15px;
+	font-weight: normal;
+}
+
+.og-clause-content {
+	overflow-x: hidden;
+	overflow-y: scoll;
+	height: 90px;
+	padding: 3px;
+	border: 1px solid #dfdfdf;
+	font-size: 12px;
+}

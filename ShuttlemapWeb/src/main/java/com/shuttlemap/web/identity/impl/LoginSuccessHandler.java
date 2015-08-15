@@ -64,7 +64,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 			}else{
 				String nextUrl = "";
 				if(login.isInRole(currentUser, Role.USER_ROLE)){
-					nextUrl = "/";
+					nextUrl = "/home";
 					
 				}else{
 					//Admin페이지로 보낸다.

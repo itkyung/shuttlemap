@@ -1,0 +1,29 @@
+#sub-qna-q{
+	position : relative;
+	width : 17px;
+	height : 17px;
+	background-image: url("../images/sub_qna_q.png");
+	background-repeat: no-repeat;	
+}
+
+#sub-qna-a{
+	position : relative;
+	width : 17px;
+	height : 17px;
+	background-image: url("../images/sub_qna_a.png");
+	background-repeat: no-repeat;	
+}
+
+.og-badge {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #fff;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-align: center;
+	background-color: #FF0000;
+	border-radius: 10px;
+}
