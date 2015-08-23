@@ -13,14 +13,17 @@
 </head>
 <body> 
 	<div class="container">
-		<h3 class="page-header">기관(협회)정보</h3>
+		<c:url value="/admin/editAssociationForm" var="associationUrl"/>
+		<h3  class="page-header"> <a href="${associationUrl}?id=${association.id}">${association.name} </a> 소속 기관 정보 </h3>
+	
 		<c:url value="/admin/saveCompany" var="formUrl"/>
 		<form id="companyForm" class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="${formUrl}">
 			<input type=hidden id="companyId" name="companyId" value="${company.id}"/>
+			<input type=hidden name="associationId" value="${association.id}"/>
 			
 			<div class="info-section-top">
 				<div class="opengarden-small-title">
-					기관(협회)기본정보
+					기관 기본정보
 				</div>
 				<div class="tab-content">
 					<div class="tab-pane active opengarden-tab">
@@ -74,6 +77,20 @@
 							 </div>
 						</div>
 						<div class="form-group border-bottom">
+							<label class="col-lg-2 control-label required">* 대표자</label>
+							<div class="col-lg-10 og-form-input">
+								<div class="col-lg-6">
+							     	 <input type="text" id="presidentName" name="presidentName" class="form-control input-sm" value="${company.presidentName}" 
+							     		placeholder="대표자 이름을 입력하세요."
+							     		data-counter="#presidentNameCounter" data-text-length="10"
+							     		/>
+							    </div>
+							    <div class="col-lg-5 height-sm">
+							    	<code id="presidentNameCounter">0/10</code>
+							    </div>
+							 </div>
+						</div>
+						<div class="form-group border-bottom">
 							<label class="col-lg-2 control-label required">* 담당자</label>
 							<div class="col-lg-10 og-form-input">
 								<div class="col-lg-6">
@@ -87,6 +104,41 @@
 							    </div>
 							 </div>
 						</div>
+						<div class="form-group border-bottom">
+							<label class="col-lg-2 control-label">휴대폰번호</label>
+							<div class="col-lg-10 og-form-input">
+								<div class="col-lg-6">
+							     	 <input type="text" id="mobilePhone" name="mobilePhone" class="form-control input-sm" value="${company.mobilePhone}" />
+							    </div>
+							    <div class="col-lg-5 height-sm">
+							    	
+							    </div>
+							 </div>
+						</div>
+						<div class="form-group border-bottom">
+							<label class="col-lg-2 control-label">이메일</label>
+							<div class="col-lg-10 og-form-input">
+								<div class="col-lg-6">
+							     	 <input type="text" id="email" name="email" class="form-control input-sm" value="${company.email}" />
+							    </div>
+							    <div class="col-lg-5 height-sm">
+							    	
+							    </div>
+							 </div>
+						</div>
+						<div class="form-group border-bottom">
+							<label class="col-lg-2 control-label">Fax</label>
+							<div class="col-lg-10 og-form-input">
+								<div class="col-lg-6">
+							     	 <input type="text" id="faxNo" name="faxNo" class="form-control input-sm" value="${company.faxNo}" />
+							    </div>
+							    <div class="col-lg-5 height-sm">
+							    	
+							    </div>
+							 </div>
+						</div>
+						
+						
 						<div class="form-group border-bottom">
 							<label class="col-lg-2 control-label">홈페이지</label>
 							<div class="col-lg-10 og-form-input">

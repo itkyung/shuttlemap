@@ -8,6 +8,7 @@ import com.shuttlemap.web.Role;
 import com.shuttlemap.web.delegate.CompanyDelegate;
 import com.shuttlemap.web.delegate.CompanySearchModel;
 import com.shuttlemap.web.delegate.UserDelegate;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.Friends;
 import com.shuttlemap.web.entity.User;
@@ -43,6 +44,7 @@ public interface IUserService {
 	int countCompany(CompanySearchModel condition);
 	Company loadCompany(String id);
 	List<User> findUser(Company company);
+	List<User> findUser(Association association);
 	void saveCompanyAndUser(Company company,String loginId,String plainPassword) throws Exception;
 	
 	List<UserDelegate> findUserByName(String name, String userType, int start, int limits);

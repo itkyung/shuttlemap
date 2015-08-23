@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shuttlemap.web.delegate.CompanyDelegate;
 import com.shuttlemap.web.delegate.CompanySearchModel;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.CurrentLocation;
 import com.shuttlemap.web.entity.Friends;
@@ -52,6 +53,7 @@ public interface IUserDAO {
 	void createCompany(Company company);
 	void updateCompany(Company company);
 	List<User> findUser(Company company);
+	List<User> findUser(Association association);
 	
 	List<User> findUserByName(String name,UserType userType,int start,int limits);
 	int countUser(String name,UserType userType);

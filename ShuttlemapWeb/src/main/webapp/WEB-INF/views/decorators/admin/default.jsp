@@ -110,11 +110,10 @@
 				      <ul class="nav navbar-nav">
 				      	
 			      		<li class="dropdown">
-				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관/셔틀 관리</a>
+				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회/기관 관리</a>
 				        	<ul class="dropdown-menu">
-					            <li><a href="${pageContext.request.contextPath}/admin/listCompany");">기관 리스트</a></li>
-					            <li><a href="${pageContext.request.contextPath}/admin/listShuttle");">셔틀 리스트</a></li>
-					            <li><a href="${pageContext.request.contextPath}/admin/editCompanyForm");">기관 등록</a></li>
+					            <li><a href="${pageContext.request.contextPath}/admin/listAssociation");">협회 리스트</a></li>
+					            <li><a href="${pageContext.request.contextPath}/admin/editAssociationForm");">협회 등록</a></li>
 					        </ul>
 				        </li>
 				      	<li class="dropdown">

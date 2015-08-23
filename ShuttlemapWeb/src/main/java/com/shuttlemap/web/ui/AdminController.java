@@ -27,6 +27,7 @@ import com.shuttlemap.web.Role;
 import com.shuttlemap.web.common.CommonUtils;
 import com.shuttlemap.web.delegate.CompanyDelegate;
 import com.shuttlemap.web.delegate.CompanySearchModel;
+import com.shuttlemap.web.delegate.DataTableSearchModel;
 import com.shuttlemap.web.delegate.RouteDelegate;
 import com.shuttlemap.web.delegate.RouteParam;
 import com.shuttlemap.web.delegate.RouteSearchModel;
@@ -34,12 +35,15 @@ import com.shuttlemap.web.delegate.ShuttleDelegate;
 import com.shuttlemap.web.delegate.ShuttleParam;
 import com.shuttlemap.web.delegate.ShuttleSearchModel;
 import com.shuttlemap.web.delegate.UserDelegate;
+import com.shuttlemap.web.dto.AssociationDTO;
 import com.shuttlemap.web.dto.CompanyDTO;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.Shuttle;
 import com.shuttlemap.web.entity.ShuttleRoute;
 import com.shuttlemap.web.entity.User;
 import com.shuttlemap.web.entity.UserType;
+import com.shuttlemap.web.identity.IAssociationService;
 import com.shuttlemap.web.identity.ILogin;
 import com.shuttlemap.web.identity.IUserService;
 import com.shuttlemap.web.identity.OsType;
@@ -55,6 +59,9 @@ public class AdminController {
 	private IUserService userService;
 	@Autowired
 	private IShuttleService shuttleService;
+	@Autowired
+	private IAssociationService associationService;
+	
 	
 	private Log log = LogFactory.getLog(AdminController.class);
 	
@@ -65,8 +72,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/listCompany")
-	public String listCompany(){
-		
+	public String listCompany(@RequestParam(value="associationId",required=false) String associationId,Model model){
+		if(associationId != null){
+			model.addAttribute("associationId",associationId);
+			Association association = associationService.load(associationId);
+			model.addAttribute("associationName", association.getName());
+		}
 		return "admin/listCompany";
 	}
 	
@@ -76,7 +87,66 @@ public class AdminController {
 		return "admin/listShuttle";
 	}
 	
-
+	@RequestMapping(value="/listAssociation")
+	public String listAssociation(){
+		return "admin/listAssociation";
+	}
+	
+	@RequestMapping(value="/searchAssociation",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String searchAssociation(@ModelAttribute("condition") DataTableSearchModel condition,BindingResult result,HttpServletRequest request) throws IOException{
+		List<Association> results = associationService.findAll();
+		
+		DatatableJson json = new DatatableJson(condition.getDraw(), results.size(), results.size(), results.toArray());
+		
+		return CommonUtils.toJson(json);
+	}
+	
+	@RequestMapping("/editAssociationForm")
+	public String editAssociationForm(@RequestParam(value="id",required=false) String id,Model model){
+		if(id != null){
+			Association association = associationService.load(id);
+			model.addAttribute("association",association);
+			List<User> users = userService.findUser(association);
+			if(users.size() > 0){
+				model.addAttribute("associationUser",users.get(0));
+			}
+		}
+		
+		return "admin/editAssociationForm";
+	}
+	
+	@RequestMapping(value="/saveAssociation",method=RequestMethod.POST)
+	public String saveAssociation(@ModelAttribute AssociationDTO dto,BindingResult result,Model model) throws IOException{
+		Association association = null;
+		
+		if(dto.getAssociationId() != null && !"".equals(dto.getAssociationId())) {
+			association = associationService.load(dto.getAssociationId());
+		}else{
+			association = new Association();
+			association.setActive(true);
+		}
+		
+		try{
+			association.setName(dto.getName());
+			association.setPresidentName(dto.getPresidentName());
+			association.setPhone(dto.getPhone());
+			association.setAddress(dto.getAddress());
+			association.setEmail(dto.getEmail());
+			association.setMobilePhone(dto.getMobilePhone());
+			association.setRegNo(dto.getRegNo());
+			association.setFaxNo(dto.getFaxNo());
+			association.setAddressDetail(dto.getAddressDetail());
+			association.setZipCode(dto.getZipCode());
+			
+			associationService.saveAssociation(association);
+			model.addAttribute("associationId", association.getId());
+		}catch(Exception e){
+			log.error("Save Error : ",e);
+		}
+		return "admin/saveAssociationResult";
+	}
+	
 	@RequestMapping(value="/searchCompany",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String searchCompany(@ModelAttribute("condition") CompanySearchModel condition,BindingResult result,HttpServletRequest request) throws IOException{
@@ -100,7 +170,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editCompanyForm")
-	public String editCompanyForm(@RequestParam(value="id",required=false) String id,Model model){
+	public String editCompanyForm(@RequestParam(value="id",required=false) String id,
+			@RequestParam(value="associationId",required=false) String associationId,
+			Model model){
+		
 		if(id != null){
 			Company company = userService.loadCompany(id);
 			List<User> users = userService.findUser(company);
@@ -108,7 +181,25 @@ public class AdminController {
 			if(users.size() > 0){
 				model.addAttribute("companyUser",users.get(0));
 			}
+			model.addAttribute("association", company.getAssociation());
+		} else {
+			Association association;
+			if(associationId == null) {
+				//현재 로그인한 사람의 (협회관리자)의 associationId를 얻는다.
+				User currentUser = login.getCurrentUser();
+				Company curCom = currentUser.getCompany();
+				if(curCom == null) {
+					association = currentUser.getAssociation();
+				}else{
+					association = curCom.getAssociation();
+				}
+				
+			}else{
+				association = associationService.load(associationId);
+			}
+			model.addAttribute("association",association);
 		}
+		
 		return "admin/editCompanyForm";
 	}
 	
@@ -140,7 +231,16 @@ public class AdminController {
 			company = userService.loadCompany(companyDto.getCompanyId());
 		}else{
 			company = new Company();
+			company.setActive(true);
+			//assocaition이 없으면 기본으로 설정한다.
+			if(companyDto.getAssociationId() == null) {
+				Association association = associationService.getDefault();
+				company.setAssociation(association);
+			} 
 		}
+		
+		populateCompany(company, companyDto);
+		
 		try{
 			userService.saveCompanyAndUser(company, companyDto.getUserLoginId(), companyDto.getUserPassword());
 			model.addAttribute("companyId", company.getId());
@@ -150,6 +250,28 @@ public class AdminController {
 		return "admin/saveCompanyResult";
 	}
 	
+	private void populateCompany(Company company, CompanyDTO companyDto) {
+		
+		company.setName(companyDto.getName());
+		company.setCompanyType(companyDto.getCompanyType());
+		company.setContactPerson(companyDto.getContactPerson());
+		company.setPresidentName(companyDto.getPresidentName());
+		company.setPhone(companyDto.getPhone());
+		company.setMobilePhone(companyDto.getMobilePhone());
+		company.setEmail(companyDto.getEmail());
+		company.setFaxNo(companyDto.getFaxNo());
+		company.setLicenseNo(companyDto.getLicenseNo());
+		company.setZipCode(companyDto.getZipCode());
+		company.setAddress(companyDto.getAddress());
+		company.setAddressDetail(companyDto.getAddressDetail());
+		
+		
+		if(companyDto.getAssociationId() != null) {
+			Association association = associationService.load(companyDto.getAssociationId());
+			company.setAssociation(association);
+		}
+	}
+	
 	@RequestMapping("/editShuttleForm")
 	public String editShuttleForm(@RequestParam(value="companyId",required=false) String companyId,
 			@RequestParam(value="id",required=false) String id,Model model){
@@ -157,8 +279,11 @@ public class AdminController {
 			Shuttle shuttle = shuttleService.loadShuttle(id);
 			model.addAttribute("shuttle",shuttle);
 			model.addAttribute("companyId", shuttle.getCompany().getId());
+			model.addAttribute("companyName", shuttle.getCompany().getName());
 		}else{
 			model.addAttribute("companyId", companyId);
+			Company company = userService.loadCompany(companyId);
+			model.addAttribute("companyName", company.getName());
 		}
 		return "admin/editShuttleForm";
 	}

@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,9 +29,23 @@ public class Company {
 	
 	private String phone;
 	
-	private String licenseNo;
+	private String mobilePhone;
 	
-	private String companyLogo;
+	private String address;
+	
+	private String zipCode;
+	
+	private String addressDetail;
+	
+	private String presidentName;	//대표자명
+	
+	private String licenseNo;	//사업자 번호 
+	
+	private String companyLogo;	//업로드 주소.
+	
+	private String email;
+	
+	private String faxNo;
 	
 	private String homepage;
 	
@@ -43,6 +58,10 @@ public class Company {
 	
 	private Date created;
 
+	private Date updated;
+	
+	@ManyToOne
+	private Association association;
 	
 	public String getId() {
 		return id;
@@ -122,6 +141,78 @@ public class Company {
 
 	public void setContactPerson(String contactPerson) {
 		this.contactPerson = contactPerson;
+	}
+
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+
+	public String getPresidentName() {
+		return presidentName;
+	}
+
+	public void setPresidentName(String presidentName) {
+		this.presidentName = presidentName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFaxNo() {
+		return faxNo;
+	}
+
+	public void setFaxNo(String faxNo) {
+		this.faxNo = faxNo;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public Association getAssociation() {
+		return association;
+	}
+
+	public void setAssociation(Association association) {
+		this.association = association;
 	}
 	
 	

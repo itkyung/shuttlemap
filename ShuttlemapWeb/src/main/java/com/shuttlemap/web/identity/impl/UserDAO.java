@@ -14,10 +14,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shuttlemap.web.delegate.CompanyDelegate;
 import com.shuttlemap.web.delegate.CompanySearchModel;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.CompanyType;
 import com.shuttlemap.web.entity.CurrentLocation;
@@ -35,6 +37,9 @@ public class UserDAO implements IUserDAO {
 	private EntityManager em;
 	
 	private DateFormat fm = new SimpleDateFormat("yyyy/MM/dd");
+	
+	@Autowired
+	private AssociationDao associationDao;
 	
 	
 	@Override
@@ -378,7 +383,9 @@ public class UserDAO implements IUserDAO {
 			hql.append("AND a.companyType = :companyType ");
 		}
 			
-		
+		if(condition.getAssociationId() != null){
+			hql.append("AND a.assocation = :association ");
+		}
 		
 		if(!isCount){
 			hql.append("Order by a.name asc ");
@@ -394,6 +401,11 @@ public class UserDAO implements IUserDAO {
 		
 		if(condition.getCompanyType() != null){
 			query.setParameter("companyType", CompanyType.valueOf(condition.getCompanyType()));
+		}
+		
+		if(condition.getAssociationId() != null){
+			Association assosiation = associationDao.load(condition.getAssociationId());
+			query.setParameter("association", assosiation);
 		}
 			
 		query.setHint("org.hibernate.cacheable", true);
@@ -433,6 +445,17 @@ public class UserDAO implements IUserDAO {
 		Query query = em.createQuery("FROM User a WHERE a.active = :active AND a.company = :company");
 		query.setParameter("active", true);
 		query.setParameter("company", company);
+		query.setHint("org.hibernate.cacheable", true);
+		return query.getResultList();
+	}
+	
+	
+
+	@Override
+	public List<User> findUser(Association association) {
+		Query query = em.createQuery("FROM User a WHERE a.active = :active AND a.association = :association");
+		query.setParameter("active", true);
+		query.setParameter("association", association);
 		query.setHint("org.hibernate.cacheable", true);
 		return query.getResultList();
 	}

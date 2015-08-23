@@ -9,9 +9,24 @@ public class CompanyDTO {
 	private String phone;
 	private String licenseNo;
 	private String contactPerson;
+	private String mobilePhone;
+	private String address;
+	
+	private String zipCode;
+	
+	private String addressDetail;
+	
+	private String email;
+	
+	private String faxNo;
+	
+	private String presidentName;
+	
 	private String homepage;
 	private String userLoginId;
 	private String userPassword;
+	private String associationId;
+	
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -65,6 +80,54 @@ public class CompanyDTO {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getAssociationId() {
+		return associationId;
+	}
+	public void setAssociationId(String associationId) {
+		this.associationId = associationId;
+	}
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getFaxNo() {
+		return faxNo;
+	}
+	public void setFaxNo(String faxNo) {
+		this.faxNo = faxNo;
+	}
+	public String getPresidentName() {
+		return presidentName;
+	}
+	public void setPresidentName(String presidentName) {
+		this.presidentName = presidentName;
 	}
 	
 	

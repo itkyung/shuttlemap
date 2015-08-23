@@ -13,7 +13,8 @@
 </head>
 <body> 
 	<div class="container">
-		<h3 class="page-header">업체리스트</h3>
+		<c:url value="/admin/editAssociationForm" var="associationUrl"/>
+		<h3 class="page-header"> <a href="${associationUrl}?id=${associationId}">${associationName} </a> 소속 업체리스트 </h3>
 		
 		<form id="searchForm" class="form-horizontal" role="form"  method="post">
 			<div class="tab-content">
@@ -41,7 +42,7 @@
 					검색결과 : 총 <code id="totalCount"> 0</code> 개.
 				</div>
 				<div class="pull-right">
-					<button  type="button" class="btn og-btn-warning" onclick="registCompany();">업체등록</button>
+					<button  type="button" class="btn og-btn-warning" onclick="registCompany('${associationId}');">업체등록</button>
 				</div>
 			</div>
 			<table id="searchResult" class="display table-bordered" cellspacing="0" width="100%">

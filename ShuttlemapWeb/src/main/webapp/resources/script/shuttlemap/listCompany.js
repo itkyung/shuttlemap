@@ -95,6 +95,6 @@ viewCompany = function(id){
 	document.location.href = _requestPath + "/admin/editCompanyForm?id=" + id;
 };
 
-registCompany = function() {
-	document.location.href = _requestPath + "/admin/editCompanyForm";
+registCompany = function(associationId) {
+	document.location.href = _requestPath + "/admin/editCompanyForm?associationId=" + associationId;
 };

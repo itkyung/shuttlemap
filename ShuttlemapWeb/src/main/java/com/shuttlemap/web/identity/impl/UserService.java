@@ -21,12 +21,14 @@ import com.shuttlemap.web.common.CommonUtils;
 import com.shuttlemap.web.delegate.CompanyDelegate;
 import com.shuttlemap.web.delegate.CompanySearchModel;
 import com.shuttlemap.web.delegate.UserDelegate;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.CurrentLocation;
 import com.shuttlemap.web.entity.Friends;
 import com.shuttlemap.web.entity.User;
 import com.shuttlemap.web.entity.UserRoles;
 import com.shuttlemap.web.entity.UserType;
+import com.shuttlemap.web.identity.IAssociationService;
 import com.shuttlemap.web.identity.ILogin;
 import com.shuttlemap.web.identity.IUserDAO;
 import com.shuttlemap.web.identity.IUserService;
@@ -36,6 +38,8 @@ import com.shuttlemap.web.identity.SocialType;
 @Service("UserService")
 public class UserService implements ILogin,IUserService {
 	@Autowired IUserDAO dao;
+	
+	@Autowired IAssociationService associationService;
 	
 	Logger log = Logger.getLogger(UserService.class);
 	
@@ -95,6 +99,11 @@ public class UserService implements ILogin,IUserService {
 		return user.getId() + "-" + curr.getTime();
 	}
 	
+	/**
+	 * 초기 사용자를 설정한다.
+	 * 최고 관리자와 본사협회를 만든다.
+	 * 
+	 */
 	@Transactional
 	@Override
 	public void initAdmin() {
@@ -111,6 +120,13 @@ public class UserService implements ILogin,IUserService {
 				dao.addRoleToUser(adminUser,Role.ADMIN_ROLE);
 				dao.createUser(adminUser);
 			}
+			
+			Association basicAssociation = associationService.getDefault();
+			if(basicAssociation == null) {
+				associationService.makeDefault();
+			}
+			
+			
 		}catch(Exception e){
 			log.error("Init admin error : " + e);
 		}
@@ -487,6 +503,11 @@ public class UserService implements ILogin,IUserService {
 		UserType uType = null;
 		if(userType != null) uType = UserType.valueOf(userType);
 		return dao.countUser(name, uType);
+	}
+
+	@Override
+	public List<User> findUser(Association association) {
+		return dao.findUser(association);
 	}
 	
 	

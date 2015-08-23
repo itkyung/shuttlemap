@@ -9,6 +9,7 @@ public class CompanySearchModel extends DataTableSearchModel{
 	private String keyword;
 	private String companyType;
 	private String userType;
+	private String associationId;
 	
 	private boolean desc=true;
 	
@@ -45,6 +46,12 @@ public class CompanySearchModel extends DataTableSearchModel{
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	public String getAssociationId() {
+		return associationId;
+	}
+	public void setAssociationId(String associationId) {
+		this.associationId = associationId;
 	}
 	
 	

@@ -20,7 +20,9 @@
 </head>
 <body> 
 	<div class="container">
-		<h3 class="page-header">셔틀 정보</h3>
+		<c:url value="/admin/editCompanyForm" var="companyUrl"/>
+		<h3 class="page-header"> <a href="${companyUrl}?id=${companyId}">${companyName} </a>소속 셔틀정보</h3>
+		
 		<c:url value="/admin/saveShuttle" var="formUrl"/>
 		<form id="shuttleForm" class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="${formUrl}">
 			<input type=hidden id="shuttleId" name="shuttleId" value="${shuttle.id}"/>

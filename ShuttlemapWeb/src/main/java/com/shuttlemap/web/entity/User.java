@@ -53,6 +53,10 @@ public class User {
 	@JoinColumn(name="company_fk")
 	private Company company;
 	
+	@ManyToOne
+	@JoinColumn(name="association_fk")
+	private Association association;	//해당 사용자가 직접 협회에 속할때에만 값이 있다.
+	
 	@Expose
 	private String phone;
 	
@@ -266,6 +270,14 @@ public class User {
 	@Override
 	public boolean equals(Object arg0) {
 		return this.id.equals(((User)arg0).getId());
+	}
+
+	public Association getAssociation() {
+		return association;
+	}
+
+	public void setAssociation(Association association) {
+		this.association = association;
 	}
 	
 	

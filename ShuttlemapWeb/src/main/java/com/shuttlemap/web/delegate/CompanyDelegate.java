@@ -14,6 +14,15 @@ public class CompanyDelegate {
 	@Expose
 	private String name;
 	@Expose
+	private String presidentName;
+	@Expose
+	private String licenseNo;
+	@Expose
+	private String email;
+	@Expose
+	private String mobilePhone;
+	
+	@Expose
 	private String companyType;
 	@Expose
 	private String contactPerson;
@@ -36,6 +45,10 @@ public class CompanyDelegate {
 		this.contactPerson = company.getContactPerson();
 		this.createdStr = df.format(company.getCreated());
 		this.phone = company.getPhone();
+		this.mobilePhone = company.getMobilePhone();
+		this.presidentName = company.getPresidentName();
+		this.licenseNo = company.getLicenseNo();
+		this.email = company.getEmail();
 	}
 
 	public String getId() {
@@ -64,6 +77,22 @@ public class CompanyDelegate {
 
 	public String getCreatedStr() {
 		return createdStr;
+	}
+
+	public String getPresidentName() {
+		return presidentName;
+	}
+
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getMobilePhone() {
+		return mobilePhone;
 	}
 	
 	
