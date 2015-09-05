@@ -224,7 +224,7 @@ saveDriverAction = function() {
 				alert("등록되었습니다.운전자를 검색해서 할당하세요.");
 				$("#registDriverModal").modal("hide");
 			}else{
-				alert("Error");
+				alert("이미 존재하는 로그인 아이디입니다.");
 			}
 		},
 		error : function(response, status, err){

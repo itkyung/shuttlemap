@@ -108,27 +108,45 @@
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav">
-				      	
-			      		<li class="dropdown">
-				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회/기관 관리</a>
-				        	<ul class="dropdown-menu">
-					            <li><a href="${pageContext.request.contextPath}/admin/listAssociation");">협회 리스트</a></li>
-					            <li><a href="${pageContext.request.contextPath}/admin/editAssociationForm");">협회 등록</a></li>
-					        </ul>
-				        </li>
-				      	<li class="dropdown">
-				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
-				        	<ul class="dropdown-menu">
-					            <li><a href="${pageContext.request.contextPath}/admin/listUser");">등록된 회원</a></li>
-					         </ul>
-				        </li>
-				        <li class="dropdown">
-				        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">정산/통계</a>
-				        	<ul class="dropdown-menu">
-					            <li><a href="javascript:goCategoryMain('${secondCategory.id}');">사용자 통계</a></li>
-					            <li><a href="javascript:goCategoryMain('${secondCategory.id}');">기관정산</a></li>
-					         </ul>
-				        </li>
+				      	<c:if test="${_roleName eq 'ROLE_ADMIN'}">
+				      		<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회/기관 관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listAssociation");">협회 리스트</a></li>
+						            <li><a href="${pageContext.request.contextPath}/admin/editAssociationForm");">협회 등록</a></li>
+						        </ul>
+					        </li>
+					      	<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listUser");">등록된 회원</a></li>
+						         </ul>
+					        </li>
+					        <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">정산/통계</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="javascript:goCategoryMain('${secondCategory.id}');">사용자 통계</a></li>
+						            <li><a href="javascript:goCategoryMain('${secondCategory.id}');">기관정산</a></li>
+						         </ul>
+					        </li>
+				        </c:if>
+				        <c:if test="${_roleName eq 'ROLE_ASSOCIATION_USER'}">
+				        	<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회 / 기관 관리</a>
+					        	<ul class="dropdown-menu">
+					        		<li><a href="${pageContext.request.contextPath}/admin/editAssociationFormProxy");">협회 상세 정보</a></li>
+						            <li><a href="${pageContext.request.contextPath}/admin/listCompanyProxy");">기관 리스트</a></li>
+						        </ul>
+					        </li>
+				        </c:if>
+				        <c:if test="${_roleName eq 'ROLE_COMPANY_USER'}">
+				        	<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관 / 셔틀 관리</a>
+					        	<ul class="dropdown-menu">
+					        		<li><a href="${pageContext.request.contextPath}/admin/editCompanyFormProxy");">기관 상세 정보</a></li>
+						        </ul>
+					        </li>
+				        </c:if>
 				      </ul>
 				     
 				    </div><!-- /.navbar-collapse -->

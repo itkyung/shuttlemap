@@ -66,9 +66,23 @@ public class AdminController {
 	private Log log = LogFactory.getLog(AdminController.class);
 	
 	@RequestMapping("/home")
-	public String home() {
+	public String home(Model model) {
 		
 		return "admin/home";
+	}
+	
+	@RequestMapping("/editAssociationFormProxy")
+	public String editAssociationFormProxy() {
+		User currentUser = login.getCurrentUser();
+		Association association = currentUser.getAssociation();
+		return "redirect:/admin/editAssociationForm?id=" + association.getId();
+	}
+	
+	@RequestMapping("/listCompanyProxy")
+	public String listCompanyProxy(){
+		User currentUser = login.getCurrentUser();
+		Association association = currentUser.getAssociation();
+		return "redirect:/admin/listCompany?associationId=" + association.getId();
 	}
 	
 	@RequestMapping("/listCompany")
@@ -139,10 +153,13 @@ public class AdminController {
 			association.setAddressDetail(dto.getAddressDetail());
 			association.setZipCode(dto.getZipCode());
 			
-			associationService.saveAssociation(association);
+			associationService.saveAssociation(association, dto.getUserLoginId(), dto.getUserPassword());
 			model.addAttribute("associationId", association.getId());
+			model.addAttribute("success",true);
 		}catch(Exception e){
 			log.error("Save Error : ",e);
+			model.addAttribute("success",false);
+			model.addAttribute("errorMsg",e.getMessage());
 		}
 		return "admin/saveAssociationResult";
 	}
@@ -169,11 +186,18 @@ public class AdminController {
 		return CommonUtils.toJson(json);
 	}
 	
+	@RequestMapping("/editCompanyFormProxy")
+	public String editCompanyFormProxy() {
+		User currentUser = login.getCurrentUser();
+		Company company = currentUser.getCompany();
+		return "redirect:/admin/editCompanyForm?id=" + company.getId();
+	}
+	
 	@RequestMapping("/editCompanyForm")
 	public String editCompanyForm(@RequestParam(value="id",required=false) String id,
 			@RequestParam(value="associationId",required=false) String associationId,
 			Model model){
-		
+		User currentUser = login.getCurrentUser();
 		if(id != null){
 			Company company = userService.loadCompany(id);
 			List<User> users = userService.findUser(company);
@@ -186,7 +210,7 @@ public class AdminController {
 			Association association;
 			if(associationId == null) {
 				//현재 로그인한 사람의 (협회관리자)의 associationId를 얻는다.
-				User currentUser = login.getCurrentUser();
+				
 				Company curCom = currentUser.getCompany();
 				if(curCom == null) {
 					association = currentUser.getAssociation();
@@ -200,6 +224,12 @@ public class AdminController {
 			model.addAttribute("association",association);
 		}
 		
+		if (login.isInRole(currentUser, Role.ASSOCIATION_ROLE)){
+			model.addAttribute("associationManager",true);
+		}else{
+			model.addAttribute("associationManager",false);
+		}
+			
 		return "admin/editCompanyForm";
 	}
 	
@@ -244,8 +274,11 @@ public class AdminController {
 		try{
 			userService.saveCompanyAndUser(company, companyDto.getUserLoginId(), companyDto.getUserPassword());
 			model.addAttribute("companyId", company.getId());
+			model.addAttribute("success",true);
 		}catch(Exception e){
 			log.error("Save Error : ",e);
+			model.addAttribute("success",false);
+			model.addAttribute("errorMsg",e.getMessage());
 		}
 		return "admin/saveCompanyResult";
 	}

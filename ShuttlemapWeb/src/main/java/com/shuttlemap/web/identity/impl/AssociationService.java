@@ -72,11 +72,10 @@ public class AssociationService implements IAssociationService {
 	@Transactional
 	@Override
 	public void saveAssociation(Association association, String loginId,
-			String plainPassword) {
+			String plainPassword) throws Exception {
 		
 		saveAssociation(association);
-		
-		try{
+	
 		if(loginId != null && loginId.length() > 0){
 			User adminUser = userDao.findByLoginId(loginId);
 			if(adminUser == null){
@@ -93,19 +92,21 @@ public class AssociationService implements IAssociationService {
 				userDao.addRoleToUser(adminUser,Role.ASSOCIATION_ROLE);
 				userDao.createUser(adminUser);
 			}else{
-				adminUser.setAssociation(association);
-				adminUser.setName(association.getName());
-				if(plainPassword != null && plainPassword.length() > 0){
-					adminUser.setPassword(new String(CommonUtils.md5(plainPassword)));
+				if(adminUser.getAssociation() != null && adminUser.getAssociation().getId().equals(association.getId())){
+					adminUser.setAssociation(association);
+					adminUser.setName(association.getName());
+					if(plainPassword != null && plainPassword.length() > 0){
+						adminUser.setPassword(new String(CommonUtils.md5(plainPassword)));
+					}
+					adminUser.setUpdated(new Date());
+					userDao.updateUser(adminUser);
+				} else {
+					throw new Exception(loginId + "는 이미 등록된 아이디입니다.");
 				}
-				adminUser.setUpdated(new Date());
-				userDao.updateUser(adminUser);
 			}
 			
 		}
-		} catch (Exception  e){
-			log.error(e);
-		}
+		
 	}
 
 	

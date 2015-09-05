@@ -51,6 +51,9 @@
 		  	 <a href="javascript:_login();" class="btn btn-primary" role="button">로그인</a>
 		  	 <a href="javascript:_regist();" class="btn btn-default" role="button">회원가입</a>
 		  </p>
+		  <p>
+		  	 슈퍼관리자 (admin / admin1234) 본사협회 관리자(asso1 / 1234),  본사기관 관리자(company1 / 1234)
+		  </p>
 		</form>
 		
 	</div>

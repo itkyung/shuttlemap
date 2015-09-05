@@ -19,7 +19,14 @@
 </head>
 <body>
 	<div class="container">
-		<h3>성공적으로 저장되었습니다.</h3>
+		<c:choose>
+			<c:when test="${success}">
+				<h3>성공적으로 저장되었습니다.</h3>
+			</c:when>
+			<c:otherwise>
+				<h3>${errorMsg}</h3>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

@@ -471,11 +471,15 @@ public class UserService implements ILogin,IUserService {
 				dao.addRoleToUser(adminUser,Role.COMPANY_ROLE);
 				dao.createUser(adminUser);
 			}else{
-				adminUser.setCompany(company);
-				adminUser.setName(company.getName());
-				adminUser.setPassword(new String(CommonUtils.md5(plainPassword)));
-				adminUser.setUpdated(new Date());
-				dao.updateUser(adminUser);
+				if(adminUser.getAssociation() == null && adminUser.getCompany() != null && adminUser.getCompany().getId().equals(company.getId())){
+					adminUser.setCompany(company);
+					adminUser.setName(company.getName());
+					adminUser.setPassword(new String(CommonUtils.md5(plainPassword)));
+					adminUser.setUpdated(new Date());
+					dao.updateUser(adminUser);
+				} else {
+					throw new Exception(loginId + "는 이미 등록된 아이디입니다.");
+				}
 			}
 			
 		}

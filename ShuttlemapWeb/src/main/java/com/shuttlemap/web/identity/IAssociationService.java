@@ -8,7 +8,7 @@ public interface IAssociationService {
 	
 	void saveAssociation(Association association);
 	
-	void saveAssociation(Association association,String userId,String password);
+	void saveAssociation(Association association,String userId,String password) throws Exception;
 	
 	List<Association> findAll();
 	
