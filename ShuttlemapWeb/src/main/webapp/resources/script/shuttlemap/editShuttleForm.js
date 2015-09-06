@@ -147,6 +147,60 @@ searchDriver = function() {
 	}).modal('show');
 };
 
+searchShuttle = function() {
+	$("#searchShuttleModal").on('show.bs.modal',function(){
+		$("#searchName").val('');
+		
+		$("#shuttleResultTBody tr").remove();
+		
+		$("#searchName").keypress(function(e){
+			var code = (e.keyCode?e.keyCode:e.which);
+			if(code == 13){
+				searchShuttleAction();
+				e.preventDefault();
+			}
+		});
+		
+		$("#btnSearchShuttle").click(function(){
+			btnSearchShuttle();
+		});
+		
+	}).modal('show');
+};
+
+searchShuttleAction = function() {
+	var keyword = $("#searchName").val();
+	if(keyword.length == 0){
+		alert("셔틀이름을 입력하세요.");
+		return;
+	}
+	var companyId = $("#companyId").val();
+	
+	var params = {"searchName":keyword, "companyId":companyId};
+	
+	$.ajax({
+		dataType:  'json', 
+		type : 'POST',
+		url : _requestPath + "/admin/searchShuttleForCopy",
+		timeout : 10000,
+		data : params,
+		beforeSubmit : function(){
+			
+		},				
+		success : function(results){
+			$("#searchName").val('');
+			$("#shuttleResultTBody tr").remove();
+			$("#shuttleTemplate").tmpl(results).appendTo("#shuttleResultTBody");
+		},
+		error : function(response, status, err){
+			alert("ERROR [" + status + "][" + err + "]");
+		}
+	});	//Ajax로 호출한다.
+};
+
+clickShuttle = function(id) {
+	document.location.href = _requestPath + "/admin/copyShuttle?targetId=" + id;
+};
 
 function searchDriverAction(){
 	var keyword = $("#driverSearchPhone").val();

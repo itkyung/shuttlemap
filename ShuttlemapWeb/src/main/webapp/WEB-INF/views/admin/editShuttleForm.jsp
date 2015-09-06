@@ -17,6 +17,15 @@
 			<td>\${phone}</td>
 		</tr>
 	</script>
+	<script id="shuttleTemplate" type="text/x-jquery-tmpl">
+		<tr>
+   			
+   			<td><a href="javascript:clickShuttle('\${id}');"> \${shuttleName} </a></td>
+			<td>\${startHour} 시</td>
+			<td>\${endHour} 시</td>
+		</tr>
+	</script>
+	
 </head>
 <body> 
 	<div class="container">
@@ -174,6 +183,8 @@
 		<div class="info-section">
 			<div class="container align-center">
 				<button type="button" id="btnSave" class="btn og-btn-primary" onclick="saveShuttle();">저 장</button>
+				<button type="button" class="btn og-btn-primary" onclick="searchShuttle();">기존 셔틀 복사</button>
+				
 			</div>
 		</div>
 		<form id="resultTable">
@@ -331,6 +342,45 @@
 		  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->	
 	
+	<!-- 셔틀 검색 -->
+	<div class="modal fade" id="searchShuttleModal" tabindex="-1" role="dialog" aria-labelledby="h4#searchShuttleModal" aria-hidden="true">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+		    	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        	<h4 class="modal-title">복사할 셔틀검색</h4>
+		      	</div>
+		      	<form id="searchSuttleForm" class="form-horizontal" role="form" method="POST">
+		      		<input type=hidden name="companyId" value="${companyId}"/>
+		      		
+		     		<div class="modal-body">
+					  <div class="form-group">
+					    <label for="searchName" class="col-lg-2 control-label">셔틀 이름</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" id="searchName" name="searchName" placeholder="현재 기관에서만 검색가능">
+					    </div>
+					  </div>
+					  <div class="form-group addressTable" id="shuttleResultTable">
+		      			<table class="table table-striped table-bordered table-hover">
+		      				<thead>
+		      					<th>셔틀명</th>
+		      					<th>출발시간</th>
+		      					<th>도착시간</th>
+		      				</thead>
+		      				<tbody id="shuttleResultTBody">
+		      					
+		      				</tbody>
+		      			</table>
+		      		</div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" id="btnSearchShuttle" class="btn btn-primary" onclick="searchShuttleAction();">검색 하기</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</form>
+				 </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	
 </body>
 </html>

@@ -69,14 +69,14 @@ public class UserService implements ILogin,IUserService {
 		return false;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public void updateLastLoginDate(User user) {
 		user.setLastLoginDate(new Date());
 		dao.updateUser(user);
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public void updateLoginData(User user, Date lastLoginDate, OsType osType,
 			String osVersion, String appVersion) {
@@ -104,7 +104,7 @@ public class UserService implements ILogin,IUserService {
 	 * 최고 관리자와 본사협회를 만든다.
 	 * 
 	 */
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public void initAdmin() {
 		try{
@@ -173,7 +173,7 @@ public class UserService implements ILogin,IUserService {
 		return false;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public boolean updateRegistrationId(String userId, String regId) {
 		User user = dao.load(userId);
@@ -186,7 +186,7 @@ public class UserService implements ILogin,IUserService {
 		return false;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public User registUser(String loginId, String plainPassword, String name,
 			String phone,UserType userType,String appVersion,OsType osType)  throws Exception{
@@ -303,7 +303,7 @@ public class UserService implements ILogin,IUserService {
 		return (approvedCount+waitCount) == 0 ? false : true;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public boolean requestFriends(User requester, User receiver) {
 		if(isFriends(requester, receiver)){
@@ -320,7 +320,7 @@ public class UserService implements ILogin,IUserService {
 		return true;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public boolean approveFriends(String friendsId) {
 		Friends friend = dao.loadFriends(friendsId);
@@ -331,7 +331,7 @@ public class UserService implements ILogin,IUserService {
 		return true;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public boolean rejectFriends(String friendsId) {
 		Friends friend = dao.loadFriends(friendsId);
@@ -340,7 +340,7 @@ public class UserService implements ILogin,IUserService {
 		return true;
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public void updateLocation(User user, double latitude, double longitude) {
 		CurrentLocation location = dao.getLocation(user);
@@ -438,7 +438,7 @@ public class UserService implements ILogin,IUserService {
 		return dao.loadCompany(id);
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	public void saveCompany(Company company) {
 		if(company.getId() == null){
 			dao.createCompany(company);
@@ -452,7 +452,7 @@ public class UserService implements ILogin,IUserService {
 		return dao.findUser(company);
 	}
 
-	@Transactional
+	@Transactional(readOnly=false)
 	@Override
 	public void saveCompanyAndUser(Company company,String loginId,String plainPassword) throws Exception {
 		saveCompany(company);

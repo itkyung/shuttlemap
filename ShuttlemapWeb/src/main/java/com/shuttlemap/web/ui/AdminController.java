@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +41,7 @@ import com.shuttlemap.web.dto.CompanyDTO;
 import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.Shuttle;
+import com.shuttlemap.web.entity.ShuttleDrivingStatus;
 import com.shuttlemap.web.entity.ShuttleRoute;
 import com.shuttlemap.web.entity.User;
 import com.shuttlemap.web.entity.UserType;
@@ -253,6 +255,17 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping(value="/searchShuttleForCopy",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String searchShuttleForCopy(@RequestParam("searchName") String searchName,@RequestParam("companyId") String companyId,
+			HttpServletRequest request) throws IOException{
+		Company company = userService.loadCompany(companyId);
+		List<ShuttleDelegate> results = shuttleService.searchShuttle(searchName,company,0,10);
+		return CommonUtils.toJson(results);
+	}
+	
+	
+	
 	@RequestMapping(value="/saveCompany",method=RequestMethod.POST)
 	public String saveCompany(@ModelAttribute CompanyDTO companyDto,BindingResult result,Model model) throws IOException{
 		Company company = null;
@@ -320,6 +333,18 @@ public class AdminController {
 		}
 		return "admin/editShuttleForm";
 	}
+	
+	@RequestMapping("/copyShuttle")
+	public String copyShuttle(@RequestParam(value="targetId",required=true) String id, HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		Shuttle shuttle = shuttleService.copyShuttle(id);
+		request.setAttribute("id", shuttle.getId());
+		request.setAttribute("companyId", shuttle.getCompany().getId());
+		request.getRequestDispatcher("/admin/editShuttleForm").forward(request, response);
+		return null;
+	}
+	
+	
 	
 	@RequestMapping(value="/searchDriver",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody

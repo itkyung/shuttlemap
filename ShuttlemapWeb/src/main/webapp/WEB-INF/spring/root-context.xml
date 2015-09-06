@@ -18,11 +18,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<util:properties id="defaultConfig" location="classpath:/META-INF/shuttlemap.properties"/> 
 	<context:property-placeholder location="classpath:/META-INF/shuttlemap.properties" />	
-	
-	
 		
-	<!--  Container에 정의된 JNDI기반의 데이타 소스를 연결한다. -->
-	<!-- jee:jndi-lookup id="dataSource" jndi-name="jdbc/shuttlemap" resource-ref="true"/ -->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -43,6 +39,9 @@
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="persistenceUnitName" value="shuttlemappu"/>
+		<property name="jpaVendorAdapter">
+        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
 		<property name="jpaProperties">
 	        <props>
 	            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -55,6 +54,7 @@
 	            <prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.cache.provider_configuration_file_resource_path}</prop>
 	            <prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
 	            <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 	        </props>
 	    </property>
 	</bean>
@@ -65,17 +65,19 @@
 	</bean>
 
 
+      
 <!-- @Configurable을 사용하기 위해서 설정한다. load-time-weaver 활성화 -->	
 	<context:load-time-weaver/>
 
 <!-- @Configuraable이 붙은 빈을 읽어들인다. -->	
-	<context:spring-configured/>
+	 <context:spring-configured/>
 
+	 <context:annotation-config/>
 
 <!--  Transactional annotation을 이용한 트랜잭션 관리를 한다. -->
 <!--  DAO와 Sevice클래스들이 Interface를 쌍으로 다 가지고 있으면 proxy-target-class설정이 없어도 interface-based proxy에 의해서 구동된다. -->
 <!--  proxy-target-class를 true로 해서 class-based proxy형태로 transaction이 적용되게한다.  -->
-	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" mode="aspectj"/>
+	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
 	
 <!-- @Configurable 같은 기능을 이용해서 동적인 Instance에 DI를 삽입하기 위해서 AspectJ를 이용하는데 이렇게 AspectJ를 통한 호출에도
 		 @Transactional이 구동되기 위해서는 tx:annotation-driven의  mode="aspectj" 로 해주어야한다. 아니면 그냥 디폴트 또는 proxy -->

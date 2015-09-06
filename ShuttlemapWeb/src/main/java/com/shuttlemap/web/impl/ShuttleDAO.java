@@ -25,21 +25,21 @@ public class ShuttleDAO implements IShuttleDAO {
 	private EntityManager em;
 	
 	@Override
-	public List<Shuttle> searchShuttle(String keyword, int start, int limit) {
-		Query query = makeQuery(keyword, start, limit, false);
+	public List<Shuttle> searchShuttle(String keyword, Company company, int start, int limit) {
+		Query query = makeQuery(keyword, company, start, limit, false);
 		
 		return query.getResultList();
 	}
 
 	@Override
-	public int countShuttle(String keyword) {
-		Query query = makeQuery(keyword, 0, 0, true);
+	public int countShuttle(String keyword,Company company) {
+		Query query = makeQuery(keyword, company,0, 0, true);
 		
 		return ((Number)query.getSingleResult()).intValue();
 	}
 
 	
-	private Query makeQuery(String keyword,int start,int limit,boolean countQuery){
+	private Query makeQuery(String keyword,Company company,int start,int limit,boolean countQuery){
 		StringBuffer sql = new StringBuffer();
 		
 		if(countQuery){
@@ -52,12 +52,19 @@ public class ShuttleDAO implements IShuttleDAO {
 			sql.append("AND (a.name like :name OR a.carNo like :carNo OR a.company.name like :companyName) ");
 		}
 		
+		if(company != null) {
+			sql.append("AND a.company = :company ");
+		}
+		
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("active", true);
 		if(keyword != null){
 			query.setParameter("name", "%" + keyword + "%");
 			query.setParameter("carNo", "%" + keyword + "%");
 			query.setParameter("companyName", "%" + keyword + "%");
+		}
+		if(company != null) {
+			query.setParameter("company", company);
 		}
 		if(!countQuery){
 			query.setFirstResult(start);
@@ -72,11 +79,13 @@ public class ShuttleDAO implements IShuttleDAO {
 	@Override
 	public void createShuttle(Shuttle shuttle) {
 		shuttle.setCreated(new Date());
+		shuttle.setUpdated(new Date());
 		em.persist(shuttle);
 	}
 
 	@Override
 	public void updateShuttle(Shuttle shuttle) {
+		shuttle.setUpdated(new Date());
 		em.merge(shuttle);
 	}
 

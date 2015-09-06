@@ -14,6 +14,7 @@ import com.shuttlemap.web.entity.User;
 
 public interface IShuttleService {
 	
+	List<ShuttleDelegate> searchShuttle(String keyword,Company company, int start,int limits);
 	List<ShuttleDelegate> searchShuttle(String keyword,int start,int limits);
 	void addBookmark(User owner, Shuttle shuttle, String markName);
 	void removeBookmakr(String id);
@@ -28,5 +29,5 @@ public interface IShuttleService {
 	Shuttle saveShuttle(ShuttleParam param);
 	void saveRoute(RouteParam param);
 	void updateDriverLocation(User user, double latitude,double longitude);
-	
+	Shuttle copyShuttle(String shuttleId);
 }

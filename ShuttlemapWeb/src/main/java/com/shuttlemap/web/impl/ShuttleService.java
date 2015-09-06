@@ -46,7 +46,7 @@ public class ShuttleService implements IShuttleService {
 	public List<ShuttleDelegate> searchShuttle(String keyword, int start,
 			int limits) {
 		
-		List<Shuttle> shuttles = dao.searchShuttle(keyword, start, limits);
+		List<Shuttle> shuttles = dao.searchShuttle(keyword, null, start, limits);
 		
 		List<ShuttleDelegate> results = new ArrayList<ShuttleDelegate>();
 		for(Shuttle shuttle : shuttles){
@@ -347,6 +347,65 @@ public class ShuttleService implements IShuttleService {
 		
 		return delegates;
 	}
+
 	
+	@Override
+	public List<ShuttleDelegate> searchShuttle(String keyword, Company company,
+			int start, int limits) {
+		List<Shuttle> shuttles = dao.searchShuttle(keyword, company, start, limits);
+		
+		List<ShuttleDelegate> results = new ArrayList<ShuttleDelegate>();
+		for(Shuttle shuttle : shuttles){
+			ShuttleDelegate del = new ShuttleDelegate(shuttle);
+			results.add(del);
+		}
+		
+		return results;
+	}
+
+	@Transactional
+	@Override
+	public Shuttle copyShuttle(String shuttleId) {
+		Shuttle old = dao.loadShuttle(shuttleId);
+		
+		Shuttle shuttle = new Shuttle();
+		shuttle.setActive(true);
+		shuttle.setCompany(old.getCompany());
+		shuttle.setCarNo(old.getCarNo());
+		shuttle.setDriver(old.getDriver());
+		shuttle.setCarType(old.getCarType());
+		shuttle.setEndHour(old.getEndHour());
+		shuttle.setEndMinute(old.getEndMinute());
+		shuttle.setEndLatitude(old.getEndLatitude());
+		shuttle.setEndLongitude(old.getEndLongitude());
+		shuttle.setGoogleMapUrl(old.getGoogleMapUrl());
+		shuttle.setName(old.getName() + "-복사본");
+		shuttle.setRouteFilePath(old.getRouteFilePath());
+		shuttle.setScheduleType(old.getScheduleType());
+		shuttle.setStartHour(old.getStartHour());
+		shuttle.setStartLatitude(old.getStartLatitude());
+		shuttle.setStartLongitude(old.getStartLongitude());
+		shuttle.setStartMinute(old.getStartMinute());
+		shuttle.setStatus(old.getStatus());
+		
+		List<ShuttleRoute> routes = new ArrayList<ShuttleRoute>();
+		for(ShuttleRoute route : old.getRoutes()) {
+			routes.add(copyRoute(route, shuttle));
+		}
+		
+		shuttle.setRoutes(routes);
+		dao.createShuttle(shuttle);
+		return shuttle;
+	}
 	
+	private ShuttleRoute copyRoute(ShuttleRoute route,Shuttle shuttle) {
+		ShuttleRoute newR = new ShuttleRoute();
+		newR.setIdx(route.getIdx());
+		newR.setLatitude(route.getLatitude());
+		newR.setLongitude(route.getLongitude());
+		newR.setRouteName(route.getRouteName());
+		newR.setShuttle(shuttle);
+		
+		return newR;
+	}
 }

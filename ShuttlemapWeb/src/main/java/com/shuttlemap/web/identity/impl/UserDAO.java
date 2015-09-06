@@ -33,7 +33,7 @@ import com.shuttlemap.web.identity.SocialType;
 @Repository("userDAO")
 public class UserDAO implements IUserDAO {
 
-	@PersistenceContext(type=PersistenceContextType.TRANSACTION)
+	@PersistenceContext(unitName="shuttlemappu",type=PersistenceContextType.TRANSACTION)
 	private EntityManager em;
 	
 	private DateFormat fm = new SimpleDateFormat("yyyy/MM/dd");
