@@ -189,7 +189,8 @@ public class ShuttleService implements IShuttleService {
 		route.setRouteName(param.getRouteName());
 		route.setLatitude(new BigDecimal(param.getLatitude()));
 		route.setLongitude(new BigDecimal(param.getLongitude()));
-		
+		route.setArrivedHour(param.getArrivedHour());
+		route.setArrivedMinute(param.getArrivedMinute());
 		route.setIdx(param.getRouteIdx());
 		route.setCreated(new Date());
 		if(param.getRouteId() != null && param.getRouteId().length() > 0){
@@ -224,12 +225,24 @@ public class ShuttleService implements IShuttleService {
 		List<Shuttle> shuttles = dao.findByDriver(user);
 		
 		for(Shuttle shuttle : shuttles){
-			updateShuttleLocation(shuttle, latitude, longitude);
+			updateShuttleLocation(shuttle, latitude, longitude, false);
 		}
 	}
 
 	
-	private void updateShuttleLocation(Shuttle shuttle,  double latitude, double longitude){
+	@Async
+	@Transactional
+	@Override
+	public void updateDriverLocation(User user, double latitude,
+			double longitude, boolean forceStart) {
+		List<Shuttle> shuttles = dao.findByDriver(user);
+		
+		for(Shuttle shuttle : shuttles){
+			updateShuttleLocation(shuttle, latitude, longitude, forceStart);
+		}
+	}
+
+	private void updateShuttleLocation(Shuttle shuttle,  double latitude, double longitude, boolean forceStart){
 		ShuttleDrivingInfo drivingInfo = dao.findCurrentDrivingInfo(shuttle);
 		
 		if(drivingInfo != null){
@@ -252,9 +265,9 @@ public class ShuttleService implements IShuttleService {
 			}
 		}else{
 			//아직 운행중이지 않으면 셔틀의 출발 시간에서 +- 10분 안쪽이면서 출발지에서 특정거리 안에 존재하면 출발상태로 처리한다.
-			if(isShuttleStartTime(shuttle)){
+			if(isShuttleStartTime(shuttle) || forceStart){
 				double distance = DistanceUtils.getDistance(shuttle.getStartLatitude().doubleValue(), shuttle.getStartLongitude().doubleValue(),
-						latitude, latitude);
+						latitude, longitude);
 				if(distance <= DISTANCE_THRESHOLD) {
 					ShuttleRoute first = shuttle.getRoutes().get(0);
 					ShuttleDrivingInfo info = new ShuttleDrivingInfo();

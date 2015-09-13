@@ -26,6 +26,8 @@ $(document).ready(function(){
 		   columns : [
 		       { data : "idx", width : "10%"},
 		       { data : "routeName"},
+		       { data : "arrivedHour"},
+		       { data : "arrivedMinute"},
 		       { data : "latitude",width : "15%"},
 		       { data : "longitude",width : "15%"}
 		   ],
@@ -36,6 +38,7 @@ $(document).ready(function(){
 		            targets : 1,
 		            render : function(data,type,row){
 		            	return "<a href='javascript:editRoute(\"" + row.id + "\",\"" + row.routeName + "\",\"" + row.idx + "\",\"" + 
+		            		row.arrivedHour + "\",\"" + row.arrivedMinute + "\",\"" +
 		            		row.latitude + "\",\"" + row.longitude + "\");'>" + data + "</a>";
 		            }
 		       }
@@ -56,11 +59,13 @@ makeParams = function(params){
 	return params;
 };
 
-editRoute = function(routeId,routeName,routeIdx,latitude,longitude){
+editRoute = function(routeId,routeName,routeIdx,arrivedHour,arrivedMinute, latitude,longitude){
 	$("#registRouteModal").on('show.bs.modal',function(){
 		$("#routeId").val(routeId);
 		$("#routeName").val(routeName);
 		$("#routeIdx").val(routeIdx);
+		$("#arrivedHour").val(arrivedHour);
+		$("#arrivedMinute").val(arrivedMinute);
 		$("#latitude").val(latitude);
 		$("#longitude").val(longitude);
 		
@@ -91,6 +96,8 @@ saveRouteAction = function() {
 	var routeIdx = $("#routeIdx").val();
 	var latitude = $("#latitude").val();
 	var longitude = $("#longitude").val();
+	var arrivedMinute = $("#arrivedMinute").val();
+	var arrivedHour = $("#arrivedHour").val();
 	
 	var params = {
 			"shuttleId":shuttleId,
@@ -98,7 +105,9 @@ saveRouteAction = function() {
 			"routeName":routeName,
 			"routeIdx":routeIdx,
 			"latitude":latitude,
-			"longitude":longitude
+			"longitude":longitude,
+			"arrivedHour":arrivedHour,
+			"arrivedMinute":arrivedMinute
 			};
 	
 	$.ajax({

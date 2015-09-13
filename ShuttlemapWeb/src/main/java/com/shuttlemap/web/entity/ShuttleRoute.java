@@ -43,6 +43,14 @@ public class ShuttleRoute {
 	@Column(precision=10, scale=6)
 	private BigDecimal longitude;
 	
+	//도착예정시간
+	@Expose
+	private int arrivedHour;
+	
+	//도착예정분
+	@Expose
+	private int arrivedMinute;
+	
 	private Date created;
 	
 	public String getId() {
@@ -99,6 +107,22 @@ public class ShuttleRoute {
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	public int getArrivedHour() {
+		return arrivedHour;
+	}
+
+	public void setArrivedHour(int arrivedHour) {
+		this.arrivedHour = arrivedHour;
+	}
+
+	public int getArrivedMinute() {
+		return arrivedMinute;
+	}
+
+	public void setArrivedMinute(int arrivedMinute) {
+		this.arrivedMinute = arrivedMinute;
 	}
 
 

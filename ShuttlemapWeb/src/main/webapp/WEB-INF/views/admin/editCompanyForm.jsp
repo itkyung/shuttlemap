@@ -138,7 +138,18 @@
 							    </div>
 							 </div>
 						</div>
-						
+						<div class="form-group border-bottom">
+							<label class="col-lg-2 control-label required"> *주소</label>
+							<div class="col-lg-10 og-form-input">
+								<div class="col-lg-6">
+							     	 <input type="text" id="address" name="address" class="form-control input-sm" value="${company.address}" 
+							     	 	placeholder="예)서울시 강남구 삼성동"/>
+							    </div>
+							    <div class="col-lg-5 height-sm">
+							    	
+							    </div>
+							 </div>
+						</div>
 						
 						<div class="form-group border-bottom">
 							<label class="col-lg-2 control-label">홈페이지</label>

@@ -201,6 +201,8 @@
 		            <tr>
 		                <th>순서</th>
 		                <th>정거장명</th>
+		                <th>도착시</th>
+		                <th>도착분</th>
 		                <th>위도</th>
 		                <th>경도</th>
 		            </tr>
@@ -319,7 +321,18 @@
 					      <input type="text" class="form-control" id="routeIdx" name="routeIdx" placeholder="1부터 시작">
 					    </div>
 					  </div>
-					  
+					  <div class="form-group">
+					    <label for="exhibitionDesc" class="col-lg-2 control-label">도착시(24시기준)</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" id="arrivedHour" name="arrivedHour" placeholder="24시기준">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="exhibitionDesc" class="col-lg-2 control-label">도착분</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" id="arrivedMinute" name="arrivedMinute">
+					    </div>
+					  </div>
 					  <div class="form-group">
 					    <label for="desc" class="col-lg-2 control-label">위도</label>
 					    <div class="col-lg-10">

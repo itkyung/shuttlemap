@@ -29,5 +29,6 @@ public interface IShuttleService {
 	Shuttle saveShuttle(ShuttleParam param);
 	void saveRoute(RouteParam param);
 	void updateDriverLocation(User user, double latitude,double longitude);
+	void updateDriverLocation(User user, double latitude,double longitude, boolean forceStart);
 	Shuttle copyShuttle(String shuttleId);
 }

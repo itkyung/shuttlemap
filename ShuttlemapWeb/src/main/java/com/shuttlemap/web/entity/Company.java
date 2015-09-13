@@ -51,6 +51,8 @@ public class Company {
 	
 	private String contactPerson;
 	
+
+	
 	@Enumerated(EnumType.STRING)
 	private CompanyType companyType;
 	
@@ -214,6 +216,8 @@ public class Company {
 	public void setAssociation(Association association) {
 		this.association = association;
 	}
+
+
 	
 	
 }

@@ -8,6 +8,8 @@ public class RouteParam {
 	private int routeIdx;
 	private double longitude;
 	private double latitude;
+	private int arrivedHour;
+	private int arrivedMinute;
 	public String getShuttleId() {
 		return shuttleId;
 	}
@@ -43,6 +45,18 @@ public class RouteParam {
 	}
 	public void setRouteId(String routeId) {
 		this.routeId = routeId;
+	}
+	public int getArrivedHour() {
+		return arrivedHour;
+	}
+	public void setArrivedHour(int arrivedHour) {
+		this.arrivedHour = arrivedHour;
+	}
+	public int getArrivedMinute() {
+		return arrivedMinute;
+	}
+	public void setArrivedMinute(int arrivedMinute) {
+		this.arrivedMinute = arrivedMinute;
 	}
 	
 	

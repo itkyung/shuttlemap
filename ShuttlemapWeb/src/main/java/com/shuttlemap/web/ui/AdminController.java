@@ -275,10 +275,12 @@ public class AdminController {
 		}else{
 			company = new Company();
 			company.setActive(true);
+			model.addAttribute("associationId", companyDto.getAssociationId());
 			//assocaition이 없으면 기본으로 설정한다.
 			if(companyDto.getAssociationId() == null) {
 				Association association = associationService.getDefault();
 				company.setAssociation(association);
+				model.addAttribute("associationId", association.getId());
 			} 
 		}
 		
@@ -429,6 +431,14 @@ public class AdminController {
 		DatatableJson json = new DatatableJson(condition.getDraw(), totalCount, results.size(), results.toArray());
 		
 		return CommonUtils.toJson(json);
+	}
+	
+	@RequestMapping(value="/test")
+	public String test(){
+		User user = userService.findByLoginId("driver1");
+		shuttleService.updateDriverLocation(user, 37.50525, 127.08880, true);
+		
+		return null;
 	}
 	
 }
