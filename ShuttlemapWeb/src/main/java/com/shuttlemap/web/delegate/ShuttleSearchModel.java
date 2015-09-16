@@ -4,6 +4,8 @@ public class ShuttleSearchModel extends DataTableSearchModel {
 	
 	private String companyId;
 	
+	private String associationId;
+	
 	private String keyword;
 
 	public String getCompanyId() {
@@ -20,6 +22,14 @@ public class ShuttleSearchModel extends DataTableSearchModel {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getAssociationId() {
+		return associationId;
+	}
+
+	public void setAssociationId(String associationId) {
+		this.associationId = associationId;
 	}
 	
 	

@@ -84,9 +84,11 @@ public class ShuttleDelegate {
 		this.endMinute = shuttle.getEndMinute();
 		
 		this.scheduleType = shuttle.getScheduleType().name();
-		this.driverId = shuttle.getDriver().getId();
-		this.driverName = shuttle.getDriver().getName();
-		this.driverPhone = shuttle.getDriver().getPhone();
+		if(shuttle.getDriver() != null){
+			this.driverId = shuttle.getDriver().getId();
+			this.driverName = shuttle.getDriver().getName();
+			this.driverPhone = shuttle.getDriver().getPhone();
+		}
 		this.routeFilePath = shuttle.getRouteFilePath();
 	}
 	

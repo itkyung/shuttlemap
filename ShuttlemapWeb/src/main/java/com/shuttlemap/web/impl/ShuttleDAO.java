@@ -25,21 +25,21 @@ public class ShuttleDAO implements IShuttleDAO {
 	private EntityManager em;
 	
 	@Override
-	public List<Shuttle> searchShuttle(String keyword, Company company, int start, int limit) {
-		Query query = makeQuery(keyword, company, start, limit, false);
+	public List<Shuttle> searchShuttle(String keyword, int start, int limit, Company... companies) {
+		Query query = makeQuery(keyword, start, limit, false, companies);
 		
 		return query.getResultList();
 	}
 
 	@Override
-	public int countShuttle(String keyword,Company company) {
-		Query query = makeQuery(keyword, company,0, 0, true);
+	public int countShuttle(String keyword,Company... companies) {
+		Query query = makeQuery(keyword, 0, 0, true, companies);
 		
 		return ((Number)query.getSingleResult()).intValue();
 	}
 
 	
-	private Query makeQuery(String keyword,Company company,int start,int limit,boolean countQuery){
+	private Query makeQuery(String keyword,int start,int limit,boolean countQuery, Company... companies){
 		StringBuffer sql = new StringBuffer();
 		
 		if(countQuery){
@@ -52,10 +52,17 @@ public class ShuttleDAO implements IShuttleDAO {
 			sql.append("AND (a.name like :name OR a.carNo like :carNo OR a.company.name like :companyName) ");
 		}
 		
-		if(company != null) {
-			sql.append("AND a.company = :company ");
-		}
+		if(companies.length > 0) {
+			sql.append("AND a.company in (");
 		
+			for( int i = 0; i < companies.length; i++){
+				sql.append("company" + i);
+				if(i < companies.length-1){
+					sql.append(",");
+				}
+			}
+			sql.append(") ");
+		}
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("active", true);
 		if(keyword != null){
@@ -63,8 +70,8 @@ public class ShuttleDAO implements IShuttleDAO {
 			query.setParameter("carNo", "%" + keyword + "%");
 			query.setParameter("companyName", "%" + keyword + "%");
 		}
-		if(company != null) {
-			query.setParameter("company", company);
+		for( int i = 0; i < companies.length; i++){
+			query.setParameter("company" + i, companies[i]);
 		}
 		if(!countQuery){
 			query.setFirstResult(start);

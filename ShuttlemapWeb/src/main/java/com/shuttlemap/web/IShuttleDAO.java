@@ -12,8 +12,8 @@ import com.shuttlemap.web.entity.User;
 
 public interface IShuttleDAO {
 	
-	List<Shuttle> searchShuttle(String keyword,Company company, int start,int limit);
-	int countShuttle(String keyword,Company company);
+	List<Shuttle> searchShuttle(String keyword, int start,int limit, Company... companies);
+	int countShuttle(String keyword,Company... companies);
 	
 	void createShuttle(Shuttle shuttle);
 	void updateShuttle(Shuttle shuttle);

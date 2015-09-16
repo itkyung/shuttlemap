@@ -11,6 +11,12 @@ $(document).ready(function(){
 	
 	var url = _requestPath + "/admin/searchShuttle";
 	
+	if (associationId != null) {
+		url += "?assocationId=" + associationId;
+	} else if (companyId != null) {
+		url += "?companyId=" + companyId;
+	}
+	
 	searchTable = $('#searchResult').DataTable({
 		  language: {
 			  paginate: {

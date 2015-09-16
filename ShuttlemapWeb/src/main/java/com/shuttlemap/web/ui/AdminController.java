@@ -97,11 +97,7 @@ public class AdminController {
 		return "admin/listCompany";
 	}
 	
-	@RequestMapping("/listShuttle")
-	public String listShuttle(){
-		
-		return "admin/listShuttle";
-	}
+
 	
 	@RequestMapping(value="/listAssociation")
 	public String listAssociation(){
@@ -166,7 +162,7 @@ public class AdminController {
 		return "admin/saveAssociationResult";
 	}
 	
-	@RequestMapping(value="/searchCompany",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value="/searchCompany",method={ RequestMethod.POST, RequestMethod.GET }, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String searchCompany(@ModelAttribute("condition") CompanySearchModel condition,BindingResult result,HttpServletRequest request) throws IOException{
 		
@@ -192,7 +188,12 @@ public class AdminController {
 	public String editCompanyFormProxy() {
 		User currentUser = login.getCurrentUser();
 		Company company = currentUser.getCompany();
-		return "redirect:/admin/editCompanyForm?id=" + company.getId();
+		if (company != null){
+			return "redirect:/admin/editCompanyForm?id=" + company.getId();
+		}else{
+			Association association = currentUser.getAssociation();
+			return "redirect:/admin/editCompanyForm?associationId=" + association.getId();
+		}
 	}
 	
 	@RequestMapping("/editCompanyForm")
@@ -226,7 +227,8 @@ public class AdminController {
 			model.addAttribute("association",association);
 		}
 		
-		if (login.isInRole(currentUser, Role.ASSOCIATION_ROLE)){
+		if (login.isInRole(currentUser, Role.ASSOCIATION_ROLE) || 
+				login.isInRole(currentUser, Role.ADMIN_ROLE)){
 			model.addAttribute("associationManager",true);
 		}else{
 			model.addAttribute("associationManager",false);
@@ -234,6 +236,34 @@ public class AdminController {
 			
 		return "admin/editCompanyForm";
 	}
+	
+	@RequestMapping("/listShuttleProxy")
+	public String listShuttleProxy() {
+		User currentUser = login.getCurrentUser();
+		Company company = currentUser.getCompany();
+		if(company != null) {
+			return "redirect:/admin/listShuttle?companyId=" + company.getId();
+		} else {
+			Association association = currentUser.getAssociation();
+			return "redirect:/admin/listShuttle?associationId=" + association.getId();
+		}
+	}
+	
+	@RequestMapping(value="/listShuttle")
+	public String listShuttle(@RequestParam(value = "companyId", required=false) String companyId, 
+			@RequestParam(value = "associationId", required=false) String associationId,
+			Model model) {
+		
+		if(companyId != null) {
+			model.addAttribute("companyId", companyId);
+		}
+		if(associationId != null) {
+			model.addAttribute("associationId", associationId);
+		}
+		
+		return "admin/listShuttle";
+	}
+	
 	
 	@RequestMapping(value="/searchShuttle",method=RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -246,6 +276,11 @@ public class AdminController {
 		if(condition.getCompanyId() != null){
 			Company company = userService.loadCompany(condition.getCompanyId());
 			List<ShuttleDelegate> results = shuttleService.findShuttle(company);
+			DatatableJson json = new DatatableJson(condition.getDraw(), results.size(), results.size(), results.toArray());
+			return CommonUtils.toJson(json);
+		} else if(condition.getAssociationId() != null) {
+			Association association = userService.loadAssociation(condition.getAssociationId());
+			List<ShuttleDelegate> results = shuttleService.findShuttle(condition.getKeyword(), association, condition.getStart(), condition.getLimit());
 			DatatableJson json = new DatatableJson(condition.getDraw(), results.size(), results.size(), results.toArray());
 			return CommonUtils.toJson(json);
 		}else{

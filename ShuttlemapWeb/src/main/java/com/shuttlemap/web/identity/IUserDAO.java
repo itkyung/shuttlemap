@@ -57,4 +57,5 @@ public interface IUserDAO {
 	
 	List<User> findUserByName(String name,UserType userType,int start,int limits);
 	int countUser(String name,UserType userType);
+	List<Company> findCompany(Association association);
 }

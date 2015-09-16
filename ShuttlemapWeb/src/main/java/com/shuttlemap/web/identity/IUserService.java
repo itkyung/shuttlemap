@@ -43,6 +43,7 @@ public interface IUserService {
 	List<CompanyDelegate> findCompany(CompanySearchModel condition);
 	int countCompany(CompanySearchModel condition);
 	Company loadCompany(String id);
+	Association loadAssociation(String id);
 	List<User> findUser(Company company);
 	List<User> findUser(Association association);
 	void saveCompanyAndUser(Company company,String loginId,String plainPassword) throws Exception;

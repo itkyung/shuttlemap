@@ -13,10 +13,17 @@
 </head>
 <body> 
 	<div class="container">
-		<c:if test="${associationManager eq true}">
-			<c:url value="/admin/editAssociationForm" var="associationUrl"/>
-			<h3  class="page-header"> <a href="${associationUrl}?id=${association.id}">${association.name} </a> 소속 기관 정보 </h3>
-		</c:if>
+		
+		<c:choose>
+			<c:when test="${associationManager eq true}">
+				<c:url value="/admin/editAssociationForm" var="associationUrl"/>
+				<h3 class="page-header"> <a href="${associationUrl}?id=${association.id}">${association.name} </a> > 기관 정보 </h3>
+			</c:when>
+			<c:otherwise>
+				<h3 class="page-header"> 기관 정보 </h3>
+			</c:otherwise>
+		</c:choose>	
+		
 		<c:url value="/admin/saveCompany" var="formUrl"/>
 		<form id="companyForm" class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="${formUrl}">
 			<input type=hidden id="companyId" name="companyId" value="${company.id}"/>

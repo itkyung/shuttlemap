@@ -10,6 +10,9 @@ $(document).ready(function(){
 	});
 	
 	var url = _requestPath + "/admin/searchCompany";
+	if(associationId.length > 0){
+		url += "?associationId=" + associationId;
+	}
 	
 	searchTable = $('#searchResult').DataTable({
 		  language: {
@@ -26,11 +29,12 @@ $(document).ready(function(){
 	       dom : '<"top"i>rt<"bottom"lp><"clear">',
 		   ajax : {
 			   url : url,
-			   type : "POST"
+			   type : "GET"
 		   },
 		   columns : [
 		       { data : "id"},
 		       { data : "companyLogo",width : "15%"},
+		       { data : "associationName", width : "15%"},
 		       { data : "name"},
 		       { data : "companyType",width : "10%"},
 		       { data : "contactPerson",width:"10%"},
@@ -53,7 +57,7 @@ $(document).ready(function(){
 		            }
 		       },
 		       {
-		            targets : 2,
+		            targets : 3,
 		            render : function(data,type,row){
 		            	return "<a href='javascript:viewCompany(\"" + row.id + "\");'>" + data + "</a>";
 		            }

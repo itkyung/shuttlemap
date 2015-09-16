@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.shuttlemap.web.IShuttleDAO;
 import com.shuttlemap.web.IShuttleService;
 import com.shuttlemap.web.common.DistanceUtils;
@@ -22,6 +23,7 @@ import com.shuttlemap.web.delegate.RouteDelegate;
 import com.shuttlemap.web.delegate.RouteParam;
 import com.shuttlemap.web.delegate.ShuttleDelegate;
 import com.shuttlemap.web.delegate.ShuttleParam;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.BookmarkShuttle;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.Shuttle;
@@ -30,6 +32,7 @@ import com.shuttlemap.web.entity.ShuttleDrivingStatus;
 import com.shuttlemap.web.entity.ShuttleRoute;
 import com.shuttlemap.web.entity.ShuttleScheduleType;
 import com.shuttlemap.web.entity.User;
+import com.shuttlemap.web.identity.IUserDAO;
 import com.shuttlemap.web.identity.IUserService;
 
 @Service
@@ -37,6 +40,7 @@ public class ShuttleService implements IShuttleService {
 	@Autowired private IShuttleDAO dao;
 	@Autowired private IFileService fileService;
 	@Autowired private IUserService userService;
+	@Autowired private IUserDAO userDao;
 	
 	private static final int DISTANCE_THRESHOLD = 100; //거리 Range meter값.
 	
@@ -46,7 +50,7 @@ public class ShuttleService implements IShuttleService {
 	public List<ShuttleDelegate> searchShuttle(String keyword, int start,
 			int limits) {
 		
-		List<Shuttle> shuttles = dao.searchShuttle(keyword, null, start, limits);
+		List<Shuttle> shuttles = dao.searchShuttle(keyword, start, limits);
 		
 		List<ShuttleDelegate> results = new ArrayList<ShuttleDelegate>();
 		for(Shuttle shuttle : shuttles){
@@ -365,7 +369,7 @@ public class ShuttleService implements IShuttleService {
 	@Override
 	public List<ShuttleDelegate> searchShuttle(String keyword, Company company,
 			int start, int limits) {
-		List<Shuttle> shuttles = dao.searchShuttle(keyword, company, start, limits);
+		List<Shuttle> shuttles = dao.searchShuttle(keyword, start, limits, company);
 		
 		List<ShuttleDelegate> results = new ArrayList<ShuttleDelegate>();
 		for(Shuttle shuttle : shuttles){
@@ -421,4 +425,21 @@ public class ShuttleService implements IShuttleService {
 		
 		return newR;
 	}
+
+	@Override
+	public List<ShuttleDelegate> findShuttle(String keyword,Association association, int start,int limits) {
+		
+		List<Company> companies = userDao.findCompany(association);
+		List<Shuttle> shuttles = dao.searchShuttle(keyword, start, limits, companies.toArray(new Company[0]));
+		List<ShuttleDelegate> results = new ArrayList<ShuttleDelegate>();
+		for(Shuttle shuttle : shuttles){
+			ShuttleDelegate del = new ShuttleDelegate(shuttle);
+			results.add(del);
+		}
+		
+		return results;
+	}
+	
+	
+	
 }

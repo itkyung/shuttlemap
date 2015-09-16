@@ -30,6 +30,8 @@ public class CompanyDelegate {
 	private String phone;
 	@Expose
 	private String createdStr;
+	@Expose
+	private String associationName;
 	
 	private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -49,6 +51,7 @@ public class CompanyDelegate {
 		this.presidentName = company.getPresidentName();
 		this.licenseNo = company.getLicenseNo();
 		this.email = company.getEmail();
+		this.associationName = company.getAssociation().getName();
 	}
 
 	public String getId() {
@@ -93,6 +96,14 @@ public class CompanyDelegate {
 
 	public String getMobilePhone() {
 		return mobilePhone;
+	}
+
+	public String getAssociationName() {
+		return associationName;
+	}
+
+	public void setAssociationName(String associationName) {
+		this.associationName = associationName;
 	}
 	
 	

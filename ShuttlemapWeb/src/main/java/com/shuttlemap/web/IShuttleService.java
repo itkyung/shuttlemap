@@ -7,6 +7,7 @@ import com.shuttlemap.web.delegate.RouteDelegate;
 import com.shuttlemap.web.delegate.RouteParam;
 import com.shuttlemap.web.delegate.ShuttleDelegate;
 import com.shuttlemap.web.delegate.ShuttleParam;
+import com.shuttlemap.web.entity.Association;
 import com.shuttlemap.web.entity.Company;
 import com.shuttlemap.web.entity.Shuttle;
 import com.shuttlemap.web.entity.ShuttleRoute;
@@ -25,6 +26,7 @@ public interface IShuttleService {
 	List<RouteDelegate> findRoutesAndLocation(String id);
 
 	List<ShuttleDelegate> findShuttle(Company company);
+	List<ShuttleDelegate> findShuttle(String keyword,Association association,int start,int limits);
 	
 	Shuttle saveShuttle(ShuttleParam param);
 	void saveRoute(RouteParam param);

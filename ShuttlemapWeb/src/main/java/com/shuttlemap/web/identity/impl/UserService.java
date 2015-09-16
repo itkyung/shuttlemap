@@ -515,6 +515,11 @@ public class UserService implements ILogin,IUserService {
 	public List<User> findUser(Association association) {
 		return dao.findUser(association);
 	}
+
+	@Override
+	public Association loadAssociation(String id) {
+		return associationService.load(id);
+	}
 	
 	
 }

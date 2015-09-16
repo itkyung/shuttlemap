@@ -8,7 +8,11 @@
 <html>
 <head>
 	<title>셔틀맵</title>
-
+	<script>
+		var associationId = "${associationId}";
+		
+		var companyId = "${companyId}";
+	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/shuttlemap/listShuttle.js"></script>
 </head>
 <body> 

@@ -322,6 +322,24 @@ saveShuttle = function() {
 		return;
 	}
 	
+	var googleMapUrl = $("#googleMapUrl").val();
+	if(googleMapUrl.length == 0) {
+		alert("구글맵 URL을 입력하세요.");
+		return;
+	}
+	
+	var routeFile = $("#routeFile").val();
+	if(routeFile.length == 0) {
+		alert("구글맵 노선파일을 선택하세요.");
+		return;
+	}
+	
+	var driverPhone = $("#driverPhone").val();
+	if(driverPhone.length == 0) {
+		alert("운전자를 선택하세요.");
+		return;
+	}
+	
 	$("#shuttleForm").submit();
 };
 

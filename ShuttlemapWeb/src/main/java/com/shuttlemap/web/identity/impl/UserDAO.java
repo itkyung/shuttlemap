@@ -384,7 +384,7 @@ public class UserDAO implements IUserDAO {
 		}
 			
 		if(condition.getAssociationId() != null){
-			hql.append("AND a.assocation = :association ");
+			hql.append("AND a.association = :association ");
 		}
 		
 		if(!isCount){
@@ -510,6 +510,17 @@ public class UserDAO implements IUserDAO {
 		Number count = (Number)query.getSingleResult();
 		
 		return count.intValue();
+	}
+
+	@Override
+	public List<Company> findCompany(Association association) {
+		
+		StringBuffer hql = new StringBuffer("FROM " + Company.class.getName() + " a WHERE a.active = :active AND a.association = :association");
+		Query query = em.createQuery(hql.toString());
+		query.setParameter("association", association);
+		query.setHint("org.hibernate.cacheable", true);
+		
+		return query.getResultList();
 	}
 	
 	

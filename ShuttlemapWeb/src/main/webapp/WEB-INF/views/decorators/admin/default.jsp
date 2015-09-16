@@ -110,10 +110,22 @@
 				      <ul class="nav navbar-nav">
 				      	<c:if test="${_roleName eq 'ROLE_ADMIN'}">
 				      		<li class="dropdown">
-					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회/기관 관리</a>
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회 관리</a>
 					        	<ul class="dropdown-menu">
 						            <li><a href="${pageContext.request.contextPath}/admin/listAssociation");">협회 리스트</a></li>
 						            <li><a href="${pageContext.request.contextPath}/admin/editAssociationForm");">협회 등록</a></li>
+						        </ul>
+					        </li>
+					        <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관 관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listCompany");">기관 리스트</a></li>
+						        </ul>
+					        </li>
+					         <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">셔틀 관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listShuttle");">셔틀 리스트</a></li>
 						        </ul>
 					        </li>
 					      	<li class="dropdown">
@@ -132,18 +144,36 @@
 				        </c:if>
 				        <c:if test="${_roleName eq 'ROLE_ASSOCIATION_USER'}">
 				        	<li class="dropdown">
-					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회 / 기관 관리</a>
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">협회 관리</a>
 					        	<ul class="dropdown-menu">
 					        		<li><a href="${pageContext.request.contextPath}/admin/editAssociationFormProxy");">협회 상세 정보</a></li>
+						        </ul>
+					        </li>
+					        <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관 관리</a>
+					        	<ul class="dropdown-menu">
 						            <li><a href="${pageContext.request.contextPath}/admin/listCompanyProxy");">기관 리스트</a></li>
+						            <li><a href="${pageContext.request.contextPath}/admin/editCompanyFormProxy");">기관 등록</a></li>
+						        </ul>
+					        </li>
+					        <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">셔틀 관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listShuttleProxy");">셔틀 리스트</a></li>
 						        </ul>
 					        </li>
 				        </c:if>
 				        <c:if test="${_roleName eq 'ROLE_COMPANY_USER'}">
 				        	<li class="dropdown">
-					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관 / 셔틀 관리</a>
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">기관 관리</a>
 					        	<ul class="dropdown-menu">
 					        		<li><a href="${pageContext.request.contextPath}/admin/editCompanyFormProxy");">기관 상세 정보</a></li>
+						        </ul>
+					        </li>
+					        <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">셔틀 관리</a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="${pageContext.request.contextPath}/admin/listShuttleProxy");">셔틀 리스트</a></li>
 						        </ul>
 					        </li>
 				        </c:if>
