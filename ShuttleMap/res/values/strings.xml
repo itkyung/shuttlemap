@@ -8,5 +8,6 @@
     <string name="title_section4">설정</string>
     <string name="action_settings">설정</string>
 	<string name="message_backkey_to_exit"><![CDATA[한 번 더 "뒤로 가기"를 누르면 앱을 종료합니다.]]></string>
-
+	<string name="join_msg_1">셔틀맵 서비스는 학원,학교,종교단체,출.퇴근용등 고정된 노선을 운행하는 셔틀버스의 현재 위치와 지인의 현재위치를 확인할 수 있는 서비스입니다.</string>
+	<string name="join_msg_2">전화번호를 입력해 주세요.</string>
 </resources>

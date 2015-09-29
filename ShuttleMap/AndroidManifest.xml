@@ -32,7 +32,7 @@
     <application
         android:name="com.shuttlemap.android.ShuttlemapApplication"
         android:allowBackup="true"
-        android:icon="@drawable/icon_2"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
@@ -64,6 +64,13 @@
         
          <activity 
             android:name="com.shuttlemap.android.LoginActivity"
+            android:theme="@style/AppTheme"
+            android:label="Shuttle"
+            android:screenOrientation="portrait"
+            ></activity>
+         
+         <activity 
+            android:name="com.shuttlemap.android.FirstJoinActivity"
             android:theme="@style/AppTheme"
             android:label="Shuttle"
             android:screenOrientation="portrait"
@@ -106,6 +113,12 @@
             android:name="com.shuttlemap.android.MyInfoActivity"
             android:theme="@style/AppTheme"
             android:label="MyInfo"
+            android:screenOrientation="portrait"
+            ></activity>
+           <activity 
+            android:name="com.shuttlemap.android.AgreeActivity"
+            android:theme="@style/AppTheme"
+            android:label="agree"
             android:screenOrientation="portrait"
             ></activity>
           

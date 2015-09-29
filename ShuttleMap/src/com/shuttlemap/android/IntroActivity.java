@@ -47,9 +47,22 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 				task.execute(account.loginId,account.loginToken);				
 			}
 		}else{
-			//MainActivity로 이동시킨다.
-			goMain(800);
+			//Login Activity로 이동시킨다.
+			goLogin(800);
 		}
+	}
+	
+	private void goLogin(int miliseconds){
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				Intent intent = new Intent(IntroActivity.this,FirstJoinActivity.class);
+				startActivity(intent);
+				finish();
+			}
+			
+		},miliseconds);
 	}
 	
 	private void goMain(int miliseconds){
@@ -124,12 +137,14 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 		@Override
 		protected Boolean doInBackground(String... params) {
 			String regId = GCMManager.getRegistrationId(IntroActivity.this);
-			
-			if (regId == null || "".equals(regId))
-				GCMManager.registerGCM(IntroActivity.this);
-			else
-				GCMServiceHandler.updateGCMRegistrationId(params[0], regId);
-			
+			try {
+				if (regId == null || "".equals(regId))
+					GCMManager.registerGCM(IntroActivity.this);
+				else
+					GCMServiceHandler.updateGCMRegistrationId(params[0], regId);
+			} catch (Exception e){
+				
+			}
 			return true;
 		}
 

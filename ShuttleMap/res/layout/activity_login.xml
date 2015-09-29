@@ -1,18 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:orientation="vertical">
     
-      <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp" />
+    <ImageView 
+        android:id="@+id/login_title_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="147dp"
+        android:src="@drawable/join_crt"
+        />
+    <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:src="@drawable/join_txt01"
+        />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/join_1"
+        android:text="@string/join_msg_1"
+        />
     
       <RelativeLayout 
           android:layout_width="fill_parent"
           android:layout_height="fill_parent"
-          android:layout_below="@+id/titleBar"
           android:padding="15dp"
           >
        
@@ -31,7 +54,7 @@
 	            android:layout_marginTop="0dp"
 	            android:ems="10"
 	            android:maxLines="1"
-	            android:hint="로그인이메일"
+	            android:hint="이메일"
 	            android:inputType="textEmailAddress"
 	            android:paddingLeft="13dp"
 	            android:background="@drawable/rounded_edittext_top"
@@ -81,27 +104,13 @@
 	     <Button
 	        android:id="@+id/btnLogin"
 	        android:layout_width="match_parent"
-	        android:layout_height="46dp"
+	        android:layout_height="53dp"
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/btnKeepLogin"
 	        android:layout_marginTop="18dp"
-	        android:background="@drawable/selector_contents_button_red"
-	        android:text="로그인"
-	        android:textColor="#ffffffff"
-	        android:textSize="16dp"
-	        android:textStyle="bold" />
+	        android:background="@drawable/join_btn11_n"
+	      />
 		
-	    <Button
-	        android:id="@+id/createAccount"
-	        android:layout_width="match_parent"
-	        android:layout_height="46dp"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/btnLogin"
-	        android:layout_marginTop="10dp"
-	        android:background="@drawable/selector_popup_button"
-	        android:text="회원가입"
-	        android:textColor="#ffffffff"
-	        android:textSize="16dp"
-	        android:textStyle="bold" />  
+	    
       </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

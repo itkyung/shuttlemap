@@ -73,17 +73,17 @@ public class MyShuttleListAdapter extends BaseAdapter {
 
 	class ViewHolder{
 		public TextView nameLabel;
-		public TextView startLabel;
+		public TextView addressLabel;
 		public ImageView imageProfile;
-		public TextView companyLabel;
+
 		public TextView bookmarkLabel;
 		ShuttleEntity entity;
 		
 		public ViewHolder(View parent){
 			nameLabel = (TextView)parent.findViewById(R.id.nameLabel);
-			startLabel = (TextView)parent.findViewById(R.id.startLabel);
+			addressLabel = (TextView)parent.findViewById(R.id.addressLabel);
 			imageProfile = (ImageView)parent.findViewById(R.id.imageProfile);
-			companyLabel = (TextView)parent.findViewById(R.id.companyLabel);
+		
 			bookmarkLabel = (TextView)parent.findViewById(R.id.bookmarkLabel);
 			
 			imageProfile.setOnClickListener(new View.OnClickListener() {
@@ -116,15 +116,15 @@ public class MyShuttleListAdapter extends BaseAdapter {
 			this.entity = entity;
 			
 			this.nameLabel.setText(entity.getShuttleName());
-			this.companyLabel.setText(entity.getCompanyName());
-			this.startLabel.setText(entity.getStartPointName());
+		
+			this.addressLabel.setText(entity.getAddress());
 			this.bookmarkLabel.setText(entity.getBookmarkName());
 			
 			String imageUrl = entity.getCompanyLogoURL();
 			if(imageUrl != null){
 				BitmapDownloader.getInstance().displayImage(imageUrl, bitmapOption, imageProfile, null);
 			}else{
-				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.shuttle_icon));
+				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.mk01_color_a));
 			}
 			
 		}

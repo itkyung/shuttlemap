@@ -1,0 +1,117 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+    
+    <ImageView 
+        android:id="@+id/login_title_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="147dp"
+        android:src="@drawable/join_crt"
+        />
+    <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="123dp"
+        android:src="@drawable/join_txt01"
+        />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/join_1"
+        android:text="@string/join_msg_1"
+        />
+    
+    
+	 <RelativeLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="121dp"
+	     android:layout_marginTop="352dp"
+	     android:background="@drawable/join_box01"
+	     >
+	     
+	     <EditText
+            android:id="@+id/editPhone1"
+            android:layout_width="106dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:maxLines="1"
+            android:hint="+82"
+            android:inputType="none"
+            android:gravity="center"
+            android:background="@drawable/rounded_edittext_top"
+            android:textColor="#323232"
+            android:textColorHint="#520000" >
+			
+        </EditText>
+	    <EditText
+            android:id="@+id/editPhone2"
+            android:layout_toRightOf="@+id/editPhone1"
+            android:layout_width="210dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:ems="10"
+            android:maxLines="1"
+            android:hint="0100000000"
+            android:inputType="none"
+            android:gravity="center"
+            android:background="@drawable/rounded_edittext_top"
+            android:textColor="#323232"
+            android:textColorHint="#520000" >
+			
+        </EditText> 
+	    <TextView 
+	        android:layout_below="@+id/editPhone1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:textColor="#c6dceb"
+	        android:textStyle="bold"
+	        android:textSize="15sp"
+	        android:gravity="center_horizontal"
+	        android:text="@string/join_msg_2"
+	        />
+	 </RelativeLayout>     
+    
+	 <ImageView 
+	     android:layout_width="272dp"
+	     android:layout_height="4dp"
+	     android:layout_marginTop="509dp"
+	     android:layout_marginLeft="44dp"
+	     android:src="@drawable/join_line01"
+	     />
+	 
+	 <Button 
+	     android:id="@+id/btn_login"
+	     android:layout_width="137dp"
+	     android:layout_height="35dp"
+	     android:layout_marginLeft="42dp"
+	     android:layout_marginTop="526dp"
+	     android:background="@drawable/join_btn12_n"
+	     />
+    
+	  <Button 
+	     android:id="@+id/btn_join"
+	     android:layout_width="137dp"
+	     android:layout_height="35dp"
+	     android:layout_marginLeft="180dp"
+	     android:layout_marginTop="526dp"
+	     android:background="@drawable/join_btn13_n"
+	     />
+	 
+</FrameLayout>

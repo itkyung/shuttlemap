@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+	
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="138dp"
+	    android:background="@drawable/join_box04"
+	    android:layout_marginTop="30dp"
+	    >
+	    <TextView 
+	        android:id="@+id/agree1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="개인 정보의 제3자 제공"
+	        android:textColor="#2d3a52"
+	        android:textStyle="bold"
+	        android:layout_marginLeft="25dp"
+	        android:layout_marginTop="15dp"
+	        />
+	    <WebView 
+	        android:id="@+id/agreeWebview1"
+	        android:layout_width="303dp"
+	        android:layout_height="94dp"
+	        android:layout_alignLeft="@+id/agree1"
+	        android:layout_below="@+id/agree1"
+	        android:layout_marginTop="3dp"
+	        />
+	    
+	</RelativeLayout>
+    
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="138dp"
+	    android:background="@drawable/join_box04"
+	    android:layout_marginTop="30dp"
+	    >
+	    <TextView 
+	        android:id="@+id/agree2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="개인 정보 취급 방침"
+	        android:textColor="#2d3a52"
+	        android:textStyle="bold"
+	        android:layout_marginLeft="25dp"
+	        android:layout_marginTop="15dp"
+	        />
+	    <WebView 
+	        android:id="@+id/agreeWebview2"
+	        android:layout_width="303dp"
+	        android:layout_height="94dp"
+	        android:layout_alignLeft="@+id/agree2"
+	        android:layout_below="@+id/agree2"
+	        android:layout_marginTop="3dp"
+	        />
+	    
+	</RelativeLayout>
+	
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="138dp"
+	    android:background="@drawable/join_box04"
+	    android:layout_marginTop="30dp"
+	    >
+	    <TextView 
+	        android:id="@+id/agree3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="위치기반서비스 이용약관"
+	        android:textColor="#2d3a52"
+	        android:textStyle="bold"
+	        android:layout_marginLeft="25dp"
+	        android:layout_marginTop="15dp"
+	        />
+	    <WebView 
+	        android:id="@+id/agreeWebview3"
+	        android:layout_width="303dp"
+	        android:layout_height="94dp"
+	        android:layout_alignLeft="@+id/agree3"
+	        android:layout_below="@+id/agree3"
+	        android:layout_marginTop="3dp"
+	        />
+	    
+	</RelativeLayout>
+	
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:orientation="horizontal"
+	    >
+	    
+	    <Button
+	        android:id="@+id/btnDisAgree"
+	        android:layout_width="170dp"
+	        android:layout_height="53dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/join_btn09_n"
+	        />
+	    
+	    <Button
+	        android:id="@+id/btnAgree"
+	        android:layout_width="170dp"
+	        android:layout_height="53dp"
+	        android:layout_marginLeft="5dp"
+	        android:background="@drawable/join_btn10_n"
+	        />
+	    
+	</LinearLayout>
+	
+	
+		
+</LinearLayout>

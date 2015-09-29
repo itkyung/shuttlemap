@@ -1,9 +1,9 @@
 package com.shuttlemap.android.server;
 
 public interface ServerStaticVariable {
-	public static final String BASE_URL = "http://121.78.131.152:8080/shuttlemap";
-	public static final String IMG_BASE_URL = "http://121.78.131.152/";
-	public static final String KML_PREFIX = "http://121.78.131.152";
+	public static final String BASE_URL = "http://54.64.241.209/shuttlemap";
+	public static final String IMG_BASE_URL = "http://54.64.241.209/";
+	public static final String KML_PREFIX = "http://54.64.241.209";
 
 	//public static final String IMG_BASE_URL = "http://192.168.219.188/";
 	//public static final String BASE_URL = "http://192.168.219.188:8080/shuttlemap";

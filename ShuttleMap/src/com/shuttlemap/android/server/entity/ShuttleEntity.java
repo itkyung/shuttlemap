@@ -58,6 +58,8 @@ public class ShuttleEntity implements Parcelable {
 	
 	private String routeFilePath;
 	
+	private String address;
+	
 	public ShuttleEntity(){
 		
 	}
@@ -155,6 +157,10 @@ public class ShuttleEntity implements Parcelable {
 		
 		if(jsonObj.has("routeFilePath")){
 			this.routeFilePath = jsonObj.getString("routeFilePath");
+		}
+		
+		if(jsonObj.has("address")){
+			this.address = jsonObj.getString("address");
 		}
 		
 	}
@@ -349,6 +355,10 @@ public class ShuttleEntity implements Parcelable {
 
 	
 	
+	public String getAddress() {
+		return address;
+	}
+
 	public String getRouteFilePath() {
 		return routeFilePath;
 	}
@@ -389,7 +399,7 @@ public class ShuttleEntity implements Parcelable {
 		dest.writeString(driverName);
 		dest.writeString(driverPhone);
 		dest.writeString(routeFilePath);
-		
+		dest.writeString(address);
 	}
 	
 	protected void readFromParcel(Parcel in){
@@ -417,7 +427,7 @@ public class ShuttleEntity implements Parcelable {
 		this.driverName = in.readString();
 		this.driverPhone = in.readString();
 		this.routeFilePath = in.readString();
-		
+		this.address = in.readString();
 	}
 	
 	public static final Parcelable.Creator<ShuttleEntity> CREATOR = new Parcelable.Creator<ShuttleEntity>()

@@ -2,6 +2,7 @@ package com.shuttlemap.android.fragment;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.internal.ke;
 import com.shuttlemap.android.R;
 import com.shuttlemap.android.ShuttleDetailActivity;
 import com.shuttlemap.android.adapter.ShuttleListAdapter;
@@ -11,6 +12,7 @@ import com.shuttlemap.android.server.entity.ShuttleEntity;
 import com.shuttlemap.android.server.handler.ShuttleHandler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +24,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -62,28 +65,49 @@ public class ShuttleListFragment extends Fragment implements ShuttleListListener
 		this.listView = (ListView)rootView.findViewById(R.id.listView);
 		this.searchText = (EditText)rootView.findViewById(R.id.searchText);
 		
-		searchText.addTextChangedListener(new TextWatcher() {
-
+//		searchText.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void afterTextChanged(Editable s){
+//				
+//				if (s.toString().length() > 1){
+//					searchShuttle(s.toString());
+//				}else{
+//					searchShuttle(s.toString());
+//				}
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+//			{
+//			}
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count)
+//			{
+//			}
+//		});
+		
+		Button btn = (Button)rootView.findViewById(R.id.searchBtn);
+		btn.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
-			public void afterTextChanged(Editable s){
-				
-				if (s.toString().length() > 1){
-					searchShuttle(s.toString());
-				}else{
-					searchShuttle(s.toString());
+			public void onClick(View v) {
+				String keyword = searchText.getText().toString();
+				if (keyword.length() > 1) {
+					searchShuttle(keyword);
+				}else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(context);
+					builder.setTitle("확인");
+					builder.setMessage("셔틀명을 입력하세요");
+					builder.setNegativeButton("확인", null);
+					builder.create().show();
+					return;
 				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
+				
 			}
 		});
+		
 		
 		this.adapter = new ShuttleListAdapter(context,this);
 		this.listView.setAdapter(adapter);

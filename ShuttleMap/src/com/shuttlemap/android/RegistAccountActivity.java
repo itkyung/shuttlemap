@@ -2,18 +2,24 @@ package com.shuttlemap.android;
 
 
 
+import com.shuttlemap.android.LoginActivity.LoginTask;
+import com.shuttlemap.android.LoginActivity.UpdateRegistTask;
 import com.shuttlemap.android.common.AccountManager;
+import com.shuttlemap.android.common.GCMManager;
 import com.shuttlemap.android.common.WaitDialog;
 import com.shuttlemap.android.fragment.common.TitleBar;
 import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.server.ServerStaticVariable;
 import com.shuttlemap.android.server.entity.AccountEntity;
+import com.shuttlemap.android.server.handler.GCMServiceHandler;
 import com.shuttlemap.android.server.handler.LoginHandler;
 
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,13 +31,12 @@ import android.widget.EditText;
 
 public class RegistAccountActivity extends ShuttlemapBaseActivity implements View.OnFocusChangeListener,View.OnClickListener,TitleBarListener {
 	private Context context;
-	private EditText editPasswd1;
-	private EditText editPasswd2;
+	private EditText editPasswd;
 	private Button btnDone;
 	private EditText editNickName;
-	private EditText editPhone;
+	private String phone;
 	private boolean canDone;
-	private TitleBar titleBar;
+	
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -39,12 +44,6 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 		this.context = this;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_regist);
-		
-		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.setTitle("회원가입");
-		
-		TelephonyManager telManager = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE); 
-		String phoneNum = telManager.getLine1Number();
 		
 		android.accounts.AccountManager mgr = android.accounts.AccountManager.get(this);
 	    Account[] accts = mgr.getAccounts();
@@ -55,24 +54,23 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
            acct = accts[i];
            break;
         }       
-		
+		String defaultEmail = null;
+        if(acct != null){
+        	defaultEmail = acct.name;
+        }
+        
 		EditText editBigtureId = (EditText)findViewById(R.id.editBigtureId);
 		editBigtureId.setOnFocusChangeListener(this);
 		
-		editBigtureId.setText(acct.name);
+		editBigtureId.setText(defaultEmail);
 		
+		this.phone = getIntent().getStringExtra("PHONE");
 		
-		editPasswd1 = (EditText)findViewById(R.id.editPassword1);
-		editPasswd1.setOnFocusChangeListener(this);
-		
-		editPasswd2 = (EditText)findViewById(R.id.editPassword2);
-		editPasswd2.setOnFocusChangeListener(this);
+		editPasswd = (EditText)findViewById(R.id.editPassword);
+		editPasswd.setOnFocusChangeListener(this);
 		
 		editNickName = (EditText)findViewById(R.id.editNickname);
 		editNickName.setOnFocusChangeListener(this);
-		
-		editPhone = (EditText)findViewById(R.id.editPhone);
-		editPhone.setText(phoneNum);
 		
 		
 		btnDone = (Button)findViewById(R.id.btnDone);
@@ -81,15 +79,13 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 			public void onClick(View v){
 				
 				if(validateData()){
-					String passwd1 = editPasswd1.getText().toString();
+					String passwd1 = editPasswd.getText().toString();
 					
 					String nickName = editNickName.getText().toString();
 					
 					EditText editBigtureId = (EditText)findViewById(R.id.editBigtureId);
 					String bigtureId = editBigtureId.getText().toString();
-					
-					String phone = editPhone.getText().toString();
-	
+				
 					AccountRegisterTask task = new AccountRegisterTask();
 					task.execute(bigtureId, passwd1, nickName, phone);
 				}else{
@@ -113,8 +109,7 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 	public void onFocusChange(View v, boolean hasFocus) {
 		if(hasFocus == false){
 			switch(v.getId()){
-			case R.id.editPassword1:
-			case R.id.editPassword2:
+			case R.id.editPassword:
 				(new Handler()).postDelayed(new Runnable() {
 					@Override
 					public void run() {
@@ -135,8 +130,7 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 	}
 
 	private boolean validatePasswd(boolean showAlert,boolean compareTest){
-		String passwd = editPasswd1.getText().toString();
-		String passwd2 = editPasswd2.getText().toString();
+		String passwd = editPasswd.getText().toString();
 		
 		if (passwd == null || passwd.length() < 6){
 			canDone = false;
@@ -147,7 +141,7 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 				builder.setNegativeButton("확인", null);
 				builder.create().show();
 				
-				editPasswd1.requestFocus();
+				editPasswd.requestFocus();
 				
 			}
 			return false;
@@ -160,24 +154,11 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 				builder.setNegativeButton("확인", null);
 				builder.create().show();
 				
-				editPasswd1.requestFocus();
-			}
-			return false;
-		}else if(compareTest && passwd != null && passwd2 != null && passwd.length() > 0 &&
-				passwd2.length() > 0 && passwd.equals(passwd2) == false){
-			canDone = false;
-			if (showAlert){
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("Error");
-				builder.setMessage("비밀번호가 서로 다릅니다.");
-				builder.setNegativeButton("확인", null);
-				builder.create().show();
-				
-				editPasswd2.setText("");
-				editPasswd2.requestFocus();
+				editPasswd.requestFocus();
 			}
 			return false;
 		}
+		
 		canDone = true;
 		return true;
 	}
@@ -206,12 +187,6 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 			return false;
 		}
 		
-		String phone = editPhone.getText().toString();
-		if (phone == null || phone.length() == 0){
-			canDone = false;
-			return false;
-		}
-		
 		canDone = true;
 		
 		return true;
@@ -221,8 +196,6 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 	class AccountRegisterTask extends AsyncTask<String,Void,Boolean>{
 		//socialType, socialId, bigtureId, passwd1, nickName, birthdayString, gender, countryCode
 		private int errorCode;
-		
-		
 		
 		@Override
 		protected void onPreExecute() {
@@ -254,14 +227,26 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 			WaitDialog.hideWaitDialog();
 			if (result){
 				setResult(RESULT_OK);
-				finish();
+				
+				EditText editBigtureId = (EditText)findViewById(R.id.editBigtureId);
+				String loginId = editBigtureId.getText().toString();
+				String passwd = editPasswd.getText().toString();
+				
+				LoginTask task = new LoginTask();
+				if(Build.VERSION.SDK_INT >= 11){
+					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,loginId, passwd, true);
+				}else{
+					task.execute(loginId, passwd, true);				
+				}
+				
+				
 			}else{
 				StringBuffer errorMsg = new StringBuffer("");
-				if(errorCode == ServerStaticVariable.ERROR_DUPLICATE){
+				//if(errorCode == ServerStaticVariable.ERROR_DUPLICATE){
 					errorMsg.append("이미 등록된 아이디(이메일)입니다.");
-				}else if(errorCode == ServerStaticVariable.ERROR_MANDATORY){
-					errorMsg.append("필수값을 입력하세요.");
-				}
+				//}else if(errorCode == ServerStaticVariable.ERROR_MANDATORY){
+				//	errorMsg.append("필수값을 입력하세요.");
+				//}
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage(errorMsg.toString());
@@ -287,4 +272,88 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 		finish();
 	}
 	
+	class LoginTask extends AsyncTask<Object, Void, Boolean>{
+
+		@Override
+		protected void onPreExecute() {
+			WaitDialog.showWailtDialog(context, false);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Object... params) {
+			boolean result = false;
+			String loginId = (String)params[0];
+			String passwd = (String)params[1];
+			boolean keepLogin = (Boolean)params[2];
+			
+			AccountEntity entity = LoginHandler.login(context, loginId, passwd, keepLogin);
+			if (entity.success){
+
+				AccountManager.getInstance().setAccountEntity(entity);
+				AccountManager.getInstance().setLogin(true);
+				entity.store(context);
+				result = true;
+				
+				if(entity.isDriver() || entity.sendLocation){
+					((ShuttlemapApplication)getApplication()).startLocationUpdate();
+				}
+			}
+			
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			WaitDialog.hideWaitDialog();
+			if (result){
+				AccountEntity account = AccountManager.getInstance().getAccountEntity();
+				UpdateRegistTask taskU = new UpdateRegistTask();
+				
+				if(Build.VERSION.SDK_INT >= 11){
+					taskU.executeOnExecutor(THREAD_POOL_EXECUTOR,account.id);
+				}else{
+					taskU.execute(account.id);					
+				}
+				
+				AccountManager.getInstance().setLogin(result);
+				
+			}else{
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle("로그인 에러");
+				builder.setMessage("아이디 또는 비밀번호를 확인하세요.");
+				builder.setNegativeButton("확인", null);
+				builder.create().show();
+			}
+			super.onPostExecute(result);
+		}
+	}
+
+	class UpdateRegistTask extends AsyncTask<String, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			String regId = GCMManager.getRegistrationId(context);
+			try {
+				if (regId == null || "".equals(regId))
+					GCMManager.registerGCM(context);
+				else
+					GCMServiceHandler.updateGCMRegistrationId(params[0], regId);
+			} catch (Exception e) {
+				//무시함. 에뮬레이터 테스트임.
+			}
+			return true;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			
+			Intent intent = new Intent(RegistAccountActivity.this, AgreeActivity.class);
+			startActivity(intent);
+			finish();
+		}
+		
+		
+	}
 }

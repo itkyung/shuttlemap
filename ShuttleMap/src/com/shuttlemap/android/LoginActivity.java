@@ -23,16 +23,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 
-public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarListener,View.OnClickListener{
+public class LoginActivity extends ShuttlemapBaseActivity implements View.OnClickListener{
 	private Context context;
 	private EditText editEmail;
 	private EditText editPasswd;
 	
 	private ImageButton btnKeepLoggedIn;
-	private Button btnCreateAccount;
+	
 	private TitleBar titleBar;
 	
 	@Override
@@ -42,8 +43,9 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
 		
-		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.setTitle("로그인");
+		TelephonyManager telManager = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE); 
+		String phoneNum = telManager.getLine1Number();
+		
 		
 		editEmail  = (EditText)findViewById(R.id.editEmail);
 		editPasswd = (EditText)findViewById(R.id.editPasswd);
@@ -58,8 +60,6 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 		TextView tvKeepLoggedIn = (TextView)findViewById(R.id.keepLoginLabel);
 		tvKeepLoggedIn.setOnClickListener(this);
 		
-		this.btnCreateAccount = (Button)findViewById(R.id.createAccount);
-		btnCreateAccount.setOnClickListener(this);
 	}
 	
 	
@@ -103,10 +103,10 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 			
 			break;
 	
-		case R.id.createAccount:
-			Intent intent = new Intent(context,RegistAccountActivity.class);
-			startActivity(intent);
-			break;
+//		case R.id.createAccount:
+//			Intent intent = new Intent(context,RegistAccountActivity.class);
+//			startActivity(intent);
+//			break;
 		
 		default:
 			break;
@@ -115,14 +115,6 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 	}
 
 
-
-
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		setResult(RESULT_CANCELED);
-		finish();
-		
-	}
 	
 	
 	class LoginTask extends AsyncTask<Object, Void, Boolean>{
@@ -187,12 +179,14 @@ public class LoginActivity extends ShuttlemapBaseActivity implements TitleBarLis
 		@Override
 		protected Boolean doInBackground(String... params) {
 			String regId = GCMManager.getRegistrationId(context);
-			
-			if (regId == null || "".equals(regId))
-				GCMManager.registerGCM(context);
-			else
-				GCMServiceHandler.updateGCMRegistrationId(params[0], regId);
-			
+			try {
+				if (regId == null || "".equals(regId))
+					GCMManager.registerGCM(context);
+				else
+					GCMServiceHandler.updateGCMRegistrationId(params[0], regId);
+			} catch (Exception e){
+				
+			}
 			return true;
 		}
 
