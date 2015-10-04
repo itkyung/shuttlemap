@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import com.shuttlemap.android.fragment.ArroundMapFragment;
 import com.shuttlemap.android.fragment.MyShuttleFragment;
-import com.shuttlemap.android.fragment.NotiFragement;
+import com.shuttlemap.android.fragment.NotiZoneFragement;
 import com.shuttlemap.android.fragment.SettingFragment;
 import com.shuttlemap.android.fragment.ShuttleListFragment;
 import com.shuttlemap.android.fragment.common.TitleBar;
@@ -189,7 +189,7 @@ public class MainActivity extends ShuttlemapBaseActivity implements View.OnClick
 				fragment = ArroundMapFragment.newInstance();
 				break;
 			case 3:
-				fragment = NotiFragement.newInstance();
+				fragment = NotiZoneFragement.newInstance();
 				break;
 			case 4:
 				fragment = SettingFragment.newInstance();

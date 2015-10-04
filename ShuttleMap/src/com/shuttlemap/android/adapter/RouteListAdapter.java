@@ -15,22 +15,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RouteListAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<RouteEntity> routes;
-	
+	private int lastIdx;
 	private DateFormat format = new SimpleDateFormat("h:mm a");
 	
 	public RouteListAdapter(Context context){
 		this.context = context;
 		this.routes = new ArrayList<RouteEntity>();
+		lastIdx = routes.size()-1;
 	}
 	
 	public void setRoutes(ArrayList<RouteEntity> routes){
 		this.routes.clear();
 		this.routes.addAll(routes);
+		lastIdx = routes.size();
 	}
 	
 	@Override
@@ -58,14 +62,22 @@ public class RouteListAdapter extends BaseAdapter {
 		}
 		
 		TextView routeLabel = (TextView)convertView.findViewById(R.id.routeLabel);
-		TextView arriveLabel = (TextView)convertView.findViewById(R.id.arriveLabel);
+		ImageButton arriveIcon = (ImageButton)convertView.findViewById(R.id.arriveIcon);
+		ImageButton arrivePoint = (ImageButton)convertView.findViewById(R.id.arrivePoint);
 		routeLabel.setText(entity.getRouteName());
 		if(entity.isArrived()){
-			arriveLabel.setVisibility(View.VISIBLE);
-			arriveLabel.setText(format.format(entity.getArriveDate()) + "- 도착");
+			arrivePoint.setVisibility(View.VISIBLE);
 		}else{
-			arriveLabel.setVisibility(View.GONE);
+			arrivePoint.setVisibility(View.GONE);
 		}
+		if(entity.getIdx() == 1) {
+			arriveIcon.setImageResource(R.drawable.road01);
+		}else if(entity.getIdx() == lastIdx) {
+			arriveIcon.setImageResource(R.drawable.road04);
+		}else {
+			arriveIcon.setImageResource(R.drawable.road02);
+		}
+		
 		
 		return convertView;
 	}

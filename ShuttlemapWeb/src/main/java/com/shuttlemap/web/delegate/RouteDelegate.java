@@ -25,6 +25,9 @@ public class RouteDelegate {
 	@Expose
 	private int idx;
 	
+	@Expose
+	private String arriveDateStr;
+	
 	public RouteDelegate(ShuttleRoute route){
 		this.id = route.getId();
 		this.routeName = route.getRouteName();
@@ -35,6 +38,8 @@ public class RouteDelegate {
 		
 		this.arrived = false;
 		arriveDate = 0;
+		this.arriveDateStr = route.getArrivedHour() + ":" + route.getArrivedMinute();
+		this.idx = route.getIdx();
 	}
 
 	public String getId() {
@@ -83,6 +88,22 @@ public class RouteDelegate {
 
 	public void setArriveDate(long arriveDate) {
 		this.arriveDate = arriveDate;
+	}
+
+	public String getArriveDateStr() {
+		return arriveDateStr;
+	}
+
+	public void setArriveDateStr(String arriveDateStr) {
+		this.arriveDateStr = arriveDateStr;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 	

@@ -55,6 +55,8 @@ public class ShuttleDelegate {
 	private String driverPhone;
 	@Expose
 	private String routeFilePath;
+	@Expose
+	private String address;
 	
 	public ShuttleDelegate(Shuttle shuttle){
 		this.id = shuttle.getId();
@@ -90,6 +92,21 @@ public class ShuttleDelegate {
 			this.driverPhone = shuttle.getDriver().getPhone();
 		}
 		this.routeFilePath = shuttle.getRouteFilePath();
+		
+		this.address = convertAddress(shuttle.getCompany().getAddress());
+	}
+	
+	private String convertAddress(String longAddress){
+		if(longAddress != null){
+			String[] addr = longAddress.split(" ");
+			if(addr.length > 3) {
+				return addr[0] + " " + addr[1] + " " + addr[2];
+			}else{
+				return longAddress;
+			}
+			
+		}
+		return longAddress;
 	}
 	
 	

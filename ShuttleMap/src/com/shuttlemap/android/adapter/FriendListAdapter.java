@@ -115,13 +115,15 @@ public class FriendListAdapter extends BaseAdapter {
 			this.nameLabel.setText(entity.getName());
 			String phone = entity.getPhone();
 			
-			this.phoneLabel.setText("010-XXXX-" + phone.substring(phone.length()-4, phone.length()));
+			if(phone != null && phone.length() > 4){
+				this.phoneLabel.setText("010-XXXX-" + phone.substring(phone.length()-4, phone.length()));
+			}
 			
 			String imageUrl = entity.getProfileImgURL();
 			if(imageUrl != null){
 				BitmapDownloader.getInstance().displayImage(imageUrl, bitmapOption, imageProfile, null);
 			}else{
-				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.common_profile_96x96));
+				imageProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.map_btn02_1_n));
 			}
 			
 			if(hideBtn){

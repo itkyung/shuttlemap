@@ -56,8 +56,9 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public User findByLoginId(String loginId) {
 		try{
-			Query query = em.createQuery("SELECT a from User a WHERE a.loginId = :loginId");
+			Query query = em.createQuery("SELECT a from User a WHERE a.loginId = :loginId and a.active = :active");
 			query.setParameter("loginId", loginId);
+			query.setParameter("active", true);
 			query.setHint("org.hibernate.cacheable", true);
 			return (User)query.getSingleResult();
 		}catch(Exception e){
@@ -68,8 +69,9 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public List<User> findByName(String name) {
 		try{
-			Query query = em.createQuery("SELECT a from User a WHERE a.name = :name");
+			Query query = em.createQuery("SELECT a from User a WHERE a.name = :name and a.active = :active");
 			query.setParameter("name", name);
+			query.setParameter("active", true);
 			query.setHint("org.hibernate.cacheable", true);
 			return query.getResultList();
 		}catch(Exception e){

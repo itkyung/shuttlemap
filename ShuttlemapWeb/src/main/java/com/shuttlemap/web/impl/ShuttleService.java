@@ -354,7 +354,7 @@ public class ShuttleService implements IShuttleService {
 			RouteDelegate delegate = new RouteDelegate(route);
 			
 			if(drivingInfo != null) {
-				if(route.equals(drivingInfo.getLastArrivedRoute())){
+				if(route.getId().equals(drivingInfo.getLastArrivedRoute().getId())){
 					delegate.setArrived(true);
 					delegate.setArriveDate(drivingInfo.getLastUpdateDate().getTime());
 				}

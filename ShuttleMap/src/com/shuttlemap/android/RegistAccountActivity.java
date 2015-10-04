@@ -47,18 +47,8 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 		
 		android.accounts.AccountManager mgr = android.accounts.AccountManager.get(this);
 	    Account[] accts = mgr.getAccounts();
-	    final int count = accts.length;
-	    Account acct = null;
-	              
-        for(int i=0;i<count;i++) {
-           acct = accts[i];
-           break;
-        }       
-		String defaultEmail = null;
-        if(acct != null){
-        	defaultEmail = acct.name;
-        }
-        
+	    
+		String defaultEmail = findDefaultEmail(accts);
 		EditText editBigtureId = (EditText)findViewById(R.id.editBigtureId);
 		editBigtureId.setOnFocusChangeListener(this);
 		
@@ -97,6 +87,19 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 				}
 			}
 		});
+	}
+	
+	private String findDefaultEmail(Account[] accts) {
+		final int count = accts.length;
+	    Account acct = null;
+	              
+        for(int i=0;i<count;i++) {
+           acct = accts[i];
+           if(acct.type.equals("com.google")){
+        	   return acct.name;
+           }
+        }   
+        return null;
 	}
 
 	@Override
@@ -295,9 +298,9 @@ public class RegistAccountActivity extends ShuttlemapBaseActivity implements Vie
 				entity.store(context);
 				result = true;
 				
-				if(entity.isDriver() || entity.sendLocation){
+				//if(entity.isDriver() || entity.sendLocation){
 					((ShuttlemapApplication)getApplication()).startLocationUpdate();
-				}
+			//	}
 			}
 			
 			return result;

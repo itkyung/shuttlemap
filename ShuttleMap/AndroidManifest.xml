@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCOUNT_MANAGER" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -149,10 +150,10 @@
 	          application uses a custom BroadcastReceiver that redefines its name.
 	        -->
 	        <!--  service android:name="com.clockworks.android.bigture.GCMIntentService" / -->
-	        <!--  meta-data android:value="AIzaSyDYniAZKsbRkCtNJgcfkrk2XSSm_qu68_I" android:name="com.google.android.maps.v2.API_KEY"/ -->
+	        <!--  meta-data android:value="AIzaSyDYniAZKsbRkCtNJgcfkrk2XSSm_qu68_I" android:name="com.google.android.maps.v2.API_KEY"/> -->
 	        
 	        <!-- 운영용 -->
-	        <meta-data android:value="AIzaSyBXE_kJnAvyVaV1eeYwKEfAl4bdcCrKOys" android:name="com.google.android.maps.v2.API_KEY"/>
+	        <meta-data android:value="AIzaSyBXE_kJnAvyVaV1eeYwKEfAl4bdcCrKOys" android:name="com.google.android.maps.v2.API_KEY"/> 
 	       
 	       
 	       <service android:name="com.shuttlemap.android.service.LocationUpdateService"/>

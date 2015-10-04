@@ -20,6 +20,11 @@ public class RouteEntity implements Parcelable {
 	
 	private Date arriveDate;
 	
+	private int idx;
+	
+	private String arriveDateStr;
+	
+	
 	public RouteEntity(){
 		
 	}
@@ -31,6 +36,10 @@ public class RouteEntity implements Parcelable {
 		this.longitude = json.getDouble("longitude");
 		this.arrived = json.getBoolean("arrived");
 		long date = json.getLong("arriveDate");
+		this.idx = json.getInt("idx");
+		if(json.has("arriveDateStr")){
+			this.arriveDateStr = json.getString("arriveDateStr");
+		}
 		arriveDate = new Date(date);
 	}
 	
@@ -95,4 +104,15 @@ public class RouteEntity implements Parcelable {
 		this.arriveDate = arriveDate;
 	}
 
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+
+
+	
+	
 }

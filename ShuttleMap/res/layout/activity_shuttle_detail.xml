@@ -4,55 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     
-      <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp" />
-    
       <RelativeLayout 
           android:id="@+id/shuttleInfoContainer"
           android:layout_width="fill_parent"
-          android:layout_height="70dp"
-          android:layout_below="@+id/titleBar"
+          android:layout_height="40dp"
+          android:background="@drawable/m1_bar01"
           >
-          <ImageView 
-              android:id="@+id/imageCompany"
-              android:layout_width="48dp"
-              android:layout_height="48dp"
-              android:src="@drawable/common_profile_96x96" 
-              android:layout_marginTop="10dp"
-              android:layout_marginLeft="10dp"
-              />
-          <TextView 
-              android:id="@+id/companyLabel"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Company"
-              android:textSize="15dp"
-              android:layout_toRightOf="@+id/imageCompany"
-              android:layout_alignTop="@+id/imageCompany"
-              android:layout_marginLeft="10dp"
-              />
            <TextView 
               android:id="@+id/shuttleLabel"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="ShuttleName"
               android:textSize="18dp"
-              android:layout_below="@+id/companyLabel"
-              android:layout_alignLeft="@+id/companyLabel"
+              android:textColor="#ffffff"
+              android:layout_centerInParent="true"
               />
-           <TextView 
-               android:id="@+id/ingLabel"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textSize="14dp"
-               android:text="운행중"
-               android:layout_toRightOf="@+id/shuttleLabel"
-               android:layout_alignBottom="@+id/shuttleLabel"
-               android:layout_marginLeft="5dp"
-               />
-               
       </RelativeLayout>
       <LinearLayout 
             android:id="@+id/tabContainer"
@@ -62,256 +28,91 @@
         	android:layout_below="@+id/shuttleInfoContainer"
         	android:orientation="horizontal"
         >
- 	      <FrameLayout 
+ 	      <ImageButton 
             android:id="@+id/tvMenu1R"
-            android:layout_width="wrap_content"
-	        android:layout_height="38dp"
-	        android:orientation="vertical"
-	        android:layout_weight="0.5"
-            >
-	        <TextView
-		        android:id="@+id/tvMenu1"
-		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent"
-		        android:gravity="center"
-		        android:text="기본정보"
-		        android:paddingLeft="15dp"
-		        android:paddingRight="15dp"
-		        android:textColor="@color/tab_text_p"
-		        android:textSize="16dp" />
-	        <ImageView
-		        android:id="@+id/ivMark1"
-		        android:layout_width="fill_parent"
-		        android:layout_height="4dp"
-		        android:layout_marginTop="34dp"
-		        android:src="@drawable/tabmenu_select_bg" />  
-	      </FrameLayout>
-	     <FrameLayout 
+            android:layout_width="180dp"
+	        android:layout_height="43dp"
+	        android:src="@drawable/m1_tab01_p"
+            />
+	     <ImageButton 
             android:id="@+id/tvMenu2R"
-            android:layout_width="wrap_content"
-	        android:layout_height="38dp"
-	        android:layout_weight="0.5"
-            >
-		     <TextView
-		        android:id="@+id/tvMenu2"
-		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent"
-		        android:gravity="center"
-		        android:text="실시간 노선"
-		        android:paddingLeft="15dp"
-		        android:paddingRight="15dp"
-		        android:textColor="@color/tab_text_n"
-		        android:textSize="16dp" />
-			  <ImageView
-		        android:id="@+id/ivMark2"
-		        android:layout_width="fill_parent"
-		        android:layout_height="4dp"
-		        android:layout_marginTop="34dp"
-		        android:src="@drawable/tabmenu_select_bg"
-		        android:visibility="gone" />
-		</FrameLayout>   
-          
+            android:layout_width="180dp"
+	        android:layout_height="43dp"
+	        android:src="@drawable/m1_tab02_n"
+            />
       </LinearLayout>
       <FrameLayout 
          android:layout_width="fill_parent"
          android:layout_height="fill_parent"
          android:layout_below="@+id/tabContainer"
-         android:layout_marginBottom="60dp"
          >
          <RelativeLayout 
              android:id="@+id/normalInfo"
              android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:paddingTop="10dp"
-             android:paddingLeft="20dp"
-             android:paddingRight="20dp"
-             android:paddingBottom="10dp"
+             android:layout_height="fill_parent"
+             
              >
-             <TextView 
-                 android:id="@+id/startPointNameLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="출발지"
-                 />
-             <TextView 
-                 android:id="@+id/startPointName"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="엘스아파트"
-                 android:layout_alignParentRight="true"
-                 />
-             <TextView 
-                 android:id="@+id/endPointNameLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="도착지"
-                 android:layout_below="@+id/startPointNameLabel"
-                 />
-             <TextView 
-                 android:id="@+id/endPointName"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="XX학원"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/startPointName"
-                 />
-              <TextView 
-                 android:id="@+id/driverNameLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="기사이름"
-                 android:layout_below="@+id/endPointNameLabel"
-                 />
-             <TextView 
-                 android:id="@+id/driverName"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="홍길동"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/endPointName"
-                 />
-             <TextView 
-                 android:id="@+id/driverPhoneLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="기사연락처"
-                 android:layout_below="@+id/driverNameLabel"
-                 />
-             <TextView 
-                 android:id="@+id/driverPhone"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="010-222-1111"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/driverNameLabel"
-                 />
-             <TextView 
-                 android:id="@+id/timeLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="운행시간"
-                 android:layout_below="@+id/driverPhoneLabel"
-                 />
-             <TextView 
-                 android:id="@+id/time"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="24:00 ~ 24:00"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/driverPhone"
-                 />
-             <TextView 
-                 android:id="@+id/carNoLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="차량번호"
-                 android:layout_below="@+id/timeLabel"
-                 />
-             <TextView 
-                 android:id="@+id/carNo"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="서울가1020"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/time"
-                 />
-             <TextView 
-                 android:id="@+id/carTypeLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="차량종류"
-                 android:layout_below="@+id/carNoLabel"
-                 />
-             <TextView 
-                 android:id="@+id/carType"
-                 android:layout_width="wrap_content"
-                 android:layout_height="20dp"
-                 android:gravity="center_vertical"
-                 android:textSize="14dp"
-                 android:text="미니버스"
-                 android:layout_alignParentRight="true"
-                 android:layout_below="@+id/carNo"
-                 />
-             
-           
-             
+              <fragment
+		        android:id="@+id/map"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        class="com.google.android.gms.maps.MapFragment" />
          </RelativeLayout>  
-         <ListView 
-             android:id="@+id/routeList"
+         <RelativeLayout 
+             android:id="@+id/routeContainer"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
-             android:divider="@color/map_top_divider"
-        	 android:dividerHeight="1dp"
-        	 android:visibility="gone"
-             ></ListView> 
-          
-          
+             android:visibility="gone"
+             >
+             <ListView 
+	             android:id="@+id/routeList"
+	             android:layout_width="fill_parent"
+	             android:layout_height="fill_parent"
+	             android:divider="@color/map_top_divider"
+	        	 android:dividerHeight="1dp"
+	        	 android:layout_marginBottom="36dp"
+	        	 android:background="@drawable/bg"
+	             ></ListView>
+             <LinearLayout 
+		          android:id="@+id/bottom"
+		          android:layout_width="fill_parent"
+		          android:layout_height="36dp"
+		          android:orientation="horizontal"
+		          android:layout_alignParentBottom="true"
+		          android:background="@drawable/low_bar"
+		          >
+		          <ImageButton 
+		              android:id="@+id/btnBookmark"
+		              android:layout_width="40dp"
+		              android:layout_height="32dp"
+		              android:layout_marginTop="5dp"
+		              android:layout_marginLeft="63dp"
+		              android:background="@null"
+		              android:src="@drawable/lowbtn01_n"
+		              />
+		          <ImageButton 
+		              android:id="@+id/btnMap"
+		              android:layout_width="40dp"
+		              android:layout_height="32dp"
+		              android:layout_marginTop="5dp"
+		              android:layout_marginLeft="63dp"
+		              android:background="@null"
+		              android:src="@drawable/lowbtn02_n"
+		              />
+		           <ImageButton 
+		              android:id="@+id/btnRefresh"
+		              android:layout_width="40dp"
+		              android:layout_height="32dp"
+		              android:layout_marginTop="5dp"
+		              android:layout_marginLeft="63dp"
+		              android:background="@null"
+		              android:src="@drawable/lowbtn03_n"
+		              />
+		           
+		      </LinearLayout>
+         </RelativeLayout> 
       </FrameLayout>
-      <LinearLayout 
-          android:id="@+id/bottom"
-          android:layout_width="fill_parent"
-          android:layout_height="60dp"
       
-          android:orientation="horizontal"
-          android:layout_alignParentBottom="true"
-          >
-          <Button 
-              android:id="@+id/btnBookmark"
-              android:layout_width="120dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="5dp"
-              android:layout_marginLeft="5dp"
-              android:text="내셔틀에 등록"
-              android:textColor="@color/white"
-              android:background="@drawable/selector_btn_popup_red"
-              />
-          <Button 
-              android:id="@+id/btnMap"
-              android:layout_width="100dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="5dp"
-              android:layout_marginLeft="5dp"
-              android:text="노선보기"
-              android:textColor="@color/white"
-              android:background="@drawable/selector_btn_popup_red"
-              />
-           <Button 
-              android:id="@+id/btnCall"
-              android:layout_width="120dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="5dp"
-              android:layout_marginLeft="5dp"
-              android:text="기사에게 전화"
-              android:textColor="@color/white"
-              android:background="@drawable/selector_btn_popup_red"              
-              />
-      </LinearLayout>
 </RelativeLayout>
     
     

@@ -149,8 +149,13 @@ public class ShuttleEntity implements Parcelable {
 			this.bookmarkName = jsonObj.getString("bookmarkName");
 		}
 		
-		this.driverId = jsonObj.getString("driverId");
-		this.driverName = jsonObj.getString("driverName");
+		if(jsonObj.has("drivierId")){
+			this.driverId = jsonObj.getString("driverId");
+		}
+		if(jsonObj.has("driverName")){
+			this.driverName = jsonObj.getString("driverName");
+		}
+		
 		if(jsonObj.has("driverPhone")){
 			this.driverPhone = jsonObj.getString("driverPhone");
 		}

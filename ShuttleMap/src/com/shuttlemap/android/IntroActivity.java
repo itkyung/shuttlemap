@@ -94,9 +94,9 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 				entity.store(context);
 				result = true;
 				
-				if(entity.isDriver() || entity.sendLocation){
+				//if(entity.isDriver() || entity.sendLocation){
 					((ShuttlemapApplication)getApplication()).startLocationUpdate();
-				}
+			//	}
 			}
 			
 			return result;

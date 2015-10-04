@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="52dp"
-    android:padding="0dp" >   
+    android:layout_height="60dp"
+    android:padding="0dp" 
+    android:background="@drawable/list02_n"
+   
+    >
 	<TextView
 	    android:id="@+id/routeLabel"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_centerVertical="true"
-	    android:layout_marginLeft="10dp"
-	    android:text="Route"
-	    android:textSize="18dp"
-	    android:textColor="#000000"
+	    android:text="군포고등학교"
+	    android:textSize="19sp"
+	    android:textColor="#323232"
+	    android:maxLines="1"
+	    android:textStyle="bold"
+	    android:layout_marginLeft="20dp"
+    	android:layout_marginTop="15dp"
 	    />
-	
 	<TextView
-	    android:id="@+id/arriveLabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerVertical="true"
+        android:id="@+id/timeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/routeLabel"
+        android:layout_alignLeft="@+id/routeLabel"
+        android:text="18:00"
+        android:textColor="#999999"
+        android:textSize="15sp"
+        android:maxLines="1"/>
+	<ImageButton
+	    android:id="@+id/arriveIcon"
+	    android:layout_width="36dp"
+	    android:layout_height="60dp"
 	    android:layout_marginRight="5dp"
-	    android:textAlignment="textEnd"
 	    android:layout_alignParentRight="true"
-	    android:text="도착"
-	    android:textSize="13dp"
-	    android:textColor="@color/red"/>
-	    
+	    android:background="@null"
+	    android:src="@drawable/road02"/>
+	<ImageButton
+	    android:id="@+id/arrivePoint"
+	    android:layout_width="36dp"
+	    android:layout_height="60dp"
+	    android:layout_marginRight="5dp"
+	    android:layout_alignParentRight="true"
+	    android:background="@null"
+	    android:visibility="gone"
+	    android:src="@drawable/road_point"/>    
 </RelativeLayout>

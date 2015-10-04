@@ -81,9 +81,14 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 * 위치 정보 업데이트를 시작한다.
 	 */
 	public void startLocationUpdates() {
+		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
+		int interval = 30000;	//30초 일반사용자인경우. 드라이버는 15초단위 
+		if (accountEntity != null && accountEntity.isDriver()) {
+			interval = 15000;
+		} 
 		mLocationRequest = new LocationRequest();
-	    mLocationRequest.setInterval(10000);
-	    mLocationRequest.setFastestInterval(5000);
+	    mLocationRequest.setInterval(interval);
+	    mLocationRequest.setFastestInterval(interval);
 	    mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 	    
 	    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -93,9 +98,14 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 * 위치정보를 주기적으로 알려달라는 요청을 한다.
 	 */
 	protected void createLocationRequest() {
+		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
+		int interval = 30000;	//30초 일반사용자인경우. 드라이버는 15초단위 
+		if (accountEntity != null && accountEntity.isDriver()) {
+			interval = 15000;
+		} 
 	    LocationRequest mLocationRequest = new LocationRequest();
-	    mLocationRequest.setInterval(10000);
-	    mLocationRequest.setFastestInterval(5000);
+	    mLocationRequest.setInterval(interval);
+	    mLocationRequest.setFastestInterval(interval);
 	    mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 	}
 	
@@ -132,12 +142,12 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 		AccountManager accountManager = AccountManager.getInstance();
 		AccountEntity accountEntity = accountManager.getAccountEntity();
 		
-		if(accountEntity.isDriver() || accountEntity.sendLocation) {
+		//if(accountEntity.isDriver() || accountEntity.sendLocation) {
 			//1. 운전수인가?
 			//2. 아니면 설정이 위치정보를 알아보게 되어있는가?
 			//현재 위치 정보를 전송한다.
 			new UpdateTask().execute(location);
-		}
+		//}
 		
 	}
 	

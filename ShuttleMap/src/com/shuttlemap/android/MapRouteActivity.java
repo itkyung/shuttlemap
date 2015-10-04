@@ -38,6 +38,7 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 	private Context context;
 	private LocationManager locationManager;
 	private String provider;
+	private boolean isDrawPath = false;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -75,9 +76,7 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		if(url != null && url.length() > 0){
 			if(ServerStaticVariable.KML_PREFIX.equals(url)){
 				new AlertDialog.Builder(context)
-		        .setTitle("노선정보가 등록되지 않았습니다.").show();
-				
-				
+				 .setTitle("노선 지도 정보가 등록되지 않았습니다.").show();
 			}else{
 				new MapDataTask().execute(url);
 			}
@@ -85,6 +84,14 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 	}
 	
 	private void drawPath(MapDataSet navigationData){
+		
+		if(navigationData == null){
+			new AlertDialog.Builder(context)
+	        .setTitle("노선 지도 정보가 등록되지 않았습니다.").show();
+			return;
+		}
+		isDrawPath = true;
+		
 		ArrayList<Placemark> routes = navigationData.getPlacemarks();
 		for(int i=0; i < routes.size()-1; i++){
 			boolean first = false;
@@ -94,7 +101,8 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 			}else if(i == routes.size()-2){
 				last = true;
 			}
-			addMarker(routes.get(i),first, first||last ? true : false);
+			//addMarker(routes.get(i),first, first||last ? true : false);
+			addMarker(routes.get(i),first, false);
 		}
 		String routeCoordinates = navigationData.getCurrentPlacemark().getCoordinates();
 		String[] points = routeCoordinates.split(" ");
@@ -104,7 +112,7 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 				String pointEnd = points[i+1];
 				googleMap.addPolyline(new PolylineOptions()
 				  .add(getLatLng(pointStart),getLatLng(pointEnd))
-				  .width(10)
+				  .width(20)
 				  .color(Color.RED));
 			}
 		}
@@ -131,13 +139,14 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		if(changeColor){
 			if(needMove){
 				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
-						.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("출발지"));
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)).snippet("출발지"));
 			}else{
 				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
-						.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).snippet("도착지"));
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)).snippet("도착지"));
 			}
 		}else{
-			googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle()));
+			googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)));
 		}
 		
 		if(needMove){
@@ -176,8 +185,10 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
 		CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
 		CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
-	//	googleMap.moveCamera(center);
-	//	googleMap.animateCamera(zoom);
+		if(!isDrawPath){
+			googleMap.moveCamera(center);
+			googleMap.animateCamera(zoom);
+		}
 		
 	}
 

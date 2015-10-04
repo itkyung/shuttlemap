@@ -35,7 +35,7 @@ public class FirstJoinActivity extends ShuttlemapBaseActivity{
 			public void onClick(View v) {
 				Intent intent = new Intent(FirstJoinActivity.this,LoginActivity.class);
 				startActivity(intent);
-				finish();
+				
 			}
 		});
 		
@@ -51,7 +51,7 @@ public class FirstJoinActivity extends ShuttlemapBaseActivity{
 				}
 				intent.putExtra("PHONE", phoneNo);
 				startActivity(intent);
-				finish();
+				
 			}
 		});
 	}	

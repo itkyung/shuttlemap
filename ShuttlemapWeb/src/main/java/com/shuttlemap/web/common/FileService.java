@@ -20,6 +20,9 @@ public class FileService implements IFileService {
 	@Value("${uploadPath}")
 	private String uploadPath;
 	
+	@Value("${fileAccessUrl}")
+	private String fileAccessUrl;
+	
 	@Override
 	public String saveFile(MultipartFile multipart, String prefix) throws Exception {
 		
@@ -35,7 +38,7 @@ public class FileService implements IFileService {
 			
 			File orgFile = new File(orgDir,fileName);
 			multipart.transferTo(orgFile);
-			filePath = uploadPath + File.separator + prefix + File.separator + fileName;
+			filePath = fileAccessUrl + prefix + File.separator + fileName;
 			
 		}catch(IOException e){
 			throw e;
