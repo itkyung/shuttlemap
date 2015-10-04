@@ -195,6 +195,8 @@ public class LoginActivity extends ShuttlemapBaseActivity implements View.OnClic
 			super.onPostExecute(result);
 			
 			setResult(RESULT_OK);
+			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+			startActivity(intent);
 			finish();
 		}
 		
