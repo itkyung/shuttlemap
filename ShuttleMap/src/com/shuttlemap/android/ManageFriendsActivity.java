@@ -20,9 +20,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
 
-public class ManageFriendsActivity extends ShuttlemapBaseActivity implements TitleBarListener,FriendListener {
+public class ManageFriendsActivity extends ShuttlemapBaseActivity implements FriendListener {
 	
-	private TitleBar titleBar;
 	private Context context;
 	private ListView listView;
 	private FriendListAdapter adapter;
@@ -44,9 +43,6 @@ public class ManageFriendsActivity extends ShuttlemapBaseActivity implements Tit
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.context = this;
 		setContentView(R.layout.activity_manage_friends);
-		
-		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.setTitle("지인관리");
 		
 		this.listView = (ListView)findViewById(R.id.friendsList);
 		this.adapter = new FriendListAdapter(context, true, this);
@@ -126,10 +122,6 @@ public class ManageFriendsActivity extends ShuttlemapBaseActivity implements Tit
 		new SendFriendsTask().execute();
 	}
 	
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		finish();
-	}
 
 
 	@Override

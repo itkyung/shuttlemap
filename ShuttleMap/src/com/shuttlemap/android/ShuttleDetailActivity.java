@@ -11,6 +11,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.shuttlemap.android.MapRouteActivity.MapDataTask;
@@ -40,6 +41,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -67,6 +69,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 	private ImageButton tab2;
 	private RouteListAdapter adapter;
 	private boolean isDrawPath = false;
+	private ArrayList<RouteEntity> routeListData = new ArrayList<RouteEntity>();
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -146,7 +149,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 		});
 		
 		updateMapInfo();
-		refreshRoutes();
+		
 		
 	}
 	
@@ -169,7 +172,6 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
         String kmlUrl = ServerStaticVariable.KML_PREFIX + shuttle.getRouteFilePath();
 		
         getRouteKmlData(kmlUrl);
-		
 	}
 
 	private void getRouteKmlData(String url){
@@ -177,6 +179,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 			if(ServerStaticVariable.KML_PREFIX.equals(url)){
 				new AlertDialog.Builder(context)
 		        .setTitle("노선 지도 정보가 등록되지 않았습니다.").show();
+				refreshRoutes();
 			}else{
 				new MapDataTask().execute(url);
 			}
@@ -201,6 +204,8 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 			}
 			//addMarker(routes.get(i),first, first||last ? true : false);
 			addMarker(routes.get(i),first, false);
+			
+			Log.i("Shuttlemap", routes.get(i).getCoordinates());
 		}
 		String routeCoordinates = navigationData.getCurrentPlacemark().getCoordinates();
 		String[] points = routeCoordinates.split(" ");
@@ -214,7 +219,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 				  .color(Color.RED));
 			}
 		}
-		
+		refreshRoutes();
 	}
 	
 	private LatLng getLatLng(String coordinates){
@@ -225,7 +230,7 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 		return new LatLng(latitude, longitude);
 	}
 	
-	private void addMarker(Placemark marker,boolean needMove,boolean changeColor){
+	private void addMarker(Placemark marker,boolean needMove,boolean isShuttle){
 		String coordinates = marker.getCoordinates();
 		String[] datas = coordinates.split(",");
 		if(datas.length == 0){
@@ -234,24 +239,31 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 		double latitude = Double.parseDouble(datas[1]);
 		double longitude = Double.parseDouble(datas[0]);
 		LatLng ll = new LatLng(latitude, longitude);
-		if(changeColor){
+		if(isShuttle){
 			if(needMove){
-				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
-						.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)).snippet("출발지"));
+				Marker cm = googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk01_color_a)));
+				
+				cm.showInfoWindow();
+				CameraPosition cp = new CameraPosition.Builder().target(ll).zoom(17f).build();
+				googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
 			}else{
-				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
-						.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)).snippet("도착지"));
+//				googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+//						.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)).snippet("도착지"));
 			}
 		}else{
-			googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
+			Marker cm = googleMap.addMarker(new MarkerOptions().position(ll).title(marker.getTitle())
 					.icon(BitmapDescriptorFactory.fromResource(R.drawable.mk_point)));
+			if(needMove){
+				CameraPosition cp = new CameraPosition.Builder().target(ll).zoom(17f).build();
+				googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+				cm.showInfoWindow();
+			}
+			
 		}
 		
-		if(needMove){
-			CameraPosition cp = new CameraPosition.Builder().target(ll).zoom(17f).build();
-			googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+		Log.i("Shuttlemap Cu", marker.getCoordinates());
 		
-		}
 	}
 	
 	@Override
@@ -294,10 +306,19 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 	}
 	    
 	private void setUpMap() {
+		LatLng startingPoint = new LatLng(37.50525, 127.08886);
+		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingPoint,14));
+		
 		googleMap.setMyLocationEnabled(true);
 		Location location = googleMap.getMyLocation();
 		if(location != null){
-			
+			LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+			CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
+			CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
+			if(!isDrawPath){
+				googleMap.moveCamera(center);
+				googleMap.animateCamera(zoom);
+			}
 		}
 	}
 
@@ -344,6 +365,19 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 		}
 	}
 	
+	private void updateMapRoute(){
+		
+		for(RouteEntity entity : routeListData){
+			if(entity.isArrived()) {
+				Placemark marker = new Placemark();
+				marker.setTitle("현위치");
+				marker.setCoordinates(entity.getLongitude() + "," + entity.getLatitude());
+				addMarker(marker, true, true);
+			}
+		}
+		
+	}
+	
 	class GetRouteListTask extends AsyncTask<String, Void, ArrayList<RouteEntity>>{
 
 		@Override
@@ -357,9 +391,11 @@ public class ShuttleDetailActivity extends ShuttlemapBaseActivity implements Loc
 			super.onPostExecute(result);
 			adapter.setRoutes(result);
 			adapter.notifyDataSetChanged();
-			
+			routeListData.clear();
+			routeListData.addAll(result);
+			updateMapRoute();
 		}
-		
 	}
+	
 	
 }

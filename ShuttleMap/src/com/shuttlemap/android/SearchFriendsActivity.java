@@ -21,11 +21,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SearchFriendsActivity extends ShuttlemapBaseActivity implements FriendListener,TitleBarListener {
+public class SearchFriendsActivity extends ShuttlemapBaseActivity implements FriendListener {
 	ListView listView;
 	FriendListAdapter adapter;
 	Context context;
-	private TitleBar titleBar;
+	
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -33,9 +33,6 @@ public class SearchFriendsActivity extends ShuttlemapBaseActivity implements Fri
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.context = this;
 		setContentView(R.layout.activity_search_friends);
-		
-		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.setTitle("지인등록");
 		
 		this.listView = (ListView)findViewById(R.id.listView);
 		EditText searchText = (EditText)findViewById(R.id.searchText);
@@ -163,10 +160,6 @@ public class SearchFriendsActivity extends ShuttlemapBaseActivity implements Fri
 		
 	}
 
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		finish();
-	}
 	
 	
 }

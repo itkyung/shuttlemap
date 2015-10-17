@@ -14,10 +14,10 @@ import com.shuttlemap.android.fragment.common.TitleBar;
 import com.shuttlemap.android.fragment.common.TitleBar.TitleBarListener;
 import com.shuttlemap.android.server.entity.AccountEntity;
 
-public class MyInfoActivity extends ShuttlemapBaseActivity implements TitleBarListener {
+public class MyInfoActivity extends ShuttlemapBaseActivity  {
 	
 	private Context context;
-	private TitleBar titleBar;
+	
 	private Button btnDone;
 	private EditText editNickName;
 	private EditText editPhone;
@@ -33,8 +33,6 @@ public class MyInfoActivity extends ShuttlemapBaseActivity implements TitleBarLi
 		this.context = this;
 		setContentView(R.layout.activity_my_info);
 		
-		this.titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		this.titleBar.setTitle("나의 정보 관리");
 		
 		final AccountEntity accountEntity = AccountManager.getInstance().entity;
 		
@@ -95,9 +93,5 @@ public class MyInfoActivity extends ShuttlemapBaseActivity implements TitleBarLi
 		
 	}
 
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		finish();
-	}
 	
 }

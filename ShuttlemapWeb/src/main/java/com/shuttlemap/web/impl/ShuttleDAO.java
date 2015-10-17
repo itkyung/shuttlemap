@@ -129,8 +129,9 @@ public class ShuttleDAO implements IShuttleDAO {
 
 	@Override
 	public List<BookmarkShuttle> listBookmark(User owner) {
-		Query query = em.createQuery("FROM " + BookmarkShuttle.class.getName() + " a WHERE a.active = :active");
+		Query query = em.createQuery("FROM " + BookmarkShuttle.class.getName() + " a WHERE a.active = :active and a.user = :user ");
 		query.setParameter("active", true);
+		query.setParameter("user", owner);
 		query.setHint("org.hibernate.cacheable", true);
 		
 		return query.getResultList();

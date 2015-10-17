@@ -63,6 +63,7 @@ public class LoginHandler{
 				entity.resultCode = errorNo;
 				entity.keepLogin = keepLogin;
 				entity.success = true;
+				entity.sendLocation = true;
 			}else{
 				entity = new AccountEntity();
 				entity.loginId = userId;
@@ -112,7 +113,7 @@ public class LoginHandler{
 				entity.keepLogin = true;
 				entity.resultCode = 0;
 				entity.success = true;
-				
+				entity.sendLocation = true;
 			}else{
 				entity.success = false;
 				entity.resultCode = errorNo;
@@ -181,6 +182,7 @@ public class LoginHandler{
 				entity.keepLogin = true;
 				entity.resultCode = errorNo;
 				entity.success = true;
+				entity.sendLocation = true;
 			}else{
 			
 				entity.resultCode = errorNo;

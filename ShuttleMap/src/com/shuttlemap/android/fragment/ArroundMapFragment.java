@@ -13,7 +13,9 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.shuttlemap.android.ManageFriendsActivity;
 import com.shuttlemap.android.R;
+import com.shuttlemap.android.SearchFriendsActivity;
 import com.shuttlemap.android.server.entity.FriendEntity;
 import com.shuttlemap.android.server.handler.FriendHandler;
 
@@ -31,12 +33,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 public class ArroundMapFragment extends Fragment implements LocationListener{
 
@@ -45,6 +54,8 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
     private String provider;
     private Context context;
     boolean locationTag=true;
+    private ScrollView scrollView;
+    private ViewGroup friendContainer;
     
 	public ArroundMapFragment(){
 		
@@ -118,14 +129,44 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 			
 		}
 		
-		Button btn = (Button)view.findViewById(R.id.btnRefresh);
-		btn.setOnClickListener(new View.OnClickListener() {
+		Button btnAddFriend = (Button)view.findViewById(R.id.btnAddFriend);
+		btnAddFriend.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				new GetFriendsTask().execute();
+				Intent intent = new Intent(getActivity(),SearchFriendsActivity.class);
+				startActivity(intent);
 			}
 		});
+		
+		final Button btnFriend = (Button)view.findViewById(R.id.btnFriend);
+		btnFriend.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				boolean selected = btnFriend.isSelected();
+				if(selected) {
+					btnFriend.setSelected(false);
+					scrollView.setVisibility(View.GONE);
+				} else {
+					btnFriend.setSelected(true);
+					scrollView.setVisibility(View.VISIBLE);
+				}
+				
+			}
+		});
+		
+		view.findViewById(R.id.btnCurrent).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Location location = googleMap.getMyLocation();
+				onLocationChanged(location);
+			}
+		});
+		
+		this.friendContainer = (ViewGroup)view.findViewById(R.id.friendContainer);
+		this.scrollView = (ScrollView)view.findViewById(R.id.friendScroll);
 		
 		return view;
 	}
@@ -134,11 +175,15 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 	public void onLocationChanged(Location location) {
 		//if(locationTag){//한번만 위치를 가져오기 위해서 tag를 주었습니다
 			LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-			CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
-			CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
-			googleMap.moveCamera(center);
-			googleMap.animateCamera(zoom);
+			moveLocation(ll);
 	    //}
+	}
+	
+	private void moveLocation(LatLng ll){
+		CameraUpdate center = CameraUpdateFactory.newLatLng(ll);
+		CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
+		googleMap.moveCamera(center);
+		googleMap.animateCamera(zoom);
 	}
 
 	@Override
@@ -169,6 +214,8 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 	}
 	    
 	private void setUpMap() {
+		LatLng startingPoint = new LatLng(37.50525, 127.08886);
+		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingPoint,14));
 		googleMap.setMyLocationEnabled(true);
 		Location location = googleMap.getMyLocation();
 		if(location != null){
@@ -189,9 +236,63 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 					.snippet("마지막시간 " + fm.format(friend.getLastLocationDate())));
 			}
 		}
+		
+		addFriendView(friends);
 	}
 	
-	    
+	private void addFriendView(ArrayList<FriendEntity> friends){
+		for(final FriendEntity friend : friends){
+			
+			LinearLayout layout = new LinearLayout(getActivity());
+			layout.setOrientation(LinearLayout.VERTICAL);
+	        // creating LayoutParams  
+	        LayoutParams linLayoutParam = new LayoutParams(convertToPx(40), convertToPx(60)); 
+	        linLayoutParam.setMargins(0, 0, convertToPx(10), 0);
+	        
+			ImageView iView = new ImageView(getActivity());
+			ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(10,10);
+			layoutParams.width = convertToPx(40);
+			layoutParams.height = convertToPx(40);
+			iView.setLayoutParams(layoutParams);
+			
+			iView.setBackgroundResource(R.drawable.map_btn02_1_n);
+			
+			LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(friendContainer.getLayoutParams());
+			
+			lParams.width = convertToPx(40);
+			lParams.height = convertToPx(40);
+			
+			layout.addView(iView, lParams);
+			
+			TextView textView = new TextView(getActivity());
+			textView.setText(friend.getName());
+			textView.setGravity(Gravity.CENTER);
+			ViewGroup.LayoutParams textParams = new LinearLayout.LayoutParams(10,10);
+			textParams.width = convertToPx(40);
+			textParams.height = convertToPx(20);
+			
+			layout.addView(textView, textParams);
+			
+			friendContainer.addView(layout, linLayoutParam);
+			
+			layout.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if (friend.getLatitude() > 0) {
+						LatLng ll = new LatLng(friend.getLatitude(), friend.getLongitude());
+						moveLocation(ll);
+					}else {
+						Toast.makeText(context, "[" + friend.getName() + "]님의 위치정보를 찾을수 없습니다.", Toast.LENGTH_LONG).show();
+					}
+				}
+			});
+		}
+	}
+	
+	private int convertToPx(int dp){
+		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getActivity().getResources().getDisplayMetrics());
+	}
 	 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {//위치설정 엑티비티 종료 후 

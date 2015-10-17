@@ -12,17 +12,64 @@
  
     
        <Button 
-           android:id="@+id/btnRefresh"
-           android:layout_width="100dp"
+           android:id="@+id/btnAddFriend"
+           android:layout_width="50dp"
            android:layout_alignParentRight="true"
            android:layout_alignParentTop="true"
            android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
 		   android:layout_height="wrap_content"
-		   android:text="지인위치갱신"
 		   android:layout_gravity="center"
        	   android:textColor="@color/white"
+       	   android:text="+"
        	   android:background="@drawable/selector_btn_popup_red"  			
            />
-            
+       
+       <Button 
+           android:id="@+id/btnCurrent"
+           android:layout_width="56dp"
+           android:layout_above="@+id/btnFriend"
+           android:layout_alignLeft="@+id/btnFriend"
+           android:layout_marginBottom="10dp"
+		   android:layout_height="56dp"
+		   android:layout_gravity="center"
+       	   android:background="@drawable/map_btn04_n"  			
+           />
+        <Button 
+           android:id="@+id/btnFriend"
+           android:layout_width="56dp"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentBottom="true"
+           android:layout_marginLeft="10dp"
+           android:layout_marginBottom="30dp"
+		   android:layout_height="56dp"
+		   android:layout_gravity="center"
+       	   android:background="@drawable/selector_btn_map_friend"  			
+           />
+       
+       <ScrollView 
+           android:id="@+id/friendScroll"
+           android:layout_width="200dp"
+           android:layout_height="75dp"
+           android:layout_toRightOf="@+id/btnFriend"
+           android:layout_marginLeft="10dp"
+           android:layout_alignTop="@+id/btnFriend"
+           android:background="@color/transparent"
+           android:scrollbars="horizontal"
+           android:visibility="gone">
+           
+           <LinearLayout 
+               android:id="@+id/friendContainer"
+               android:layout_width="300dp"
+               android:layout_height="50dp"
+               android:orientation="horizontal"
+               android:gravity="top">
+               
+           </LinearLayout>
+           
+           
+       </ScrollView>
+       
+       
+       
 </RelativeLayout>

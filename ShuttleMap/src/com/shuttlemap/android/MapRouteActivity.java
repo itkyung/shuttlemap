@@ -202,6 +202,9 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 	}
 	    
 	private void setUpMap() {
+		LatLng startingPoint = new LatLng(37.50525, 127.08886);
+		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingPoint,14));
+		
 		googleMap.setMyLocationEnabled(true);
 		Location location = googleMap.getMyLocation();
 		if(location != null){

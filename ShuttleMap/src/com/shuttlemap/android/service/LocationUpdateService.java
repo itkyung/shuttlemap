@@ -82,9 +82,9 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 */
 	public void startLocationUpdates() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
-		int interval = 30000;	//30초 일반사용자인경우. 드라이버는 15초단위 
+		int interval = 300000;	//5분 일반사용자인경우. 드라이버는 1분단위 
 		if (accountEntity != null && accountEntity.isDriver()) {
-			interval = 15000;
+			interval = 60000;
 		} 
 		mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);
@@ -99,9 +99,9 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 */
 	protected void createLocationRequest() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
-		int interval = 30000;	//30초 일반사용자인경우. 드라이버는 15초단위 
+		int interval = 300000;	//5분 일반사용자인경우. 드라이버는 1분단위 
 		if (accountEntity != null && accountEntity.isDriver()) {
-			interval = 15000;
+			interval = 60000;
 		} 
 	    LocationRequest mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);

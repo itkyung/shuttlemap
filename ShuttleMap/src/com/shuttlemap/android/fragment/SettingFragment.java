@@ -64,16 +64,6 @@ public class SettingFragment extends Fragment {
 			}
 		});
 		
-		View registFriend = rootView.findViewById(R.id.registFriend);
-		registFriend.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(),SearchFriendsActivity.class);
-				startActivity(intent);
-			}
-		});
-		
 		View manageFriend = rootView.findViewById(R.id.manageFriend);
 		manageFriend.setOnClickListener(new View.OnClickListener() {
 			
