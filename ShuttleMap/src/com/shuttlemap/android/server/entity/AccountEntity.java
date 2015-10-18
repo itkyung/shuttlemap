@@ -31,6 +31,10 @@ public class AccountEntity implements Parcelable{
 	public boolean success;
 	public String userType;
 	public boolean sendLocation;
+	
+	public boolean notiShuttle;
+	public boolean notiFriend;
+	public boolean notiTake;
 
 	public AccountEntity(){
 		
@@ -95,6 +99,10 @@ public class AccountEntity implements Parcelable{
 			this.keepLogin = preferences.getBoolean("keepLogin", false);
 			this.userType = preferences.getString("userType", null);
 			this.sendLocation = preferences.getBoolean("sendLocation", false);
+			this.notiShuttle = preferences.getBoolean("notiShuttle", false);
+			this.notiFriend = preferences.getBoolean("notiFriend", false);
+			this.notiTake = preferences.getBoolean("notiTake", false);
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -116,8 +124,28 @@ public class AccountEntity implements Parcelable{
 		editor.putBoolean("keepLogin", this.keepLogin);
 		editor.putString("userType", this.userType);
 		editor.putBoolean("sendLocation", this.sendLocation);
+		editor.putBoolean("notiShuttle", this.notiShuttle);
+		editor.putBoolean("notiFriend", this.notiFriend);
+		editor.putBoolean("notiTake", this.notiTake);
 		editor.commit();
 		
+	}
+	
+	public void loadExtra(Context context){
+		SharedPreferences preferences = context.getSharedPreferences("AccountExtra", Context.MODE_PRIVATE);
+		
+		this.notiShuttle = preferences.getBoolean("notiShuttle", false);
+		this.notiFriend = preferences.getBoolean("notiFriend", false);
+		this.notiTake = preferences.getBoolean("notiTake", false);
+	}
+	
+	public void storeExtra(Context context){
+		SharedPreferences preferences = context.getSharedPreferences("AccountExtra", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putBoolean("notiShuttle", this.notiShuttle);
+		editor.putBoolean("notiFriend", this.notiFriend);
+		editor.putBoolean("notiTake", this.notiTake);
+		editor.commit();
 	}
 	
 	public void storePhotoURL(Context context){
@@ -149,6 +177,9 @@ public class AccountEntity implements Parcelable{
 		out.writeString(profileImg);
 		out.writeString(userType);
 		out.writeInt(sendLocation ? 1 : 0);
+		out.writeInt(notiShuttle ? 1: 0);
+		out.writeInt(notiFriend ? 1 : 0);
+		out.writeInt(notiTake ? 1 : 0);
 	}
 	
 	protected void readFromParcel(Parcel in){
@@ -163,9 +194,22 @@ public class AccountEntity implements Parcelable{
 		profileImg = in.readString();
 		userType = in.readString();
 		sendLocation = in.readInt() == 1 ? true : false;
+		notiShuttle = in.readInt() == 1 ? true : false;
+		notiFriend = in.readInt() == 1 ? true : false;
+		notiTake = in.readInt() == 1 ? true : false;
 	}
 
-	
+	public void copyFrom(AccountEntity entity) {
+		this.name = entity.name;
+		this.loginToken = entity.loginToken;
+		this.twitter = entity.twitter;
+		this.facebook = entity.facebook;
+		this.phone = entity.phone;
+		this.userType = entity.userType;
+		this.sendLocation = entity.sendLocation;
+		
+		
+	}
 	
 	public static final Parcelable.Creator<AccountEntity> CREATOR = new Parcelable.Creator<AccountEntity>()
 	{

@@ -57,6 +57,7 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
     private ScrollView scrollView;
     private ViewGroup friendContainer;
     
+    
 	public ArroundMapFragment(){
 		
 	}
@@ -124,7 +125,8 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 			setUpMapIfNeeded();
 			Location location = locationManager.getLastKnownLocation(provider);
         	if(location != null){
-        		onLocationChanged(location);
+        		LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+    			moveLocation(ll);
         	}
 			
 		}
@@ -161,7 +163,8 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 			@Override
 			public void onClick(View v) {
 				Location location = googleMap.getMyLocation();
-				onLocationChanged(location);
+				LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+				moveLocation(ll);
 			}
 		});
 		
@@ -173,10 +176,11 @@ public class ArroundMapFragment extends Fragment implements LocationListener{
 
 	@Override
 	public void onLocationChanged(Location location) {
-		//if(locationTag){//한번만 위치를 가져오기 위해서 tag를 주었습니다
+		if(locationTag){//한번만 위치를 가져오기 위해서 tag를 주었습니다
 			LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
 			moveLocation(ll);
-	    //}
+			locationTag = false;
+	    }
 	}
 	
 	private void moveLocation(LatLng ll){

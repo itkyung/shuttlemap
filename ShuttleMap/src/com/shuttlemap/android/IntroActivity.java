@@ -88,7 +88,7 @@ public class IntroActivity extends ShuttlemapBaseActivity{
 			
 			AccountEntity entity = LoginHandler.login(context, loginId, loginToken);
 			if (entity.success){
-
+				AccountManager.getInstance().load();
 				AccountManager.getInstance().setAccountEntity(entity);
 				AccountManager.getInstance().setLogin(true);
 				entity.store(context);
