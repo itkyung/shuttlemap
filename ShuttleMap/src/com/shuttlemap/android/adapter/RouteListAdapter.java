@@ -78,6 +78,8 @@ public class RouteListAdapter extends BaseAdapter {
 			arriveIcon.setImageResource(R.drawable.road02);
 		}
 		
+		TextView timeLabel = (TextView)convertView.findViewById(R.id.timeLabel);
+		timeLabel.setText(entity.getArriveDateStr());
 		
 		return convertView;
 	}

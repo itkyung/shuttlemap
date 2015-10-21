@@ -10,6 +10,10 @@
     <color name="tab_text_p">#646464</color>
     <color name="tab_text_n">#aba8a3</color>
     <color name="list_remove_cell">#dd5644</color>
+    
+    <color name="blue_pressed">#0000CD</color>
+    <color name="blue_unpressed">#323C73</color>
+    
     <drawable name="tab_action_bg_p">#e0ddd4</drawable>
     <drawable name="tab_action_bg_n">#f5f2e9</drawable>
      

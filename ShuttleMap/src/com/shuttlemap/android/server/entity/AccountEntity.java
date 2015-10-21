@@ -35,6 +35,9 @@ public class AccountEntity implements Parcelable{
 	public boolean notiShuttle;
 	public boolean notiFriend;
 	public boolean notiTake;
+	
+	public int notiShuttleRange;
+	public int notiFriendRange;
 
 	public AccountEntity(){
 		
@@ -137,6 +140,9 @@ public class AccountEntity implements Parcelable{
 		this.notiShuttle = preferences.getBoolean("notiShuttle", false);
 		this.notiFriend = preferences.getBoolean("notiFriend", false);
 		this.notiTake = preferences.getBoolean("notiTake", false);
+		
+		this.notiShuttleRange = preferences.getInt("notiShuttleRange", 0);
+		this.notiFriendRange = preferences.getInt("notiFriendRange", 0);
 	}
 	
 	public void storeExtra(Context context){
@@ -145,6 +151,8 @@ public class AccountEntity implements Parcelable{
 		editor.putBoolean("notiShuttle", this.notiShuttle);
 		editor.putBoolean("notiFriend", this.notiFriend);
 		editor.putBoolean("notiTake", this.notiTake);
+		editor.putInt("notiFriendRange", this.notiFriendRange);
+		editor.putInt("notiShuttleRange", this.notiShuttleRange);
 		editor.commit();
 	}
 	
@@ -180,6 +188,8 @@ public class AccountEntity implements Parcelable{
 		out.writeInt(notiShuttle ? 1: 0);
 		out.writeInt(notiFriend ? 1 : 0);
 		out.writeInt(notiTake ? 1 : 0);
+		out.writeInt(notiShuttleRange);
+		out.writeInt(notiFriendRange);
 	}
 	
 	protected void readFromParcel(Parcel in){
@@ -197,6 +207,8 @@ public class AccountEntity implements Parcelable{
 		notiShuttle = in.readInt() == 1 ? true : false;
 		notiFriend = in.readInt() == 1 ? true : false;
 		notiTake = in.readInt() == 1 ? true : false;
+		notiShuttleRange = in.readInt();
+		notiFriendRange = in.readInt();
 	}
 
 	public void copyFrom(AccountEntity entity) {

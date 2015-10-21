@@ -112,6 +112,17 @@ public class RouteEntity implements Parcelable {
 		this.idx = idx;
 	}
 
+	public String getArriveDateStr() {
+		if(arriveDateStr != null && arriveDateStr.endsWith(":0")) {
+			return arriveDateStr + "0";
+		}
+		return arriveDateStr;
+	}
+
+	public void setArriveDateStr(String arriveDateStr) {
+		this.arriveDateStr = arriveDateStr;
+	}
+
 
 	
 	

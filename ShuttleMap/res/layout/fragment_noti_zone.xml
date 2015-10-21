@@ -51,35 +51,35 @@
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="20dp"
-	        android:src="@drawable/m4_opt01_n" />
+	        android:src="@drawable/selector_btn_m4_opt01" />
        <ImageButton
 	        android:id="@+id/btn_shuttle_2"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt02_n" />
+	        android:src="@drawable/selector_btn_m4_opt02" />
        <ImageButton
 	        android:id="@+id/btn_shuttle_3"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt03_n" />
+	        android:src="@drawable/selector_btn_m4_opt03" />
        <ImageButton
 	        android:id="@+id/btn_shuttle_4"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt04_n" />
+	        android:src="@drawable/selector_btn_m4_opt04" />
        <ImageButton
 	        android:id="@+id/btn_shuttle_5"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt05_n" />
+	        android:src="@drawable/selector_btn_m4_opt05" />
    </LinearLayout>
    
    
@@ -123,35 +123,35 @@
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="20dp"
-	        android:src="@drawable/m4_opt01_n" />
+	        android:src="@drawable/selector_btn_m4_opt01" />
        <ImageButton
 	        android:id="@+id/btn_friend_2"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt02_n" />
+	        android:src="@drawable/selector_btn_m4_opt02" />
        <ImageButton
 	        android:id="@+id/btn_friend_3"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt03_n" />
+	        android:src="@drawable/selector_btn_m4_opt03" />
        <ImageButton
 	        android:id="@+id/btn_friend_4"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt04_n" />
+	        android:src="@drawable/selector_btn_m4_opt04" />
        <ImageButton
 	        android:id="@+id/btn_friend_5"
 	        android:layout_width="55dp"
 	        android:layout_height="60dp"
 	        android:background="@null"
 	        android:layout_marginLeft="8dp"
-	        android:src="@drawable/m4_opt05_n" />
+	        android:src="@drawable/selector_btn_m4_opt05" />
    </LinearLayout>
    <RelativeLayout 
        android:layout_width="fill_parent"

@@ -32,8 +32,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.TextView;
 
-public class MapRouteActivity extends ShuttlemapBaseActivity implements LocationListener,TitleBarListener{
+public class MapRouteActivity extends ShuttlemapBaseActivity implements LocationListener{
 	private GoogleMap googleMap;
 	private Context context;
 	private LocationManager locationManager;
@@ -66,9 +67,9 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
         Intent intent = getIntent();
         String kmlUrl = intent.getStringExtra("kmlUrl");
         String title = intent.getStringExtra("routeName");
-        TitleBar titleBar = (TitleBar)getFragmentManager().findFragmentById(R.id.titleBar);
-		titleBar.setTitle(title);
-		
+        TextView titleView = (TextView)findViewById(R.id.titleBar);
+        titleView.setText(title);
+        
         getRouteKmlData(kmlUrl);
 	}
 	
@@ -155,12 +156,7 @@ public class MapRouteActivity extends ShuttlemapBaseActivity implements Location
 		
 		}
 	}
-	
-	
-	@Override
-	public void onBackButtonClicked(TitleBar titleBar) {
-		finish();
-	}
+
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {

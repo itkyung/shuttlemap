@@ -8,30 +8,30 @@
         android:id="@+id/editBookmarkName"
         android:layout_width="320dp"
         android:layout_height="46dp"
-        android:hint="셔틀 북마크 이름을 적으세요."
+        android:hint="등록셔틀에 저장할 이름을 적으세요"
         android:paddingLeft="13dp"
         android:background="@drawable/rounded_edittext"
         android:textColor="#505050"
         />
     <Button 
         android:id="@+id/btnOk"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="확인"
+        android:layout_width="114dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/editBookmarkName"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="35dp"
         android:textColor="@color/white"
-        android:background="@drawable/selector_btn_popup_red"      
+        android:background="@drawable/selector_btn_confirm"      
         />
     <Button 
         android:id="@+id/btnCancel"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="닫기"
+        android:layout_width="114dp"
+        android:layout_height="40dp"
+       
         android:layout_alignTop="@+id/btnOk"
         android:layout_toRightOf="@+id/btnOk"
         android:layout_marginLeft="10dp"
         android:textColor="@color/white"
-        android:background="@drawable/selector_btn_popup_red"      
+        android:background="@drawable/selector_btn_close"      
         />
 </RelativeLayout>

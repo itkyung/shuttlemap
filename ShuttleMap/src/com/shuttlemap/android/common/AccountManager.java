@@ -79,11 +79,11 @@ public class AccountManager{
 	}
 	
 	public void setAccountEntity(AccountEntity entity){
-		if(this.entity != null && this.entity.loginId.endsWith(entity.loginId)) {
-			this.entity.copyFrom(entity);
-		}else{
+//		if(this.entity != null && this.entity.loginId.endsWith(entity.loginId)) {
+//			this.entity.copyFrom(entity);
+//		}else{
 			this.entity = entity;
-		}
+		//}
 		this.entity.store(context);
 	}
 	

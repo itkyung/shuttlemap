@@ -3,10 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <fragment android:name="com.shuttlemap.android.fragment.common.TitleBar"
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp" />
+    <RelativeLayout 
+          android:id="@+id/titleContainer"
+          android:layout_width="fill_parent"
+          android:layout_height="60dp"
+          android:background="@drawable/m1_bar01"
+          >
+           <TextView 
+               android:id="@+id/titleBar"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+             
+              android:textSize="22sp"
+              android:textStyle="bold"
+              android:textColor="#ffffff"
+              android:layout_centerInParent="true"
+              />
+      </RelativeLayout>
       
     <fragment
         android:id="@+id/map"

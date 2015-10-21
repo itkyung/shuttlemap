@@ -14,10 +14,13 @@
 		<security:intercept-url pattern="/loginByToken" access="permitAll"/>
 		<security:intercept-url pattern="/loginBySocial" access="permitAll"/>
 		
+		
 		<security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_ASSOCIATION_USER','ROLE_COMPANY_USER')"/>
 		<security:intercept-url pattern="/mobile/**" access="permitAll"/>
 		<security:intercept-url pattern="/login/**" access="permitAll"/>
 		<security:intercept-url pattern="/an/**"   access="permitAll"/>
+		<security:intercept-url pattern="/rest/**"   access="permitAll"/>
+		
 		<security:custom-filter ref="requestHeaderFilter" before="FORM_LOGIN_FILTER" />
 		<security:custom-filter ref="socialHeaderFilter" before="BASIC_AUTH_FILTER"/>
 		
