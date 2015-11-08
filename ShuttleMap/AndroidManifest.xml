@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shuttlemap.android"
-    android:versionCode="3"
-    android:versionName="1.0.2" >
+    android:versionCode="5"
+    android:versionName="1.0.4" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -22,6 +22,7 @@
     <permission android:name="com.shuttlemap.android.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
     <uses-permission android:name="com.shuttlemap.android.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     
      <permission android:name="com.shuttlemap.android.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -155,7 +156,14 @@
 	        <!-- 운영용 -->
 	        <meta-data android:value="AIzaSyBXE_kJnAvyVaV1eeYwKEfAl4bdcCrKOys" android:name="com.google.android.maps.v2.API_KEY"/>
 	       
-	       
+	       <receiver
+				android:name=".BootReceiver"
+				android:enabled="true"
+				android:exported="false" >
+				<intent-filter>
+					<action android:name="android.intent.action.BOOT_COMPLETED" />
+				</intent-filter>
+			</receiver>
 	       <service android:name="com.shuttlemap.android.service.LocationUpdateService"/>
     </application>
 

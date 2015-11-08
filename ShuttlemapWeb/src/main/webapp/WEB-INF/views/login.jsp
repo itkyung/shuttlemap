@@ -36,11 +36,11 @@
 		<form id="loginForm" role="form" action="${loginUrl}" method="POST">
 		  <div class="form-group">
 		    <label for="loginId">아이디(이메일 주소)</label>
-		    <input type="email" class="form-control" id="loginId" name="loginId" value="admin" placeholder="로그인아이디">
+		    <input type="email" class="form-control" id="loginId" name="loginId" value="" placeholder="로그인아이디">
 		  </div>
 		  <div class="form-group">
 		    <label for="pwd">비밀번호</label>
-		    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호" value="admin1234">
+		    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호" value="">
 		  </div>
 		  <div class="checkbox">
 		    <label>

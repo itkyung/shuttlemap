@@ -5,9 +5,9 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout 
+    <RelativeLayout 
         android:layout_width="fill_parent"
-        android:layout_height="51dp"
+        android:layout_height="50dp"
         android:background="@drawable/m1_bar02"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
@@ -21,14 +21,17 @@
 	        android:textSize="13sp"
 	        android:background="@drawable/search02"
 	        android:paddingLeft="28dp"
+	        android:layout_centerVertical="true"
 	        />
         <Button 
             android:id="@+id/searchBtn"
             android:layout_width="43dp"
             android:layout_height="40dp"
             android:background="@drawable/searchbtn_n"
+            android:layout_toRightOf="@+id/searchText"
+            android:layout_marginTop="2dp"
             />
-    </LinearLayout>
+    </RelativeLayout>
     
     
     <ListView 

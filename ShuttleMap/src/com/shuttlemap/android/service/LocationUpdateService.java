@@ -7,15 +7,19 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.shuttlemap.android.ShuttlemapApplication;
+
 import com.shuttlemap.android.common.AccountManager;
 import com.shuttlemap.android.server.entity.AccountEntity;
 import com.shuttlemap.android.server.handler.LocationUpdateHandler;
+import com.shuttlemap.android.server.handler.LoginHandler;
 
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
@@ -58,13 +62,29 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+		checkLogin();
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+	}
+	
+	private void checkLogin(){
+		AccountManager.getInstance().load();
+		if(!AccountManager.isLogin()) {
+			AccountEntity account = AccountManager.getInstance().getAccountEntity();
+			if(account != null && account.keepLogin){
+				//자동 로그인을 시도한다.
+				AutoLoginTask task = new AutoLoginTask();
+				if(Build.VERSION.SDK_INT >= 11){
+					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,account.loginId,account.loginToken);
+				}else{
+					task.execute(account.loginId,account.loginToken);				
+				}
+			}
+		}
 	}
 	
 	private synchronized void buildGoogleApiClient() {
@@ -82,14 +102,15 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 */
 	public void startLocationUpdates() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
-		int interval = 300000;	//5분 일반사용자인경우. 드라이버는 1분단위 
+		int interval = 180000;	//3분 일반사용자인경우. 드라이버는 1분단위 
 		if (accountEntity != null && accountEntity.isDriver()) {
 			interval = 60000;
 		} 
 		mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);
 	    mLocationRequest.setFastestInterval(interval);
-	    mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+	    mLocationRequest.setSmallestDisplacement(200);
+	    mLocationRequest.setPriority(LocationRequest.PRIORITY_NO_POWER);
 	    
 	    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 	}
@@ -99,14 +120,15 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	 */
 	protected void createLocationRequest() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
-		int interval = 300000;	//5분 일반사용자인경우. 드라이버는 1분단위 
+		int interval = 180000;	//3분 일반사용자인경우. 드라이버는 1분단위 
 		if (accountEntity != null && accountEntity.isDriver()) {
 			interval = 60000;
 		} 
 	    LocationRequest mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);
 	    mLocationRequest.setFastestInterval(interval);
-	    mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+	    mLocationRequest.setSmallestDisplacement(200);
+	    mLocationRequest.setPriority(LocationRequest.PRIORITY_NO_POWER	);
 	}
 	
 	@Override
@@ -168,12 +190,39 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 		@Override
 		protected Void doInBackground(Location... params) {
 			Location location = params[0];
-			AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
-			
-			LocationUpdateHandler.updateLocation(accountEntity.loginId, location.getLatitude(), location.getLongitude());
+			if(AccountManager.isLogin()){
+				AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
+				LocationUpdateHandler.updateLocation(accountEntity.loginId, location.getLatitude(), location.getLongitude());
+			}
 			return null;
 		}
-		
 	}
 	
+	class AutoLoginTask extends AsyncTask<String, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			boolean result = false;
+			String loginId = params[0];
+			String loginToken = params[1];
+			
+			AccountEntity entity = LoginHandler.login(LocationUpdateService.this, loginId, loginToken);
+			if (entity.success){
+				AccountManager.getInstance().load();
+				AccountManager.getInstance().setAccountEntity(entity);
+				AccountManager.getInstance().setLogin(true);
+				entity.store(LocationUpdateService.this);
+				result = true;
+				
+			}
+			
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			
+			super.onPostExecute(result);
+		}
+	}
 }
