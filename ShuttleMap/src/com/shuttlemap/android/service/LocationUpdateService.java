@@ -74,16 +74,7 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	private void checkLogin(){
 		AccountManager.getInstance().load();
 		if(!AccountManager.isLogin()) {
-			AccountEntity account = AccountManager.getInstance().getAccountEntity();
-			if(account != null && account.keepLogin){
-				//자동 로그인을 시도한다.
-				AutoLoginTask task = new AutoLoginTask();
-				if(Build.VERSION.SDK_INT >= 11){
-					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,account.loginId,account.loginToken);
-				}else{
-					task.execute(account.loginId,account.loginToken);				
-				}
-			}
+			
 		}
 	}
 	
@@ -103,14 +94,17 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	public void startLocationUpdates() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
 		int interval = 180000;	//3분 일반사용자인경우. 드라이버는 1분단위 
+		int displacement = 500; //일반사용자는 500m, 드라이버는 100m
 		if (accountEntity != null && accountEntity.isDriver()) {
 			interval = 60000;
+			displacement = 100;
 		} 
+		
 		mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);
 	    mLocationRequest.setFastestInterval(interval);
-	    mLocationRequest.setSmallestDisplacement(200);
-	    mLocationRequest.setPriority(LocationRequest.PRIORITY_NO_POWER);
+	    mLocationRequest.setSmallestDisplacement(displacement);
+	    mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 	    
 	    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 	}
@@ -121,14 +115,16 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	protected void createLocationRequest() {
 		AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
 		int interval = 180000;	//3분 일반사용자인경우. 드라이버는 1분단위 
+		int displacement = 500; //일반사용자는 500m, 드라이버는 100m
 		if (accountEntity != null && accountEntity.isDriver()) {
 			interval = 60000;
+			displacement = 100;
 		} 
 	    LocationRequest mLocationRequest = new LocationRequest();
 	    mLocationRequest.setInterval(interval);
 	    mLocationRequest.setFastestInterval(interval);
-	    mLocationRequest.setSmallestDisplacement(200);
-	    mLocationRequest.setPriority(LocationRequest.PRIORITY_NO_POWER	);
+	    mLocationRequest.setSmallestDisplacement(displacement);
+	    mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY	);
 	}
 	
 	@Override
@@ -144,6 +140,7 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 	@Override
 	public void onConnected(Bundle connectionHint) {
 		mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		onLocationChanged(mLastLocation);
 		startLocationUpdates();
 	}
 
@@ -190,39 +187,15 @@ public class LocationUpdateService extends Service implements ConnectionCallback
 		@Override
 		protected Void doInBackground(Location... params) {
 			Location location = params[0];
-			if(AccountManager.isLogin()){
-				AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
+			//if(AccountManager.isLogin()){
+			AccountManager.createInstance(LocationUpdateService.this).load();
+			AccountEntity accountEntity = AccountManager.getInstance().getAccountEntity();
+			if(accountEntity != null){
 				LocationUpdateHandler.updateLocation(accountEntity.loginId, location.getLatitude(), location.getLongitude());
 			}
 			return null;
 		}
 	}
 	
-	class AutoLoginTask extends AsyncTask<String, Void, Boolean>{
-
-		@Override
-		protected Boolean doInBackground(String... params) {
-			boolean result = false;
-			String loginId = params[0];
-			String loginToken = params[1];
-			
-			AccountEntity entity = LoginHandler.login(LocationUpdateService.this, loginId, loginToken);
-			if (entity.success){
-				AccountManager.getInstance().load();
-				AccountManager.getInstance().setAccountEntity(entity);
-				AccountManager.getInstance().setLogin(true);
-				entity.store(LocationUpdateService.this);
-				result = true;
-				
-			}
-			
-			return result;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			
-			super.onPostExecute(result);
-		}
-	}
+	
 }
